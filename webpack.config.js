@@ -137,6 +137,9 @@ module.exports = (env = {}) => {
     },
     devServer: {
       port: 8080,
+      proxy: {
+        "/scrivito": { target: "http://localhost:8090" },
+      },
       historyApiFallback: {
         rewrites: [
           { from: /^\/scrivito/, to: '/scrivito/index.html' },
