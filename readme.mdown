@@ -80,6 +80,17 @@ Calling `npm run build` will compile all JS, HTML and CSS and place it in the `b
 
 Calling `npm start` will start a webserver, which listens to [localhost:8080](http://localhost:8080/) and opens this URL in your browser. It should also automatically reload the page after changes to the code (in `src/`) have been made.
 
+This branch is configured to use a dev version of the SDK located
+at ../rails_connector. So before you `npm start` the app, have these
+steps executed:
+```
+# You already have forked and cloned rails_connector, don't you?
+cd ../rails_connector/js
+yarn package:npm:watch # creates a scrivito/NPM into ../rails_connector/js/build/npm_scrivito
+                       # For a one-time compile, use yarn package:npm:dev
+yarn start             # serves the UI at localhost:8090/scrivito
+```
+
 ## Your first change
 
 To see development in action, let's change the `ButtonWidget` so that it prefixes all buttons with your favorite emoji.
