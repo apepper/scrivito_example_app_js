@@ -1,8 +1,9 @@
 {
   "name": "scrivito",
   "license": "LGPL-3.0",
-  "version": "1.3.0-rc1-277-gbc1098bf33",
+  "version": "1.2.0-rc1-2016-g67ccd158dd",
   "dependencies": {
+    "@types/promise-polyfill": "^6.0.0",
     "history": "^4.7.2",
     "promise-polyfill": "^7.1.2",
     "react": "^16.4.0",
