@@ -8,18 +8,20 @@ class RedirectComponent extends React.Component {
       const link = this.props.page.get("link");
       const openInUi = this.props.page.get("openInUi");
       const url = link && Scrivito.urlFor(link);
+      const target = link && link.target();
 
-      return { link, openInUi, url };
-    }).then(({ link, openInUi, url }) => {
+      return { link, openInUi, url, target };
+    }).then(({ link, openInUi, url, target }) => {
       if (!link) {
         return;
       }
 
-      if (link.isExternal()) {
-        window.top.location.replace(url);
-      } else if (openInUi === "yes") {
+      if (link.isInternal() && openInUi === "yes") {
         const scrivitoUiUrl = url.replace(/(\/\/[^/]+)/, "$1/scrivito");
         window.top.location.replace(scrivitoUiUrl);
+      } else if (target) {
+        window.open(url, target);
+        window.history.back();
       } else {
         window.location.replace(url);
       }
