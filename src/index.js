@@ -7,19 +7,6 @@ import './Widgets';
 import App from './App';
 import './config';
 
-function preloadHomepage() {
-  // TODO Load "homepage" callback of "Scrivito.configure", if configured
-  Scrivito.Obj.root();
-}
-
-function preloadPermalink() {
-  // TODO remove "routingBasePath" of "Scrivito.configure" from path, if configured
-  const pathToRecognize = window.location.pathname;
-  const path = pathToRecognize.replace(new RegExp('^/+|/+$', 'g'), '');
-  if (!path) { return; }
-  Scrivito.Obj.getByPermalink(path);
-}
-
 const appElement = document.getElementById('application');
 const prerenderedObjId = appElement.getAttribute('data-scrivito-prerendering-obj-id');
 
@@ -30,12 +17,7 @@ function renderApp() {
 if (prerenderedObjId && window.preloadDump) {
   Scrivito.preload(window.preloadDump)
     .then(
-      () => Scrivito.load(
-        () => {
-          preloadHomepage();
-          preloadPermalink();
-        }
-      )
+      () => Scrivito.load(Scrivito.currentPage)
     ).then(renderApp);
 } else {
   window.prerenderReady = false;
