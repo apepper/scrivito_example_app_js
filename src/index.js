@@ -15,10 +15,7 @@ function renderApp() {
 }
 
 if (prerenderedObjId && window.preloadDump) {
-  Scrivito.preload(window.preloadDump)
-    .then(
-      () => Scrivito.load(Scrivito.currentPage)
-    ).then(renderApp);
+  Scrivito.preload(window.preloadDump).then(renderApp);
 } else {
   window.prerenderReady = false;
   renderApp();
