@@ -974,6 +974,9 @@ __webpack_require__.d(public_authentication_namespaceObject, "ERROR_CODE_CLIENT_
 __webpack_require__.d(public_authentication_namespaceObject, "perform", function() { return perform; });
 __webpack_require__.d(public_authentication_namespaceObject, "reset", function() { return public_authentication_reset; });
 __webpack_require__.d(public_authentication_namespaceObject, "currentState", function() { return public_authentication_currentState; });
+var attribute_deserializer_namespaceObject = {};
+__webpack_require__.r(attribute_deserializer_namespaceObject);
+__webpack_require__.d(attribute_deserializer_namespaceObject, "deserialize", function() { return deserialize; });
 var infopark_integration_test_support_namespaceObject = {};
 __webpack_require__.r(infopark_integration_test_support_namespaceObject);
 __webpack_require__.d(infopark_integration_test_support_namespaceObject, "alwaysShowOptionMarkers", function() { return alwaysShowOptionMarkers; });
@@ -1183,6 +1186,14 @@ var InternalError = /** @class */ (function (_super) {
     return InternalError;
 }(ScrivitoError));
 
+var MissingAuthError = /** @class */ (function (_super) {
+    __extends(MissingAuthError, _super);
+    function MissingAuthError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return MissingAuthError;
+}(ScrivitoError));
+
 var RequestFailedError = /** @class */ (function (_super) {
     __extends(RequestFailedError, _super);
     function RequestFailedError() {
@@ -1248,6 +1259,14 @@ var InMemoryTenantUnsupportedOperationError = /** @class */ (function (_super) {
         return _super.call(this, description + " is not supported when using the in-memory tenant") || this;
     }
     return InMemoryTenantUnsupportedOperationError;
+}(ScrivitoError));
+
+var MultiSiteModeOperationError = /** @class */ (function (_super) {
+    __extends(MultiSiteModeOperationError, _super);
+    function MultiSiteModeOperationError(message) {
+        return _super.call(this, message) || this;
+    }
+    return MultiSiteModeOperationError;
 }(ScrivitoError));
 
 
@@ -1453,7 +1472,7 @@ function disableConsoleError() {
 // CONCATENATED MODULE: ./scrivito_sdk/common/get_scrivito_version.ts
 
 function getScrivitoVersion() {
-    var version = "1.2.0-rc1-2332-g59824c1f5c";
+    var version = "1.2.0-rc1-2451-gb144f33c9b";
     if (!version) {
         throw new InternalError('version info missing');
     }
@@ -1843,6 +1862,7 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 };
 
 
+
 var basic_link_BasicLink = /** @class */ (function () {
     function BasicLink(attributes) {
         this.attributes = __assign({}, attributes);
@@ -1899,7 +1919,18 @@ var basic_link_BasicLink = /** @class */ (function () {
         return (this.objId() === otherLink.objId() && this.title() === otherLink.title());
     };
     BasicLink.prototype.copy = function (attributes) {
-        return new BasicLink(__assign({}, this.attributes, attributes));
+        var newAttributes = __assign({}, this.attributes, attributes);
+        if (attributes.objId && attributes.url) {
+            throw new ArgumentError('Link#copy refused: both "objId" and "url" have been' +
+                ' specified with truthy values');
+        }
+        if (attributes.objId) {
+            newAttributes.url = null;
+        }
+        else if (attributes.url) {
+            newAttributes.objId = null;
+        }
+        return new BasicLink(newAttributes);
     };
     BasicLink.prototype.isBroken = function () {
         if (this.isExternal()) {
@@ -2525,13 +2556,12 @@ function loadAllUntil(iterator, size, objs) {
 }
 
 // CONCATENATED MODULE: ./scrivito_sdk/loadable/load_handler.ts
-/* this module is package-private, i.e. do not import from outside of loadable. */
 
 var captureContextContainer = new context_container();
 var currentCaptureList = function () { return captureContextContainer.current(); };
 function capture(fn) {
     var captureList = {
-        loaders: [],
+        subscribes: [],
         missing: false,
         outdated: false,
     };
@@ -2547,10 +2577,10 @@ function notifyMissing() {
         captureList.missing = true;
     }
 }
-function notifyLoadingRequired(loader) {
+function notifyDataRequired(subscribe) {
     var captureList = currentCaptureList();
     if (captureList) {
-        captureList.loaders.push(loader);
+        captureList.subscribes.push(subscribe);
     }
 }
 function notifyOutdated() {
@@ -2570,23 +2600,50 @@ var CaptureReport = /** @class */ (function () {
             extendList(currentList, this.captureList);
         }
     };
-    /* returns true iff no data is missing, doesn't care about outdated  */
+    /** returns true iff no data is missing, doesn't care about outdated  */
     CaptureReport.prototype.isAllDataLoaded = function () {
         return !this.captureList.missing;
     };
-    /* returns true iff no data is missing or outdated */
+    /** returns true iff no data is missing or outdated */
     CaptureReport.prototype.isAllDataUpToDate = function () {
         return !this.captureList.missing && !this.captureList.outdated;
     };
-    /* triggers (re-)loading of all missing or outdated data that was captured */
-    CaptureReport.prototype.loadRequiredData = function () {
-        this.captureList.loaders.forEach(function (loader) { return loader(); });
+    /** subscribes to the loading of all data that was captured, using the provided subscription.
+     * all subscribed data is loaded automatically, and reloaded when outdated.
+     * the subscription is automatically updated to reflect the data captured in this report,
+     * i.e. any data that is no longer present in the capture is unsubscribed.
+     */
+    CaptureReport.prototype.subscribeLoading = function (subscriber) {
+        var unsubscribes = this.captureList.subscribes.map(function (subscribe) {
+            return subscribe();
+        });
+        subscriber.unsubscribe();
+        subscriber.storeUnsubscribe(function () {
+            unsubscribes.forEach(function (unsubscribe) { return unsubscribe(); });
+        });
     };
     return CaptureReport;
 }());
 
+/** keeps track of subscriptions to LoadableData */
+var LoadingSubscriber = /** @class */ (function () {
+    function LoadingSubscriber() {
+    }
+    /** used internally, do not call from outside 'loadable' */
+    LoadingSubscriber.prototype.storeUnsubscribe = function (unsubscribe) {
+        this.unsubscribeCallback = unsubscribe;
+    };
+    /** unsubscribe any previously subscribed data */
+    LoadingSubscriber.prototype.unsubscribe = function () {
+        if (this.unsubscribeCallback) {
+            this.unsubscribeCallback();
+        }
+    };
+    return LoadingSubscriber;
+}());
+
 function extendList(target, source) {
-    target.loaders = target.loaders.concat(source.loaders);
+    target.subscribes = target.subscribes.concat(source.subscribes);
     target.missing = target.missing || source.missing;
     target.outdated = target.outdated || source.outdated;
 }
@@ -2691,9 +2748,30 @@ var LoadableValue = /** @class */ (function () {
 // CONCATENATED MODULE: ./scrivito_sdk/loadable/loading_registry.ts
 
 var loadingState = {};
+var loadingSubscriptions = {};
 var loadIdCounter = 0;
 function loading_registry_reset() {
     loadingState = {};
+    loadingSubscriptions = {};
+}
+// for test purposes
+function subscriberCountForLoading(dataId) {
+    return loadingSubscriptions[dataId] || 0;
+}
+function subscribeLoading(dataId) {
+    var subscriptionActive = true;
+    changeSubscriptionsFor(dataId, 1);
+    return function () {
+        if (!subscriptionActive) {
+            return;
+        }
+        subscriptionActive = false;
+        changeSubscriptionsFor(dataId, -1);
+    };
+}
+function changeSubscriptionsFor(dataId, amount) {
+    var currentNumber = loadingSubscriptions[dataId] || 0;
+    loadingSubscriptions[dataId] = currentNumber + amount;
 }
 function isLoading(dataId) {
     return loadingState[dataId] !== undefined;
@@ -2787,12 +2865,13 @@ var loadable_data_LoadableData = /** @class */ (function () {
     // If the LoadableData is missing or loading, undefined will be returned.
     // if `throwNotLoaded` has been configured, a NotLoadedError is thrown instead.
     LoadableData.prototype.ensureAvailable = function () {
+        this.notifyDataRequired();
         if (this.isAvailable()) {
-            this.reloadIfOutdated();
+            this.notifyIfOutdated();
             return true;
         }
         if (this.isError()) {
-            this.reloadIfOutdated();
+            this.notifyIfOutdated();
             throw this.value.error();
         }
         if (!isCurrentlyCapturing()) {
@@ -2802,7 +2881,6 @@ var loadable_data_LoadableData = /** @class */ (function () {
                 'See https://scrivito.com/content-not-yet-loaded-error');
         }
         notifyMissing();
-        this.notifyLoadingRequired();
         if (this.throwNotLoaded) {
             throw new not_loaded_error();
         }
@@ -2867,22 +2945,26 @@ var loadable_data_LoadableData = /** @class */ (function () {
             _this.transitionToError(error, versionWhenLoadingStarted);
         });
     };
+    // for test purposes only
+    LoadableData.prototype.numSubscribers = function () {
+        return subscriberCountForLoading(this.id);
+    };
     LoadableData.prototype.transitionToError = function (error, version) {
         if (version === void 0) { version = this.currentVersion(); }
         this.value.transitionToError(error, version);
     };
-    LoadableData.prototype.reloadIfOutdated = function () {
+    LoadableData.prototype.notifyIfOutdated = function () {
         if (this.hasBeenInvalidated()) {
             notifyOutdated();
-            this.notifyLoadingRequired();
         }
     };
-    LoadableData.prototype.notifyLoadingRequired = function () {
+    LoadableData.prototype.notifyDataRequired = function () {
         var _this = this;
-        notifyLoadingRequired(function () {
+        notifyDataRequired(function () {
             if (_this.hasBeenInvalidated() || _this.isMissing()) {
                 _this.triggerLoading();
             }
+            return subscribeLoading(_this.id);
         });
     };
     LoadableData.prototype.hasBeenInvalidated = function () {
@@ -2994,11 +3076,8 @@ function normalizeData(data) {
     if (Array.isArray(data)) {
         return data.map(normalizeData);
     }
-    if (data !== null && typeof data === 'object') {
-        return external_underscore_["chain"](data)
-            .mapObject(normalizeData)
-            .pairs()
-            .sortBy(external_underscore_["first"]);
+    if (data !== null && external_underscore_["isObject"](data)) {
+        return external_underscore_["sortBy"](external_underscore_["pairs"](external_underscore_["mapObject"](data, normalizeData)), external_underscore_["first"]);
     }
     return data;
 }
@@ -3089,8 +3168,9 @@ function generateRecord(data) {
 
 
 function observeAndLoad(loadableExpression, listener) {
-    return observe(function () { return capture(function () { return runAndCatchException(loadableExpression); }); }, function (captured) {
-        captured.loadRequiredData();
+    var loadingSubscriber = new LoadingSubscriber();
+    var observation = observe(function () { return capture(function () { return runAndCatchException(loadableExpression); }); }, function (captured) {
+        captured.subscribeLoading(loadingSubscriber);
         var outcome = captured.result;
         if (outcome.errorThrown) {
             if (!captured.isAllDataUpToDate()) {
@@ -3104,6 +3184,13 @@ function observeAndLoad(loadableExpression, listener) {
             allDataUpToDate: captured.isAllDataUpToDate(),
         });
     });
+    return {
+        forceRefresh: function () { return observation.forceRefresh(); },
+        unsubscribe: function () {
+            observation.unsubscribe();
+            loadingSubscriber.unsubscribe();
+        },
+    };
 }
 
 // CONCATENATED MODULE: ./scrivito_sdk/loadable/index.ts
@@ -3585,8 +3672,9 @@ function handleAjaxResponse(request) {
         if (details && isJSONObject(details)) {
             var visit = details.visit;
             if (typeof visit === 'string') {
-                redirectTo(authenticationUrlFor(visit));
-                return {};
+                var target = authenticationUrlFor(visit);
+                redirectTo(target);
+                throw new MissingAuthError("Insufficient authorization - please visit " + target);
             }
         }
     }
@@ -5721,36 +5809,7 @@ function deserializeWidgetlistValue(typeFromBackend, valueFromBackend, model) {
     return model.widget(widgetId);
   });
 }
-// CONCATENATED MODULE: ./scrivito_sdk/models/type_info.ts
-
-
-function normalizeAttributeType(typeInfo) {
-    if (typeof typeInfo === 'string') {
-        return [typeInfo];
-    }
-    if (external_underscore_["isArray"](typeInfo)) {
-        return typeInfo;
-    }
-    throw new InternalError('Type Info needs to be a string or an array containing a string and optionally a hash');
-}
-function normalizeAttrs(attributes) {
-    return external_underscore_["mapObject"](attributes, function (attributeValue, name) {
-        if (isSystemAttribute(name)) {
-            if (external_underscore_["isArray"](attributeValue)) {
-                return attributeValue;
-            }
-            return [attributeValue];
-        }
-        if (!external_underscore_["isArray"](attributeValue)) {
-            throw new InternalError("Value for " + name + " should be a tuple: [value, typeInfo]");
-        }
-        var value = attributeValue[0], typeInfo = attributeValue[1];
-        return [value, normalizeAttributeType(typeInfo)];
-    });
-}
-
 // CONCATENATED MODULE: ./scrivito_sdk/models/basic_attribute_content.ts
-
 
 
 
@@ -5762,19 +5821,16 @@ var basic_attribute_content_BasicAttributeContent = /** @class */ (function () {
             throw new ArgumentError('Attribute names have to be in camel case.');
         }
         var internalAttributeName = underscore(attributeName);
-        if (isSystemAttribute(internalAttributeName)) {
-            return this.getSystemAttributeValue(internalAttributeName) || null;
-        }
-        var normalizedAttributeType = normalizeAttributeType(typeInfo);
-        var type = normalizedAttributeType[0];
-        var options = normalizedAttributeType.length > 1
-            ? normalizedAttributeType[1]
-            : undefined;
         var rawValue = this.getAttributeData(internalAttributeName);
         if (!rawValue || !external_underscore_["isArray"](rawValue)) {
             rawValue = [];
         }
-        return deserialize(this, rawValue, type, options);
+        if (typeof typeInfo === 'string') {
+            return deserialize(this, rawValue, typeInfo);
+        }
+        else {
+            return deserialize.apply(attribute_deserializer_namespaceObject, [this, rawValue].concat(typeInfo));
+        }
     };
     BasicAttributeContent.prototype.serializeAttributes = function (data) {
         var _this = this;
@@ -5823,6 +5879,24 @@ function isWidgetlistAttributeValueAndType(valueAndType) {
     var typeInfo = valueAndType[1];
     return (external_underscore_["isArray"](typeInfo) && typeInfo.length > 0 && typeInfo[0] === 'widgetlist');
 }
+function normalizeAttributes(attributes) {
+    return external_underscore_["mapObject"](attributes, function (attributeValue, name) {
+        if (isSystemAttribute(name)) {
+            if (external_underscore_["isArray"](attributeValue)) {
+                return attributeValue;
+            }
+            return [attributeValue];
+        }
+        if (!external_underscore_["isArray"](attributeValue)) {
+            throw new InternalError("Value for " + name + " should be a tuple: [value, typeInfo]");
+        }
+        var value = attributeValue[0], typeInfo = attributeValue[1];
+        if (typeof typeInfo === 'string') {
+            return [value, [typeInfo]];
+        }
+        return [value, typeInfo];
+    });
+}
 
 // CONCATENATED MODULE: ./scrivito_sdk/models/basic_widget.js
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -5858,7 +5932,6 @@ function basic_widget_createClass(Constructor, protoProps, staticProps) { if (pr
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -5916,7 +5989,7 @@ function (_BasicAttributeConten) {
     basic_widget_classCallCheck(this, BasicWidget);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BasicWidget).call(this));
-    _this._attributesToBeSaved = normalizeAttrs(attributes);
+    _this._attributesToBeSaved = normalizeAttributes(attributes);
     assertWidgetClassExists(attributes._objClass);
     return _this;
   }
@@ -5954,7 +6027,7 @@ function (_BasicAttributeConten) {
     value: function update(attributes) {
       var _this2 = this;
 
-      var normalizedAttributes = normalizeAttrs(attributes);
+      var normalizedAttributes = normalizeAttributes(attributes);
       withBatchedUpdates(function () {
         _this2.persistWidgets(_this2.obj(), normalizedAttributes);
 
@@ -6059,17 +6132,6 @@ function (_BasicAttributeConten) {
     key: "getData",
     value: function getData() {
       return this.obj().getWidgetData(this.id());
-    }
-  }, {
-    key: "getSystemAttributeValue",
-    value: function getSystemAttributeValue(name) {
-      switch (name) {
-        case '_id':
-          return this.id();
-
-        case '_obj_class':
-          return this.objClass();
-      }
     }
   }, {
     key: "serializeAttributes",
@@ -6529,7 +6591,6 @@ var basic_obj_extends = (undefined && undefined.__extends) || (function () {
 
 
 
-
 var basic_obj_BasicObj = /** @class */ (function (_super) {
     basic_obj_extends(BasicObj, _super);
     function BasicObj(objData) {
@@ -6556,7 +6617,7 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
         return obj;
     };
     BasicObj.create = function (attributes) {
-        var normalizedAttributes = normalizeAttrs(attributes);
+        var normalizedAttributes = normalizeAttributes(attributes);
         assertObjClassExists(normalizedAttributes._objClass);
         if (!normalizedAttributes._id) {
             normalizedAttributes._id = [this.generateId()];
@@ -6574,7 +6635,7 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
         var basicObj = this.create(attributes);
         var futureBinary = models_binary.upload(file);
         return futureBinary.intoId(basicObj.id()).then(function (binary) {
-            basicObj.update({ blob: [binary, 'binary'] });
+            basicObj.update({ blob: [binary, ['binary']] });
             return basicObj.finishSaving().then(function () { return basicObj; });
         });
     };
@@ -6621,6 +6682,9 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
             return null;
         }
         return obj;
+    };
+    BasicObj.getAllByPermalink = function (permalink) {
+        return this.where('_permalink', 'equals', permalink).take();
     };
     BasicObj.prototype.id = function () {
         return this.getAttributeData('_id');
@@ -6766,7 +6830,7 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
     };
     BasicObj.prototype.update = function (attributes) {
         var _this = this;
-        var normalizedAttributes = normalizeAttrs(attributes);
+        var normalizedAttributes = normalizeAttributes(attributes);
         withBatchedUpdates(function () {
             _this.persistWidgets(_this, normalizedAttributes);
             var patch = serialize(normalizedAttributes);
@@ -6787,7 +6851,9 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
             var newAttributeValue = attributeValue.slice(0, newIndex).concat([
                 widget
             ], attributeValue.slice(newIndex));
-            container.update((_a = {}, _a[attributeName] = [newAttributeValue, 'widgetlist'], _a));
+            container.update((_a = {},
+                _a[attributeName] = [newAttributeValue, ['widgetlist']],
+                _a));
         }
     };
     BasicObj.prototype.removeWidget = function (widget) {
@@ -6901,28 +6967,8 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
     BasicObj.prototype.getData = function () {
         return this.objData.get();
     };
-    BasicObj.prototype.getSystemAttributeValue = function (name) {
-        switch (name) {
-            case '_id':
-                return this.id();
-            case '_obj_class':
-                return this.objClass();
-            case '_path':
-                return this.path();
-            case '_permalink':
-                return this.permalink();
-            case '_created_at':
-                return this.createdAt();
-            case '_created_by':
-                return this.createdBy();
-            case '_last_changed':
-                return this.lastChanged();
-            case '_last_changed_by':
-                return this.lastChangedBy();
-        }
-    };
     BasicObj.prototype.rawBlob = function () {
-        var blob = this.get('blob', 'binary');
+        var blob = this.get('blob', ['binary']);
         return blob && blob.raw();
     };
     BasicObj.prototype._copyAttributes = function () {
@@ -6981,7 +7027,7 @@ var basic_obj_BasicObj = /** @class */ (function (_super) {
         return {
             container: container,
             attributeName: attributeName,
-            attributeValue: container.get(attributeName, 'widgetlist'),
+            attributeValue: container.get(attributeName, ['widgetlist']),
             index: placement.index,
             parentWidgetId: parentWidgetId,
         };
@@ -7101,6 +7147,7 @@ function () {
     this._container = container;
     this._attributeName = attributeName;
     this._typeInfo = typeInfo;
+    this._typeOptions = this._typeInfo[1] || {};
   }
 
   basic_field_createClass(BasicField, [{
@@ -7134,11 +7181,6 @@ function () {
       return this._typeInfo[0];
     }
   }, {
-    key: "typeOptions",
-    value: function typeOptions() {
-      return this._typeInfo[1] || {};
-    }
-  }, {
     key: "equals",
     value: function equals(other) {
       if (!basic_field_instanceof(other, BasicField)) {
@@ -7152,14 +7194,14 @@ function () {
     value: function values() {
       this._assertValidTypes(['enum', 'multienum'], 'Only enum and multienum attributes can have values');
 
-      return this._sortValuesByLocalization(this.typeOptions().values);
+      return this._sortValuesByLocalization(this._typeOptions.values);
     }
   }, {
     key: "titleForValue",
     value: function titleForValue(value) {
       this._assertValidTypes(['enum', 'multienum'], 'Only enum and multienum attributes can have localized values');
 
-      var localization = Object(external_underscore_["findWhere"])(this.typeOptions().valuesLocalization, {
+      var localization = Object(external_underscore_["findWhere"])(this._typeOptions.valuesLocalization, {
         value: value
       });
       return localization && localization.title || value;
@@ -7228,9 +7270,9 @@ function () {
       var _this = this;
 
       if (values) {
-        if (this.typeOptions().valuesLocalization) {
+        if (this._typeOptions.valuesLocalization) {
           return Object(external_underscore_["sortBy"])(values, function (value) {
-            var index = Object(external_underscore_["findIndex"])(_this.typeOptions().valuesLocalization, {
+            var index = Object(external_underscore_["findIndex"])(_this._typeOptions.valuesLocalization, {
               value: value
             });
 
@@ -7740,10 +7782,7 @@ function isAppClass(object) {
 }
 function normalizeAttributeDefinition(attrDefinition) {
     if (typeof attrDefinition === 'string') {
-        return [attrDefinition, {}];
-    }
-    if (attrDefinition.length < 2) {
-        return [attrDefinition[0], {}];
+        return [attrDefinition];
     }
     return attrDefinition;
 }
@@ -10222,7 +10261,58 @@ function setWindowContext(newIframeContext) {
 function getWindowRegistry() {
   return getWindowContext()._privateRealm._registry;
 }
+// CONCATENATED MODULE: ./scrivito_sdk/app_support/multi_site_mode.ts
+
+
+
+var getSiteIdForObjCallback;
+var multi_site_mode_selectedSiteId = null;
+function setMultiSiteMode(callback) {
+    getSiteIdForObjCallback = callback;
+}
+function useMultiSiteMode() {
+    return !!getSiteIdForObjCallback;
+}
+function multi_site_mode_getSiteIdForObj(obj) {
+    var siteId = getSiteIdForObjCallback(wrap_in_app_class_wrapInAppClass(getWindowRegistry(), obj));
+    if (typeof siteId === 'string' && siteId.length > 0) {
+        return siteId;
+    }
+    return null;
+}
+/** Selecting a site ID only makes sense in the multi-site mode */
+function unstable_selectSiteId(siteId) {
+    if (!getSiteIdForObjCallback) {
+        throw new MultiSiteModeOperationError('Scrivito.unstable_selectSiteId is only available in the multi-site mode');
+    }
+    if (multi_site_mode_selectedSiteId) {
+        throw new MultiSiteModeOperationError('Scrivito.unstable_selectSiteId can be called only once');
+    }
+    multi_site_mode_selectedSiteId = siteId;
+}
+/** Accessing the selected site ID only makes sense in the multi-site mode */
+function getSelectedSiteId() {
+    // This should never happen!
+    if (!getSiteIdForObjCallback) {
+        throw new InternalError('Calling getSelectedSiteId is only available in multi-site mode');
+    }
+    return multi_site_mode_selectedSiteId;
+}
+function assertSelectedSiteId(operationDescription) {
+    if (!multi_site_mode_selectedSiteId) {
+        throw new MultiSiteModeOperationError("Used " + operationDescription + " in the multi-site mode, but the site ID is not yet selected." +
+            ' Forgot to use Scrivito.unstable_selectSiteId?');
+    }
+}
+// For test purpose only.
+function resetMultiSiteMode() {
+    getSiteIdForObjCallback = undefined;
+    multi_site_mode_selectedSiteId = null;
+}
+
 // CONCATENATED MODULE: ./scrivito_sdk/app_support/routing_path.ts
+
+
 
 
 
@@ -10242,8 +10332,15 @@ function generateRoutingPath(obj) {
     }
     var permalink = obj.permalink();
     if (permalink) {
-        setObjIdForPermalink(obj.id(), permalink);
-        return "/" + permalink;
+        if (useMultiSiteMode()) {
+            assertSelectedSiteId('routing-related API (e.g. Scrivito.navigateTo)');
+            if (isGlobalOrFromSelectedSite(obj)) {
+                return generateUsingPermalink(obj, permalink);
+            }
+        }
+        else {
+            return generateUsingPermalink(obj, permalink);
+        }
     }
     var slug = generateSlug(obj);
     if (slug) {
@@ -10262,12 +10359,36 @@ function recognizeRoutingPath(pathToRecognize) {
     }
     return recognizePermalink(path);
 }
+function isGlobalOrFromSelectedSite(obj) {
+    var objSiteId = multi_site_mode_getSiteIdForObj(obj);
+    var selectedSiteId = getSelectedSiteId();
+    return !objSiteId || objSiteId === selectedSiteId;
+}
+function generateUsingPermalink(obj, permalink) {
+    setObjIdForPermalink(obj.id(), permalink);
+    return "/" + permalink;
+}
 function recognizePermalink(path) {
     var objId = objIdForPermalink(path);
     if (objId) {
         return basic_obj.get(objId);
     }
+    if (useMultiSiteMode()) {
+        return recognizeMultiSitePermalink(path);
+    }
     return basic_obj.getByPermalink(path);
+}
+function recognizeMultiSitePermalink(path) {
+    assertSelectedSiteId('routing-related API (e.g. Scrivito.currentPage, Scrivito.urlFor)');
+    var siteId = getSelectedSiteId();
+    var objs = basic_obj.getAllByPermalink(path);
+    return (Object(external_underscore_["find"])(objs, function (obj) {
+        var objSiteId = multi_site_mode_getSiteIdForObj(obj);
+        if (objSiteId) {
+            return objSiteId === siteId;
+        }
+        return true;
+    }) || null);
 }
 // For test purpose only.
 function getHomepageCallback() {
@@ -10857,6 +10978,7 @@ var connect_ComponentConnector = /** @class */ (function () {
         this.component = component;
         this.isMounted = false;
         this.updateIfNecessary = this.updateIfNecessary.bind(this);
+        this.loadingSubscriber = new LoadingSubscriber();
     }
     ComponentConnector.prototype.componentDidMount = function () {
         this.isMounted = true;
@@ -10870,6 +10992,7 @@ var connect_ComponentConnector = /** @class */ (function () {
     ComponentConnector.prototype.componentWillUnmount = function () {
         this.unregisterLoadingActivity();
         this.isMounted = false;
+        this.loadingSubscriber.unsubscribe();
     };
     ComponentConnector.prototype.render = function (originalRender) {
         var _this = this;
@@ -10890,8 +11013,7 @@ var connect_ComponentConnector = /** @class */ (function () {
         else {
             var captured_1 = capture(function () { return runWithFrozenState(originalRender); });
             this.whenMounted(function () {
-                // note that this also triggers reloading of outdated data
-                captured_1.loadRequiredData();
+                captured_1.subscribeLoading(_this.loadingSubscriber);
                 if (captured_1.isAllDataLoaded()) {
                     _this.unregisterLoadingActivity();
                 }
@@ -11968,7 +12090,7 @@ function cssPropertiesForScrivitoBackground(background) {
     if (image instanceof getWindowContext().Obj) {
         var basicObj = unwrapAppClass(image);
         if (isBinaryBasicObj(basicObj)) {
-            var blob = basicObj.get('blob', 'binary');
+            var blob = basicObj.get('blob', ['binary']);
             if (blob) {
                 return cssPropertiesForBinary(blob, background);
             }
@@ -13572,6 +13694,7 @@ var checkUrlFor = checkArgumentsFor('urlFor', [['target', url_for_TargetType], [
 
 
 
+
 var _isConfigured = false;
 var OriginValue = external_tcomb_validation_.refinement(external_tcomb_validation_.String, function (v) { return external_urijs_(v).origin() === v; });
 var AllowedConfiguration = external_tcomb_validation_.struct({
@@ -13596,8 +13719,15 @@ function configure(configuration) {
     else {
         if (ui_adapter_uiAdapter) {
             var tenantConfiguration = { tenant: tenant, endpoint: endpoint };
-            if (unstable && unstable.useRailsAuth) {
-                tenantConfiguration.useRailsAuth = unstable.useRailsAuth;
+            if (unstable) {
+                var useRailsAuth = unstable.useRailsAuth;
+                if (useRailsAuth) {
+                    tenantConfiguration.useRailsAuth = useRailsAuth;
+                }
+                var getSiteIdForObj = unstable.getSiteIdForObj;
+                if (getSiteIdForObj) {
+                    setMultiSiteMode(getSiteIdForObj);
+                }
             }
             ui_adapter_uiAdapter.configureTenant(tenantConfiguration);
         }
@@ -13686,6 +13816,7 @@ var OnClickScan = /** @class */ (function () {
 }());
 
 // CONCATENATED MODULE: ./scrivito_sdk/app_support/app_adapter.ts
+
 
 
 
@@ -13799,6 +13930,13 @@ var app_adapter_AppAdapter = /** @class */ (function () {
     AppAdapter.prototype.replaceInternalLinks = function (htmlString) {
         return replaceInternalLinks(htmlString);
     };
+    AppAdapter.prototype.getSiteIdForObj = function (objId) {
+        var obj = basic_obj.get(objId);
+        if (obj) {
+            return multi_site_mode_getSiteIdForObj(obj);
+        }
+        return null;
+    };
     return AppAdapter;
 }());
 /* harmony default export */ var app_adapter = (app_adapter_AppAdapter);
@@ -13818,13 +13956,16 @@ function buildObjClassData(name, modelClass) {
 }
 function buildAttributesData(attributes, attributeEditConfigs) {
     var attributesData = Object(external_underscore_["map"])(attributes, function (definition, name) {
-        var type = definition[0], options = definition[1];
+        var type = definition[0];
         var attributeData = { name: name, type: type };
-        if (options.only) {
-            attributeData.only = options.only;
-        }
-        if (options.values) {
-            attributeData.values = options.values;
+        if (definition.length > 1) {
+            var options = definition[1];
+            if ('only' in options && options.only) {
+                attributeData.only = options.only;
+            }
+            if ('values' in options && options.values) {
+                attributeData.values = options.values;
+            }
         }
         return attributeData;
     });
@@ -14096,12 +14237,12 @@ function computeMenuPatch() {
 
 
 
-var observation;
+var menu_observer_observation;
 function observeMenu() {
-    if (observation) {
+    if (menu_observer_observation) {
         return;
     }
-    observation = observeAndLoad(computeMenuPatch, function (observed) {
+    menu_observer_observation = observeAndLoad(computeMenuPatch, function (observed) {
         if (observed.allDataLoaded) {
             if (ui_adapter_uiAdapter) {
                 ui_adapter_uiAdapter.updateMenu(observed.result);
@@ -14110,13 +14251,13 @@ function observeMenu() {
     });
 }
 function notifyMenuUpdate() {
-    if (observation) {
-        observation.forceRefresh();
+    if (menu_observer_observation) {
+        menu_observer_observation.forceRefresh();
     }
 }
 // for test purposes only
 function resetObserveMenu() {
-    observation = undefined;
+    menu_observer_observation = undefined;
 }
 
 // CONCATENATED MODULE: ./scrivito_sdk/app_support/extend_menu.ts
@@ -14319,6 +14460,7 @@ function currentPublicAuthorizationState() {
 
 
 
+
 // React
 
 
@@ -14367,6 +14509,7 @@ var public_api_provideWidgetClass = public_api_realmApi.provideWidgetClass;
 /* concated harmony reexport provideEditingConfig */__webpack_require__.d(__webpack_exports__, "provideEditingConfig", function() { return provideEditingConfig; });
 /* concated harmony reexport urlFor */__webpack_require__.d(__webpack_exports__, "urlFor", function() { return url_for_urlFor; });
 /* concated harmony reexport useHistory */__webpack_require__.d(__webpack_exports__, "useHistory", function() { return useHistory; });
+/* concated harmony reexport unstable_selectSiteId */__webpack_require__.d(__webpack_exports__, "unstable_selectSiteId", function() { return unstable_selectSiteId; });
 /* concated harmony reexport BackgroundImageTag */__webpack_require__.d(__webpack_exports__, "BackgroundImageTag", function() { return background_image_tag; });
 /* concated harmony reexport ChildListTag */__webpack_require__.d(__webpack_exports__, "ChildListTag", function() { return child_list_tag; });
 /* concated harmony reexport ContentTag */__webpack_require__.d(__webpack_exports__, "ContentTag", function() { return content_tag; });
