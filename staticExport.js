@@ -5,12 +5,17 @@ const Webpack = require("webpack");
 const webpackConfig = require("./webpack.config.js");
 const WebpackDevServer = require("webpack-dev-server");
 
-const TARGET_DIR = "build";
+const TARGET_DIR = "build_static";
 let browser;
 
 async function staticExport() {
   console.time("[staticExport]");
-  console.log("[staticExport] Starting...");
+
+  console.log(`[staticExport] Removing ${TARGET_DIR}/`);
+  fse.removeSync(TARGET_DIR);
+
+  console.log(`[staticExport] Copying build/ to ${TARGET_DIR}/`);
+  fse.copySync("build", TARGET_DIR);
 
   let filesAdded = 0;
   let filesRemoved = 0;
