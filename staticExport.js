@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const fse = require('fs-extra');
 const nodeUrl = require('url');
 const path = require('path');
