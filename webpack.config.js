@@ -22,11 +22,11 @@ function generateEntry(isProduction) {
     index: "./index.js",
     google_analytics: "./google_analytics.js",
     scrivito_extensions: "./scrivito_extensions.js",
-    sitemap: "./sitemap.js",
     "index.css": "./assets/stylesheets/index.scss",
   };
   if (!isProduction) {
     entry.export_objs = "./export_objs.js";
+    entry.export_sitemap = "./export_sitemap.js";
   }
   return entry;
 }
@@ -37,7 +37,7 @@ function generatePlugins(
 ) {
   const ignorePublicFiles = [];
   if (isProduction) {
-    ignorePublicFiles.push("_export_objs.html");
+    ignorePublicFiles.push("_export_*.html");
   }
 
   const plugins = [
