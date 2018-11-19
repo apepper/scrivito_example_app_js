@@ -22,10 +22,12 @@ function exportObj(obj) {
   Helmet.canUseDOM = false;
 
   return Scrivito.renderPage(obj, () => {
+    const objId = obj.id();
     const bodyContent = ReactDOMServer.renderToStaticMarkup(<App />);
     const helmet = Helmet.renderStatic();
+    const preloadDumpFileName = `preloadDump-${objId}.js`;
     return {
-      objId: obj.id(),
+      objId,
       objUrl: Scrivito.urlFor(obj),
       htmlAttributes: helmet.htmlAttributes.toString(),
       headContent: `
@@ -35,12 +37,19 @@ function exportObj(obj) {
         `,
       bodyAttributes: helmet.bodyAttributes.toString(),
       bodyContent,
+      preloadDumpFileName,
     };
   })
     .then(({ result, preloadDump }) => {
       result.preloadDump = preloadDump;
 
-      return result;
+      return {
+        htmlContent: generateHtml(result),
+        objId: result.objId,
+        objUrl: result.objUrl,
+        preloadDumpContent: generatePreloadDump(preloadDump),
+        preloadDumpFileName: result.preloadDumpFileName,
+      };
     })
     .catch(e => {
       const objId = obj.id();
@@ -50,6 +59,40 @@ function exportObj(obj) {
         errorDuringGeneration: true,
       };
     });
+}
+
+function generateHtml({
+  objId,
+  htmlAttributes,
+  headContent,
+  bodyAttributes,
+  bodyContent,
+  preloadDumpFileName,
+}) {
+  return `<!DOCTYPE html>
+<html ${htmlAttributes}>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Scrivito by Infopark AG (scrivito.com)">
+  ${headContent}
+  <link rel="preconnect" href="https://api.scrivito.com" crossorigin>
+  <link rel="preconnect" href="https://api.scrivito.com">
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body ${bodyAttributes}>
+  <div id="application" data-scrivito-prerendering-obj-id="${objId}">
+    ${bodyContent}
+  </div>
+  <script src="/${preloadDumpFileName}"></script>
+  <script async src="/index.js"></script>
+</body>
+</html>`;
+}
+
+function generatePreloadDump(preloadDump) {
+  return `window.preloadDump = ${JSON.stringify(preloadDump)};`;
 }
 
 function exportObjs() {

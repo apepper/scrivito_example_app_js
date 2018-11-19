@@ -117,20 +117,23 @@ function closeServer(server) {
 
 function writeObjsToDisk(results) {
   results.forEach(result => {
-    const { objId, objUrl, preloadDump } = result;
+    const {
+      objId,
+      objUrl,
+      htmlContent,
+      preloadDumpContent,
+      preloadDumpFileName,
+    } = result;
     const fileName = filenameFromUrl(objUrl);
-    const preloadDumpFileName = `preloadDump-${objId}.js`;
 
     console.log(
       `  [writeObjsToDisk] Writing ${fileName} (${objId}) to disk...`
     );
-    const htmlContent = generateHtml({ preloadDumpFileName, ...result });
     fse.outputFileSync(`${TARGET_DIR}/${fileName}`, htmlContent);
 
     console.log(
       `  [writeObjsToDisk] Writing ${preloadDumpFileName} to disk...`
     );
-    const preloadDumpContent = generatePreloadDump(preloadDump);
     fse.outputFileSync(
       `${TARGET_DIR}/${preloadDumpFileName}`,
       preloadDumpContent
@@ -146,40 +149,6 @@ function filenameFromUrl(url) {
   }
 
   return `${pathname}.html`;
-}
-
-function generateHtml({
-  objId,
-  htmlAttributes,
-  headContent,
-  bodyAttributes,
-  bodyContent,
-  preloadDumpFileName,
-}) {
-  return `<!DOCTYPE html>
-<html ${htmlAttributes}>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Scrivito by Infopark AG (scrivito.com)">
-  ${headContent}
-  <link rel="preconnect" href="https://api.scrivito.com" crossorigin>
-  <link rel="preconnect" href="https://api.scrivito.com">
-  <link rel="stylesheet" href="/index.css">
-</head>
-<body ${bodyAttributes}>
-  <div id="application" data-scrivito-prerendering-obj-id="${objId}">
-    ${bodyContent}
-  </div>
-  <script src="/${preloadDumpFileName}"></script>
-  <script async src="/index.js"></script>
-</body>
-</html>`;
-}
-
-function generatePreloadDump(preloadDump) {
-  return `window.preloadDump = ${JSON.stringify(preloadDump)};`;
 }
 
 staticExport().catch(e => {
