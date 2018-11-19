@@ -131,7 +131,7 @@ function filenameFromUrl(url) {
 function generateHtml({
   objId, htmlAttributes, headContent, bodyAttributes, bodyContent, preloadDumpFileName,
 }) {
-  const html = `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html ${ htmlAttributes }>
 <head>
   <meta charset="utf-8">
@@ -151,9 +151,6 @@ function generateHtml({
   <script async src="/index.js"></script>
 </body>
 </html>`;
-
-  // TODO: Remove workaround for host containing urls from scrivito.
-  return html.replace(/http:\/\/localhost\:8080/g, '');
 }
 
 function generatePreloadDump(preloadDump) {
