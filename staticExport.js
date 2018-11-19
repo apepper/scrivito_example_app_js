@@ -2,11 +2,10 @@ const fse = require("fs-extra");
 const nodeUrl = require("url");
 const puppeteer = require("puppeteer");
 const Webpack = require("webpack");
-const webpackConfig = require("./webpack.config.js");
 const WebpackDevServer = require("webpack-dev-server");
+const webpackConfig = require("./webpack.config.js");
 
 const TARGET_DIR = "build_static";
-let browser;
 
 async function staticExport() {
   console.time("[staticExport]");
@@ -25,10 +24,11 @@ async function staticExport() {
   console.log("[staticExport] 🗄️  webpack-dev-server started...");
 
   console.log("[staticExport] 🖥️️  Starting browser...");
-  browser = await puppeteer.launch();
+  const browser = await puppeteer.launch();
   console.log("[staticExport] 🖥️️  Browser started");
 
   const exportedObjs = await executeInBrowser(
+    browser,
     "http://localhost:8080/_export_objs.html",
     () => exportObjs()
   );
@@ -42,6 +42,7 @@ async function staticExport() {
 
   console.log("[staticExport] Creating sitemap.xml...");
   const sitemap = await executeInBrowser(
+    browser,
     "http://localhost:8080/_export_sitemap.html",
     () => exportSitemap()
   );
@@ -74,7 +75,7 @@ async function staticExport() {
   console.timeEnd("[staticExport]");
 }
 
-async function executeInBrowser(url, jsCommand) {
+async function executeInBrowser(browser, url, jsCommand) {
   console.log(`  [executeInBrowser] 🖥️️  Visiting ${url} ...`);
   const page = await browser.newPage();
   page.on("console", msg =>
