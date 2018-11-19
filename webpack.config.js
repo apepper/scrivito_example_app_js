@@ -25,10 +25,18 @@ module.exports = (env = {}) => {
     );
   }
 
+  let scrivitoOrigin = '';
+  if (process.env.CONTEXT === 'production') {
+    scrivitoOrigin = process.env.URL;
+  } else if (process.env.DEPLOY_PRIME_URL) {
+    scrivitoOrigin = process.env.DEPLOY_PRIME_URL;
+  }
+
   const plugins = [
     new webpack.EnvironmentPlugin({
       NODE_ENV: isProduction ? 'production' : 'development',
       SCRIVITO_TENANT: '',
+      SCRIVITO_ORIGIN: scrivitoOrigin,
     }),
     new CopyWebpackPlugin([
       { from: '../public' },
