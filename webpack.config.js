@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ZipPlugin = require("zip-webpack-plugin");
-const AddSitemapToRedirectsWebpackPlugin = require("./AddSitemapToRedirectsWebpackPlugin");
 const headersCsp = require("./public/_headersCsp.json");
 const ExtendCspHeadersWebpackPlugin = require("./ExtendCspHeadersWebpackPlugin");
 
@@ -54,7 +53,6 @@ function generatePlugins(
         to: "scrivito/index.html",
       },
     ]),
-    new AddSitemapToRedirectsWebpackPlugin(),
     new ExtendCspHeadersWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name]",
