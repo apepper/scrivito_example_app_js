@@ -26,7 +26,6 @@ module.exports = (env = {}) => {
   }
 
   const plugins = [
-    new ProgressBarPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: isProduction ? 'production' : 'development',
       SCRIVITO_TENANT: '',
@@ -40,6 +39,16 @@ module.exports = (env = {}) => {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
   ];
+
+  if (!env.disableProgressBarPlugin) {
+    plugins.unshift(new ProgressBarPlugin());
+  }
+
+  if (env.disableReactDevtools) {
+    plugins.push(new webpack.DefinePlugin({
+      __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+    }));
+  }
 
   if (isProduction) {
     plugins.unshift(new CleanWebpackPlugin([buildPath], { verbose: false }));

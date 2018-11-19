@@ -1,11 +1,11 @@
-const express = require('express');
 const fse = require('fs-extra');
 const nodeUrl = require('url');
-const path = require('path');
 const puppeteer = require('puppeteer');
+const Webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+const WebpackDevServer = require('webpack-dev-server');
 
 const TARGET_DIR = 'build';
-let server;
 let browser;
 
 async function staticExport() {
@@ -15,9 +15,9 @@ async function staticExport() {
   let filesAdded = 0;
   let filesRemoved = 0;
 
-  console.log('[staticExport] 🗄️  Starting express server...');
-  server = await startServer();
-  console.log('[staticExport] 🗄️  Express server started...');
+  console.log('[staticExport] 🗄️  Starting webpack-dev-server...');
+  const server = await startServer();
+  console.log('[staticExport] 🗄️  webpack-dev-server started...');
 
   console.log('[staticExport] 🖥️️  Starting browser...');
   browser = await puppeteer.launch();
@@ -56,8 +56,8 @@ async function staticExport() {
   console.log('[staticExport] 🖥️️  Closing the browser...');
   await browser.close();
 
-  console.log('[staticExport] 🗄️  Closing express server...');
-  await server.close();
+  console.log('[staticExport] 🗄️  Closing webpack-dev-server...');
+  await closeServer(server);
 
   console.log(`[staticExport] 📦 Added ${ filesAdded } files to and remove ${ filesRemoved }`+
     ` files from folder ${ TARGET_DIR }!`);
@@ -85,14 +85,20 @@ async function executeInBrowser(url, jsCommand) {
 }
 
 function startServer() {
-  const buildPath = path.join(__dirname, 'build');
-  const app = express();
-  const staticMiddleware = express.static(buildPath);
-  app.use(staticMiddleware);
+  const compiler = Webpack(webpackConfig({
+    disableProgressBarPlugin: true,
+    disableReactDevtools: true,
+  }));
+  const server = new WebpackDevServer(compiler, { ...webpackConfig.devServer, quiet: true });
 
-  let server;
-  return new Promise((resolve, reject) => {
-    server = app.listen(8080, () => resolve(server));
+  return new Promise((resolve, _reject) => {
+    server.listen(8080, 'localhost', () => resolve(server));
+  });
+}
+
+function closeServer(server) {
+  return new Promise((resolve, _reject) => {
+    server.close(resolve);
   });
 }
 
