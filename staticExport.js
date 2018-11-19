@@ -39,6 +39,16 @@ async function staticExport() {
   writeObjsToDisk(exportedObjs);
   filesAdded += exportedObjs.length;
 
+  console.log("[staticExport] Creating sitemap.xml...");
+  const sitemap = await executeInBrowser(
+    browser,
+    "http://localhost:8080/_export_sitemap.html",
+    () => exportSitemap()
+  );
+  fse.outputFileSync(`${TARGET_DIR}/sitemap.xml`, sitemap);
+  filesAdded += 1;
+  console.log("[staticExport] Created sitemap.xml");
+
   console.log("[staticExport] 🖥️️  Closing the browser...");
   await browser.close();
 
