@@ -1,22 +1,19 @@
 /* eslint no-console: "off" */
-import * as React from 'react';
-import * as ReactDOMServer from 'react-dom/server';
-import * as Scrivito from 'scrivito';
-import Helmet from 'react-helmet';
-import './Objs';
-import './Widgets';
-import App from './App';
-import './config';
+import * as React from "react";
+import * as ReactDOMServer from "react-dom/server";
+import * as Scrivito from "scrivito";
+import Helmet from "react-helmet";
+import "./Objs";
+import "./Widgets";
+import App from "./App";
+import "./config";
 
-const blacklistObjClasses = [
-  'Download',
-  'Image',
-  'Redirect',
-  'Video',
-];
+const blacklistObjClasses = ["Download", "Image", "Redirect", "Video"];
 
 function allObjs() {
-  return [...Scrivito.Obj.all().andNot('_objClass', 'equals', blacklistObjClasses)];
+  return [
+    ...Scrivito.Obj.all().andNot("_objClass", "equals", blacklistObjClasses),
+  ];
 }
 
 function exportObj(obj) {
@@ -39,27 +36,27 @@ function exportObj(obj) {
       bodyAttributes: helmet.bodyAttributes.toString(),
       bodyContent,
     };
-  }).then(
-    ({ result, preloadDump }) => {
+  })
+    .then(({ result, preloadDump }) => {
       result.preloadDump = preloadDump;
 
       return result;
-    }
-  ).catch(e => {
-    const objId = obj.id();
-    console.log(`❌  Error while processing obj ${objId}`, e);
-    return {
-      objId,
-      errorDuringGeneration: true,
-    };
-  });
+    })
+    .catch(e => {
+      const objId = obj.id();
+      console.log(`❌  Error while processing obj ${objId}`, e);
+      return {
+        objId,
+        errorDuringGeneration: true,
+      };
+    });
 }
 
 function exportObjs() {
-  console.time('[exportObjs]');
-  console.time('Loading all objs');
+  console.time("[exportObjs]");
+  console.time("Loading all objs");
   return Scrivito.load(allObjs).then(objs => {
-    console.timeEnd('Loading all objs');
+    console.timeEnd("Loading all objs");
 
     const promises = objs.map(obj => {
       console.time(`Exporting obj ${obj.id()}`);
@@ -70,11 +67,15 @@ function exportObjs() {
     });
 
     return Promise.all(promises).then(results => {
-      const filteredResults = results.filter(result => !result.errorDuringGeneration);
+      const filteredResults = results.filter(
+        result => !result.errorDuringGeneration
+      );
       const exportedCount = filteredResults.length;
       const failedCount = results.length - exportedCount;
-      console.log(`Exporting ${exportedCount} objs (skipped ${failedCount} due to failures)`);
-      console.timeEnd('[exportObjs]');
+      console.log(
+        `Exporting ${exportedCount} objs (skipped ${failedCount} due to failures)`
+      );
+      console.timeEnd("[exportObjs]");
       return filteredResults;
     });
   });
