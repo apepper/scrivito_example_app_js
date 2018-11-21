@@ -3,5 +3,5 @@
 # “command” is your build command.
 
 [build]
-  publish = "build"
-  command = "npm run build"
+  publish = "buildPrerendered"
+  command = "npm run prerender"
