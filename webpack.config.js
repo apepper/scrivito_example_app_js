@@ -56,6 +56,7 @@ function webpackConfig(env = {}) {
             {
               loader: "babel-loader",
               options: {
+                plugins: ["babel-plugin-styled-components"],
                 presets: [
                   "@babel/preset-react",
                   [
