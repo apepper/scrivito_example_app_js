@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
+import styled from "styled-components";
 import InPlaceEditingPlaceholder from "../../Components/InPlaceEditingPlaceholder";
 
 Scrivito.provideComponent("YoutubeVideoWidget", ({ widget }) => {
@@ -15,24 +16,31 @@ Scrivito.provideComponent("YoutubeVideoWidget", ({ widget }) => {
   }
 
   return (
-    <div
-      style={{
-        position: "relative",
-        paddingTop: `${100 / aspectRatio}%`,
-      }}
-    >
-      <iframe
+    <StyledDiv aspectRatio={aspectRatio}>
+      <StyledIframe
         src={`https://www.youtube.com/embed/${youtubeVideoId}`}
-        className="fullsize-iframe"
         frameBorder="0"
         allow="autoplay; encrypted-media"
         allowFullScreen
         webkitallowfullscreen="true"
         mozallowfullscreen="true"
       />
-    </div>
+    </StyledDiv>
   );
 });
+
+const StyledDiv = styled.div`
+  position: relative;
+  padding-top: ${props => 100 / props.aspectRatio}%;
+`;
+
+const StyledIframe = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
 
 function aspectRatioToFloat(aspectRatio) {
   switch (aspectRatio) {
