@@ -3117,11 +3117,6 @@ img.cookie-img {
 /* list *
 =================================================================== */
 
-.tick-list {
-  list-style-type: none;
-  padding-left: 15px;
-  @include clearfix;
-}
 .tick-list li {
   position: relative;
   padding: 0 0 20px 17px;
