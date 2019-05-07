@@ -27,14 +27,15 @@ const SITEMAP_OBJ_CLASSES_WHITELIST = [
   "Page",
 ];
 
-async function prerenderContent() {
-  await prerenderSitemap(SITEMAP_OBJ_CLASSES_WHITELIST, window.storeResult);
-  await prerenderObjs(
+window.prerenderSitemap = async () =>
+  prerenderSitemap(SITEMAP_OBJ_CLASSES_WHITELIST, window.storeResult);
+
+window.prerenderObjs = async () =>
+  prerenderObjs(
     PRERENDER_OBJ_CLASSES_BLACKLIST,
     window.storeResult,
     window.reportError
   );
-}
 
 // The following method will be overwritten by puppeteer in storePrerenderedContent.
 // It is only here, to simplify debugging in the browser
@@ -51,6 +52,3 @@ window.storeResult = async ({ filename, content }) => {
 window.reportError = (message, ...args) => {
   console.log(`[reportError] ${message}`, ...args);
 };
-
-// Usage: window.prerenderContent().then(results => ...);
-window.prerenderContent = prerenderContent;
