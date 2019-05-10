@@ -5,3 +5,4 @@
 [build]
   command = "npm run prerender:parallel"
   publish = "buildPrerendered"
+  environment = { SCRIVITO_TENANT = "cabf310c0c0b429e3eb30503d172f85b" }
