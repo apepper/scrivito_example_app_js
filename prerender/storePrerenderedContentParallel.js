@@ -35,17 +35,17 @@ async function storePrerenderedContentParallel() {
     })
   );
 
-  log(`🎁  Packing prerenderServerArchive...`);
+  log(`🎁 Packing prerenderServerArchive...`);
   const prerenderServerArchive = await generatePrerenderServerArchive(
     SOURCE_DIR
   );
   log(
-    `🎁  Packed prerenderServerArchive (file size: ${filesize(
+    `🎁 Packed prerenderServerArchive (file size: ${filesize(
       prerenderServerArchive.length
     )})`
   );
 
-  log("👨‍🔧  Calculating prerenderObjsTotalCount on Lambda...");
+  log("👨‍🔧 Calculating prerenderObjsTotalCount on Lambda...");
   const totalObjsCount = await invokeLambda(
     TARGET_DIR,
     storedFiles,
@@ -53,9 +53,9 @@ async function storePrerenderedContentParallel() {
     "prerenderObjsTotalCount()",
     "plainOutput"
   );
-  log(`👨‍🔧  prerenderObjsTotalCount is ${totalObjsCount}`);
+  log(`👨‍🔧 prerenderObjsTotalCount is ${totalObjsCount}`);
 
-  log("👨‍🔧  Invoking Lambdas...");
+  log("👨‍🔧 Invoking Lambdas...");
   const parallelWorkerCount = Math.ceil(totalObjsCount / OBJS_PER_WORKER);
   const promises = [...Array(parallelWorkerCount).keys()].map(number =>
     invokeLambda(
@@ -75,7 +75,7 @@ async function storePrerenderedContentParallel() {
     )
   );
   await Promise.all(promises);
-  log("👨‍🔧  Lambdas are done.");
+  log("👨‍🔧 Lambdas are done.");
 
   await extendRedirects(TARGET_DIR, storedFiles, SOURCE_DIR);
 
