@@ -2,6 +2,7 @@ const fse = require("fs-extra");
 const puppeteer = require("puppeteer");
 
 const { extendRedirects } = require("./extendRedirects");
+const { prerenderSitemapInBrowser } = require("./prerenderSitemapInBrowser");
 const { reportError } = require("./reportError");
 const { startServer } = require("./startServer");
 const { storeResult } = require("./storeResult");
@@ -56,9 +57,7 @@ async function storePrerenderedContent() {
     `🖥️️  Executed javascript command prerenderObjsTotalCount (result: ${totalObjsCount}).`
   );
 
-  log("🖥️️  Executing javascript command prerenderSitemap...");
-  await page.evaluate("prerenderSitemap()");
-  log("🖥️️  Executed javascript command prerenderSitemap.");
+  await prerenderSitemapInBrowser(TARGET_DIR, storedFiles, page);
 
   log("🖥️️  Executing javascript command prerenderObjs...");
   await page.evaluate(`prerenderObjs(0, ${totalObjsCount})`);

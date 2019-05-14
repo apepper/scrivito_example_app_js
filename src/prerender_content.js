@@ -10,7 +10,10 @@ import {
   prerenderObjs,
   prerenderObjsSearch,
 } from "./prerenderContent/prerenderObjs";
-import prerenderSitemap from "./prerenderContent/prerenderSitemap";
+import {
+  prerenderSitemapUrls,
+  prerenderSitemapSearch,
+} from "./prerenderContent/prerenderSitemapUrls";
 
 const PRERENDER_OBJ_CLASSES_BLACKLIST = [
   "Download",
@@ -30,8 +33,13 @@ const SITEMAP_OBJ_CLASSES_WHITELIST = [
   "Page",
 ];
 
-window.prerenderSitemap = async () =>
-  prerenderSitemap(SITEMAP_OBJ_CLASSES_WHITELIST, window.storeResult);
+window.prerenderSitemapCount = async () =>
+  Scrivito.load(() =>
+    prerenderSitemapSearch(SITEMAP_OBJ_CLASSES_WHITELIST).count()
+  );
+
+window.prerenderSitemapUrls = async (offset, objsPerBatch) =>
+  prerenderSitemapUrls(SITEMAP_OBJ_CLASSES_WHITELIST, offset, objsPerBatch);
 
 window.prerenderObjsTotalCount = async () =>
   Scrivito.load(() =>
