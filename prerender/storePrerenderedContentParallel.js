@@ -9,6 +9,7 @@ const {
 } = require("./generatePrerenderServerArchive");
 const { prerenderSitemapInBrowser } = require("./prerenderSitemapInBrowser");
 const { invokeLambda } = require("./invokeLambda");
+const { prerenderSitemapOnLambda } = require("./prerenderSitemapOnLambda");
 const { reportError } = require("./reportError");
 const { startServer } = require("./startServer");
 const { storeResult } = require("./storeResult");
@@ -90,6 +91,16 @@ async function storePrerenderedContentParallel() {
       "storedResults"
     )
   );
+  promises.push(
+    prerenderSitemapOnLambda(
+      TARGET_DIR,
+      storedFiles,
+      SITEMAP_OBJS_PER_WORKER,
+      prerenderServerArchive
+    )
+  );
+  await Promise.all(promises);
+  log("👨‍🔧  Lambdas are done.");
 
   await prerenderSitemapInBrowser(TARGET_DIR, storedFiles, page);
 
