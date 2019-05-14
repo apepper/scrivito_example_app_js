@@ -11,8 +11,8 @@ const { visitUrl } = require("./visitUrl");
 const SOURCE_DIR = "build";
 const TARGET_DIR = "buildPrerendered";
 
-async function storePrerenderedContent() {
-  console.time("[storePrerenderedContent]");
+async function storePrerenderedContentParallel() {
+  console.time("[storePrerenderedContentParallel]");
 
   const storedFiles = [];
 
@@ -76,14 +76,14 @@ async function storePrerenderedContent() {
       ` removed ${filesRemoved} files from folder ${TARGET_DIR}!`
   );
 
-  console.timeEnd("[storePrerenderedContent]");
+  console.timeEnd("[storePrerenderedContentParallel]");
 }
 
 function log(message, ...args) {
-  console.log(`[storePrerenderedContent] ${message}`, ...args);
+  console.log(`[storePrerenderedContentParallel] ${message}`, ...args);
 }
 
-storePrerenderedContent().catch(e => {
+storePrerenderedContentParallel().catch(e => {
   reportError("An error occurred!", e);
   process.exitCode = 1;
 });
