@@ -8,11 +8,14 @@ const {
   generatePrerenderServerArchive,
 } = require("./generatePrerenderServerArchive");
 const { prerenderSitemapInBrowser } = require("./prerenderSitemapInBrowser");
+const { invokeLambda } = require("./invokeLambda");
 const { reportError } = require("./reportError");
 const { startServer } = require("./startServer");
 const { storeResult } = require("./storeResult");
 const { visitUrl } = require("./visitUrl");
 
+const OBJS_PER_WORKER = 32;
+const SITEMAP_OBJS_PER_WORKER = 1000;
 const SOURCE_DIR = "build";
 const TARGET_DIR = "buildPrerendered";
 
@@ -66,17 +69,29 @@ async function storePrerenderedContentParallel() {
   log(`🖥️️  Redefining window.reportError...`);
   await page.exposeFunction("reportError", reportError);
 
-  log("🖥️️  Executing javascript command prerenderObjsTotalCount...");
-  const totalObjsCount = await page.evaluate("prerenderObjsTotalCount()");
-  log(
-    `🖥️️  Executed javascript command prerenderObjsTotalCount (result: ${totalObjsCount}).`
+  log("👨‍🔧  Calculating prerenderObjsTotalCount on Lambda...");
+  const totalObjsCount = await invokeLambda(
+    TARGET_DIR,
+    storedFiles,
+    prerenderServerArchive,
+    "prerenderObjsTotalCount()",
+    "plainOutput"
+  );
+  log(`👨‍🔧  prerenderObjsTotalCount is ${totalObjsCount}`);
+
+  log("👨‍🔧  Invoking Lambdas...");
+  const parallelWorkerCount = Math.ceil(totalObjsCount / OBJS_PER_WORKER);
+  const promises = [...Array(parallelWorkerCount).keys()].map(number =>
+    invokeLambda(
+      TARGET_DIR,
+      storedFiles,
+      prerenderServerArchive,
+      `prerenderObjs(${number * OBJS_PER_WORKER}, ${OBJS_PER_WORKER})`,
+      "storedResults"
+    )
   );
 
   await prerenderSitemapInBrowser(TARGET_DIR, storedFiles, page);
-
-  log("🖥️️  Executing javascript command prerenderObjs...");
-  await page.evaluate(`prerenderObjs(0, ${totalObjsCount})`);
-  log("🖥️️  Executed javascript command prerenderObjs.");
 
   log("🖥️️  Closing the browser...");
   await browser.close();
