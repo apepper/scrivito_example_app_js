@@ -50,12 +50,18 @@ async function storePrerenderedContent() {
   log(`🖥️️  Redefining window.reportError...`);
   await page.exposeFunction("reportError", reportError);
 
+  log("🖥️️  Executing javascript command prerenderObjsTotalCount...");
+  const totalObjsCount = await page.evaluate("prerenderObjsTotalCount()");
+  log(
+    `🖥️️  Executed javascript command prerenderObjsTotalCount (result: ${totalObjsCount}).`
+  );
+
   log("🖥️️  Executing javascript command prerenderSitemap...");
   await page.evaluate("prerenderSitemap()");
   log("🖥️️  Executed javascript command prerenderSitemap.");
 
   log("🖥️️  Executing javascript command prerenderObjs...");
-  await page.evaluate("prerenderObjs()");
+  await page.evaluate(`prerenderObjs(0, ${totalObjsCount})`);
   log("🖥️️  Executed javascript command prerenderObjs.");
 
   log("🖥️️  Closing the browser...");

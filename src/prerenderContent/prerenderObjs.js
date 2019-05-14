@@ -3,16 +3,27 @@ import * as Scrivito from "scrivito";
 import { chunk } from "lodash-es";
 import prerenderObj from "./prerenderObj";
 
-export default async function prerenderObjs(
+export function prerenderObjsSearch(objClassesBlacklist) {
+  return Scrivito.Obj.all().andNot("_objClass", "equals", objClassesBlacklist);
+}
+
+export async function prerenderObjs(
   objClassesBlacklist,
+  offset,
+  objsPerBatch,
   storeResult,
   reportError
 ) {
   console.time("[prerenderObjs]");
 
-  console.time("Loading all objs");
-  const objs = await Scrivito.load(() => allObjs(objClassesBlacklist));
-  console.timeEnd("Loading all objs");
+  const batchMessage = `Objs with offset ${offset} and objsPerBatch ${objsPerBatch} loaded`;
+  console.time(batchMessage);
+  const objs = await Scrivito.load(() =>
+    prerenderObjsSearch(objClassesBlacklist)
+      .offset(offset)
+      .take(objsPerBatch)
+  );
+  console.timeEnd(batchMessage);
   console.log(`Loaded ${objs.length} objs`);
 
   let failedCount = 0;
@@ -40,12 +51,6 @@ export default async function prerenderObjs(
   if (failedCount) {
     reportError(`Skipped ${failedCount} objs due to failures.`);
   }
-}
-
-function allObjs(objClassesBlacklist) {
-  return Scrivito.Obj.all()
-    .andNot("_objClass", "equals", objClassesBlacklist)
-    .take();
 }
 
 async function asyncForEach(items, fn) {
