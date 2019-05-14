@@ -1,8 +1,12 @@
 const dotenv = require("dotenv");
+const filesize = require("filesize");
 const fse = require("fs-extra");
 const puppeteer = require("puppeteer");
 
 const { extendRedirects } = require("./extendRedirects");
+const {
+  generatePrerenderServerArchive,
+} = require("./generatePrerenderServerArchive");
 const { prerenderSitemapInBrowser } = require("./prerenderSitemapInBrowser");
 const { reportError } = require("./reportError");
 const { startServer } = require("./startServer");
@@ -30,6 +34,16 @@ async function storePrerenderedContentParallel() {
       await fse.remove(`${TARGET_DIR}/${filename}`);
       filesRemoved += 1;
     })
+  );
+
+  log(`🎁  Packing prerenderServerArchive...`);
+  const prerenderServerArchive = await generatePrerenderServerArchive(
+    SOURCE_DIR
+  );
+  log(
+    `🎁  Packed prerenderServerArchive (file size: ${filesize(
+      prerenderServerArchive.length
+    )})`
   );
 
   log("🗄️  Starting express server...");
