@@ -1,3 +1,4 @@
+const dotenv = require("dotenv");
 const fse = require("fs-extra");
 const puppeteer = require("puppeteer");
 
@@ -13,7 +14,7 @@ const TARGET_DIR = "buildPrerendered";
 
 async function storePrerenderedContentParallel() {
   console.time("[storePrerenderedContentParallel]");
-
+  dotenv.config();
   const storedFiles = [];
 
   log(`Removing ${TARGET_DIR}/`);
