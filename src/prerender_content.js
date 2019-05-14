@@ -1,12 +1,15 @@
 /* eslint no-console: "off" */
 import "react";
 import "react-dom";
-import "scrivito";
+import * as Scrivito from "scrivito";
 import filesize from "filesize";
 import "./Objs";
 import "./Widgets";
 import "./config";
-import prerenderObjs from "./prerenderContent/prerenderObjs";
+import {
+  prerenderObjs,
+  prerenderObjsSearch,
+} from "./prerenderContent/prerenderObjs";
 import prerenderSitemap from "./prerenderContent/prerenderSitemap";
 
 const PRERENDER_OBJ_CLASSES_BLACKLIST = [
@@ -30,9 +33,16 @@ const SITEMAP_OBJ_CLASSES_WHITELIST = [
 window.prerenderSitemap = async () =>
   prerenderSitemap(SITEMAP_OBJ_CLASSES_WHITELIST, window.storeResult);
 
-window.prerenderObjs = async () =>
+window.prerenderObjsTotalCount = async () =>
+  Scrivito.load(() =>
+    prerenderObjsSearch(PRERENDER_OBJ_CLASSES_BLACKLIST).count()
+  );
+
+window.prerenderObjs = async (offset, objsPerBatch) =>
   prerenderObjs(
     PRERENDER_OBJ_CLASSES_BLACKLIST,
+    offset,
+    objsPerBatch,
     window.storeResult,
     window.reportError
   );
