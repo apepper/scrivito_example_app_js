@@ -7,15 +7,15 @@ exports.prerenderSitemapInBrowser = async function prerenderSitemapInBrowser(
   page
 ) {
   console.log(
-    "[prerenderSitemapInBrowser] 🖥️️  Executing javascript command prerenderSitemapCount..."
+    "  🖥️️  [prerenderSitemapInBrowser] Executing javascript command prerenderSitemapCount..."
   );
   const sitemapCount = await page.evaluate("prerenderSitemapCount()");
   console.log(
-    `[prerenderSitemapInBrowser] 🖥️️  Executed javascript command prerenderSitemapCount (result: ${sitemapCount}).`
+    `  🖥️️  [prerenderSitemapInBrowser] Executed javascript command prerenderSitemapCount (result: ${sitemapCount}).`
   );
 
   console.log(
-    "[prerenderSitemapInBrowser] 🖥️️  Executing javascript command prerenderSitemapUrls..."
+    "  🖥️️  [prerenderSitemapInBrowser] Executing javascript command prerenderSitemapUrls..."
   );
   const sitemapUrls = await page.evaluate(
     `prerenderSitemapUrls(0, ${sitemapCount})`
@@ -23,7 +23,7 @@ exports.prerenderSitemapInBrowser = async function prerenderSitemapInBrowser(
   const content = sitemapUrlsToSitemapXml(sitemapUrls);
 
   console.log(
-    `[prerenderSitemapInBrowser] 🖥️️  Executed javascript command prerenderSitemapUrls (result: ${
+    `  🖥️️  [prerenderSitemapInBrowser] Executed javascript command prerenderSitemapUrls (result: ${
       content.length
     }).`
   );
