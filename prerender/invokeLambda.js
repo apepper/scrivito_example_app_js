@@ -13,7 +13,6 @@ exports.invokeLambda = async function invokeLambda(
 ) {
   const functionIdentifier = `  👨‍🔧 [invokeLambda] Lambda function ${prerenderCommand}`;
   console.time(`${functionIdentifier} finished`);
-  console.time(`${functionIdentifier} response received`);
   return new Promise((resolve, reject) => {
     const requestBody = JSON.stringify({
       prerenderCommand,
@@ -25,7 +24,6 @@ exports.invokeLambda = async function invokeLambda(
       Payload: JSON.stringify({ body: requestBody }),
     };
     lambdaInstance().invoke(params, async (err, data) => {
-      console.timeEnd(`${functionIdentifier} response received`);
       if (err) {
         return reject(err);
       }
