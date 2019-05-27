@@ -14,11 +14,11 @@ exports.storeResult = async function storeResult(
     reportError(`filename "${filename}" is invalid! Skipping file...`);
     return;
   }
-  console.log(
-    `  📥 [storeResult] Storing "${filename}" (file size: ${filesize(
-      content.length
-    )})...`
-  );
+  // console.log(
+  //   `  📥 [storeResult] Storing "${filename}" (file size: ${filesize(
+  //     content.length
+  //   )})...`
+  // );
   try {
     await fse.outputFile(filePath, content, { flag: "wx" });
     storedFiles.push(filePath.substring(targetDir.length));
