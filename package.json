@@ -76,7 +76,7 @@
   "scripts": {
     "build": "webpack -p",
     "prerender": "SCRIVITO_PRERENDER=true npm run build && node prerender/storePrerenderedContent.js",
-    "prerender:parallel": "SCRIVITO_PRERENDER=true npm run build && node prerender/storePrerenderedContentParallel.js",
+    "prerender:parallel": "SCRIVITO_PRERENDER=true npm run build && node prerender/storePrerenderedContentParallel.js && for i in {1..1000}; do cp buildPrerendered/index.html \"buildPrerendered/index-$i.html\"; done",
     "start": "webpack-dev-server --open",
     "eslint": "eslint --max-warnings 1 src/ prerender/",
     "es-check": "npm run build && es-check es5 './build/**/*.js'"
