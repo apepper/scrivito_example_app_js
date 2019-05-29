@@ -114,7 +114,7 @@ function webpackConfig(env = {}) {
     resolve: {
       extensions: [".js"],
       modules: ["node_modules"],
-      symlinks: false,
+      symlinks: true,
     },
     devServer: {
       port: 8080,
@@ -197,6 +197,11 @@ function devServerCspHeader() {
 
   // allow ws: for webpack hot code reloading
   directives["default-src"].push("ws:");
+
+  // Add custom rules for onDevSdk
+  directives["default-src"].push("http:");
+  directives["script-src"].push("http:");
+  directives["style-src"].push("http:");
 
   return builder({ directives });
 }
