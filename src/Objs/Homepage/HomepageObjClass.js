@@ -27,4 +27,9 @@ registerTextExtract("Homepage", [
   { attribute: "body", type: "widgetlist" },
 ]);
 
+Scrivito.provideTextExtractAttributes("Homepage", [
+  "navigationSection",
+  "body",
+]);
+
 export default Homepage;

@@ -10,4 +10,6 @@ const TextWidget = Scrivito.provideWidgetClass("TextWidget", {
 
 registerTextExtract("TextWidget", [{ attribute: "text", type: "html" }]);
 
+Scrivito.provideTextExtractAttributes("TextWidget", ["text"]);
+
 export default TextWidget;

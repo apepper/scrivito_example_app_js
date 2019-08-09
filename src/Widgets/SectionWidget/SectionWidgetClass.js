@@ -29,4 +29,6 @@ registerTextExtract("SectionWidget", [
   { attribute: "content", type: "widgetlist" },
 ]);
 
+Scrivito.provideTextExtractAttributes("SectionWidget", ["content"]);
+
 export default SectionWidget;

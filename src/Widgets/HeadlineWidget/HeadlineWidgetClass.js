@@ -16,4 +16,6 @@ registerTextExtract("HeadlineWidget", [
   { attribute: "headline", type: "string" },
 ]);
 
+Scrivito.provideTextExtractAttributes("HeadlineWidget", ["headline"]);
+
 export default HeadlineWidget;
