@@ -15,4 +15,6 @@ registerTextExtract("ColumnContainerWidget", [
   { attribute: "columns", type: "widgetlist" },
 ]);
 
+Scrivito.provideTextExtractAttributes("ColumnContainerWidget", ["columns"]);
+
 export default ColumnContainerWidget;

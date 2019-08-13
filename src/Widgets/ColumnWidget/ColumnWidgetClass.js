@@ -13,4 +13,6 @@ registerTextExtract("ColumnWidget", [
   { attribute: "content", type: "widgetlist" },
 ]);
 
+Scrivito.provideTextExtractAttributes("ColumnWidget", ["content"]);
+
 export default ColumnWidget;

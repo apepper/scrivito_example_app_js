@@ -16,5 +16,6 @@ const BlogPost = Scrivito.provideObjClass("BlogPost", {
 });
 
 registerTextExtract("BlogPost", [{ attribute: "body", type: "widgetlist" }]);
+Scrivito.provideTextExtractAttributes("BlogPost", ["body"]);
 
 export default BlogPost;
