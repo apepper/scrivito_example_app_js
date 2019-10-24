@@ -12,5 +12,9 @@
     "https://www.google-analytics.com"
   ],
   "object-src": "'none'",
-  "block-all-mixed-content": true
+  "block-all-mixed-content": true,
+  "frame-ancestors": [
+    "'self'",
+    "https://deploy-preview-5784--scrivito-ui-dev.netlify.com"
+  ]
 }

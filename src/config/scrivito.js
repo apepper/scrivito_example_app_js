@@ -2,7 +2,13 @@ import * as Scrivito from "scrivito";
 
 const config = {
   tenant: process.env.SCRIVITO_TENANT,
-  unstable: { assetUrlBase: "http://localhost:8090/scrivito" },
+  unstable: {
+    assetUrlBase:
+      "https://deploy-preview-5784--scrivito-ui-dev.netlify.com/scrivito/",
+    trustedUiOrigins: [
+      "https://deploy-preview-5784--scrivito-ui-dev.netlify.com",
+    ],
+  },
 };
 
 if (process.env.SCRIVITO_ORIGIN) {
