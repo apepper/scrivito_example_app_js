@@ -3,10 +3,10 @@ import * as Scrivito from "scrivito";
 const config = {
   tenant: process.env.SCRIVITO_TENANT,
   unstable: {
-    assetUrlBase:
-      "https://deploy-preview-5784--scrivito-ui-dev.netlify.com/scrivito/",
+    assetUrlBase: "http://localhost:8090/scrivito/",
     trustedUiOrigins: [
       "https://deploy-preview-5784--scrivito-ui-dev.netlify.com",
+      "https://deploy-preview-5825--scrivito-ui-dev.netlify.com/",
     ],
   },
 };
