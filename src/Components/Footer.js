@@ -15,6 +15,7 @@ function Footer() {
         The footer starts here. There’s only one footer. It belongs to the
         homepage but is displayed on all other pages as well.
       </InPlaceEditingPlaceholder>
+      <a id="footer">The footer</a>
       <Scrivito.ContentTag content={root} attribute="footer" tag="footer" />
     </React.Fragment>
   );

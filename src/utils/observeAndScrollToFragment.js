@@ -76,7 +76,7 @@ function createScrollToElement(elementId) {
     }
 
     console.log("Found element - scrolling", elementId);
-    // element.scrollIntoView();
+    element.scrollIntoView();
     reset();
     return true;
   };
