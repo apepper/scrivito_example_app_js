@@ -15,6 +15,7 @@ function Footer() {
         The footer starts here. There’s only one footer. It belongs to the
         homepage but is displayed on all other pages as well.
       </InPlaceEditingPlaceholder>
+      <a href="#fully-fledged-cms-service">fully-fledged-cms-service</a>
       <Scrivito.ContentTag
         content={root}
         attribute="footer"

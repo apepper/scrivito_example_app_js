@@ -6,4 +6,9 @@ const history = createBrowserHistory();
 
 Scrivito.useHistory(history);
 
-scrollToFragment({ history });
+scrollToFragment({ history, scrollIntoView });
+
+function scrollIntoView(element) {
+  console.log("scrollIntoView");
+  element.scrollIntoView({ block: "center" });
+}
