@@ -7,8 +7,13 @@ const { reportError } = require("./reportError");
 exports.storeResult = async function storeResult(
   targetDir,
   storedFiles,
-  { filename, content }
+  { filename: inputFilename, content }
 ) {
+  const filename =
+    inputFilename === "/contact/index.html"
+      ? "/📝contact/index.html"
+      : inputFilename;
+
   const filePath = path.join(targetDir, filename);
   if (!path.normalize(filePath).startsWith(`${targetDir}`)) {
     reportError(`filename "${filename}" is invalid! Skipping file...`);

@@ -12,6 +12,10 @@ export default async function generateHtml({
 }) {
   const assets = await assetManifest;
 
+  const patchedBodyContent = bodyContent
+    .replace(/\/contact/g, "/%F0%9F%93%9Dcontact")
+    .replace(/Contact/g, "📝Contact");
+
   return `<!DOCTYPE html>
 <html ${htmlAttributes}>
   <head>
@@ -26,7 +30,7 @@ export default async function generateHtml({
     <link rel="stylesheet" href="${assets["index.css"]}" />
   </head>
   <body ${bodyAttributes}>
-    <div id="application" data-scrivito-prerendering-obj-id="${objId}">${bodyContent}</div>
+    <div id="application" data-scrivito-prerendering-obj-id="${objId}">${patchedBodyContent}</div>
   </body>
 </html>
 `;
