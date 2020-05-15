@@ -24,14 +24,9 @@ export default async function generateHtml({
     <link rel="preconnect" href="https://api.scrivito.com" />
     <link rel="preconnect" href="https://cdn0.scrvt.com" />
     <link rel="stylesheet" href="${assets["index.css"]}" />
-
-    <script src="/js_snippets_head.js"></script>
   </head>
   <body ${bodyAttributes}>
     <div id="application" data-scrivito-prerendering-obj-id="${objId}">${bodyContent}</div>
-    <script src="${preloadDumpFileName}"></script>
-    <script async src="${assets["index.js"]}"></script>
-    <script src="/js_snippets_before_body_end.js"></script>
   </body>
 </html>
 `;
