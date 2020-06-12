@@ -3,6 +3,7 @@ import * as Scrivito from "scrivito";
 const config = {
   tenant: process.env.SCRIVITO_TENANT,
   unstable: {
+    assetUrlBase: "/scrivito",
     trustedUiOrigins: [
       "'self'",
       "http://localhost:8090",
