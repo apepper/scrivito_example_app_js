@@ -20,6 +20,10 @@ Scrivito.provideEditingConfig("BlogPost", {
       title: "Published at",
       description: "When was this blog post published?",
     },
+    publishedAtTime: {
+      title: "Published at time",
+      description: "When was this blog post published (time)?",
+    },
     titleImage: {
       title: "Header image",
       description:
@@ -30,7 +34,13 @@ Scrivito.provideEditingConfig("BlogPost", {
       title: "Tags",
     },
   },
-  properties: ["author", "publishedAt", "titleImage", "tags"],
+  properties: [
+    "author",
+    "publishedAt",
+    "publishedAtTime",
+    "titleImage",
+    "tags",
+  ],
   propertiesGroups: [...metadataPropertiesGroups],
   initialContent: {
     ...metadataInitialContent,
