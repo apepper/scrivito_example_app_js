@@ -26,6 +26,7 @@ Scrivito.provideComponent("BlogPost", ({ page }) => (
         />
       </div>
     </section>
+    <div>My time: {page.get("publishedAtTime")?.toUTCString()}</div>
     <Scrivito.ContentTag tag="div" content={page} attribute="body" />
     <BlogPostAuthor author={page.get("author")} />
     <BlogPostTagList tags={page.get("tags")} />
