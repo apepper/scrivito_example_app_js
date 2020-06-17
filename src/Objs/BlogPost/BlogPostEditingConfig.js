@@ -41,7 +41,13 @@ Scrivito.provideEditingConfig("BlogPost", {
     "titleImage",
     "tags",
   ],
-  propertiesGroups: [...metadataPropertiesGroups],
+  propertiesGroups: [
+    {
+      title: "Demo",
+      properties: ["publishedAtTime"],
+    },
+    ...metadataPropertiesGroups,
+  ],
   initialContent: {
     ...metadataInitialContent,
     body: [new SectionWidget({})],
