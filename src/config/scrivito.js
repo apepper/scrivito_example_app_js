@@ -11,6 +11,15 @@ export function configureScrivito(options) {
   const config = {
     adoptUi: true,
     autoConvertAttributes: true,
+    unstable: {
+      trustedUiOrigins: [
+        "http://localhost:8090",
+        "https://*.d2gu55vvqejsqp.amplifyapp.com",
+        "https://*.netlify.app",
+        "https://*.netlify.com",
+        "https://dt5t498v8txnt.cloudfront.net",
+      ],
+    },
     baseUrlForSite: (siteId) => baseUrls[siteId],
     optimizedWidgetLoading: true,
     siteForUrl: (url) =>
