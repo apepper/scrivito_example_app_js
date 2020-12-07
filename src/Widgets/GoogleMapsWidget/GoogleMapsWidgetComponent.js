@@ -4,6 +4,7 @@ import useResizeObserver from "use-resize-observer";
 
 import googleMapsApiKey from "../../utils/googleMapsApiKey";
 import googleMapsImageUrl from "../../utils/googleMapsImageUrl";
+import { useCookieConsent } from "../../Components/CookieConsentContext";
 import "./GoogleMapsWidget.scss";
 
 const maxWidth = 640;
@@ -13,10 +14,22 @@ function GoogleMapsWidgetComponent({ widget }) {
   const zoom = widget.get("zoom") || "15";
   const apiKey = googleMapsApiKey();
   const mapType = widget.get("mapType") || "static";
+  const { cookieConsentChoice, acceptCookieConsent } = useCookieConsent();
 
   const containerClasses = ["container", "container-initial"];
   if (mapType === "interactive") {
     containerClasses.push("d-flex", "flex-row-reverse");
+  }
+
+  if (cookieConsentChoice !== "accepted") {
+    return (
+      <NoCookiesNotification
+        onAcceptCookiesClick={acceptCookieConsent}
+        containerClasses={containerClasses}
+      >
+        <Widgets widget={widget} />
+      </NoCookiesNotification>
+    );
   }
 
   const Map = mapType === "static" ? StaticGoogleMap : InteractiveGoogleMap;
@@ -30,6 +43,35 @@ function GoogleMapsWidgetComponent({ widget }) {
     >
       <Widgets widget={widget} />
     </Map>
+  );
+}
+
+function NoCookiesNotification({
+  onAcceptCookiesClick,
+  children,
+  containerClasses,
+}) {
+  return (
+    <div className="google-maps-widget">
+      <div className={containerClasses.join(" ")}>
+        <div className="col-lg-3 col-md-4 col-sm-5 container-initial">
+          {children}
+        </div>
+        <div className="no-cookies-notification">
+          <div className="consent-content">
+            Please accept our Cookie Policy to view Google Maps.
+          </div>
+          <div>
+            <button
+              className="cookie-button btn btn-primary"
+              onClick={onAcceptCookiesClick}
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
