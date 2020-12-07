@@ -14,16 +14,32 @@ function GoogleMapsWidgetComponent({ widget }) {
   const apiKey = googleMapsApiKey();
   const mapType = widget.get("mapType") || "static";
 
+  const containerClasses = ["container", "container-initial"];
+  if (mapType === "interactive") {
+    containerClasses.push("d-flex", "flex-row-reverse");
+  }
+
   const Map = mapType === "static" ? StaticGoogleMap : InteractiveGoogleMap;
 
   return (
-    <Map address={address} zoom={zoom} apiKey={apiKey}>
-      <Widgets widget={widget} mapType={mapType} />
+    <Map
+      address={address}
+      zoom={zoom}
+      apiKey={apiKey}
+      containerClasses={containerClasses}
+    >
+      <Widgets widget={widget} />
     </Map>
   );
 }
 
-function InteractiveGoogleMap({ address, apiKey, zoom, children }) {
+function InteractiveGoogleMap({
+  address,
+  apiKey,
+  zoom,
+  children,
+  containerClasses,
+}) {
   const url = `https://www.google.com/maps/embed/v1/place?q=${address}&key=${apiKey}&zoom=${zoom}`;
   return (
     <div className="google-maps-widget">
@@ -34,12 +50,22 @@ function InteractiveGoogleMap({ address, apiKey, zoom, children }) {
         src={url}
         loading="lazy"
       />
-      {children}
+      <div className={containerClasses.join(" ")}>
+        <div className="col-lg-3 col-md-4 col-sm-5 container-initial">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
 
-function StaticGoogleMap({ address, apiKey, zoom, children }) {
+function StaticGoogleMap({
+  address,
+  apiKey,
+  zoom,
+  children,
+  containerClasses,
+}) {
   const {
     ref,
     width: elementWidth = null,
@@ -62,7 +88,11 @@ function StaticGoogleMap({ address, apiKey, zoom, children }) {
         })})`,
       }}
     >
-      {children}
+      <div className={containerClasses.join(" ")}>
+        <div className="col-lg-3 col-md-4 col-sm-5 container-initial">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
@@ -100,26 +130,17 @@ function getMapUrl({ width, height, address, apiKey, zoom }) {
   return googleMapsImageUrl(params);
 }
 
-const Widgets = Scrivito.connect(({ widget, mapType }) => {
+const Widgets = Scrivito.connect(({ widget }) => {
   if (widget.get("showWidgets") !== "yes") {
     return null;
   }
 
-  const containerClasses = ["container", "container-initial"];
-  if (mapType === "interactive") {
-    containerClasses.push("d-flex", "flex-row-reverse");
-  }
-
   return (
-    <div className={containerClasses.join(" ")}>
-      <div className="col-lg-3 col-md-4 col-sm-5 container-initial">
-        <Scrivito.ContentTag
-          content={widget}
-          attribute="content"
-          className={"card card-theme"}
-        />
-      </div>
-    </div>
+    <Scrivito.ContentTag
+      content={widget}
+      attribute="content"
+      className={"card card-theme"}
+    />
   );
 });
 
