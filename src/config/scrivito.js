@@ -1,7 +1,7 @@
 import * as Scrivito from "scrivito";
 
 export function configureScrivito(options) {
-  const config = { tenant: process.env.SCRIVITO_TENANT, adoptUi: true };
+  const config = { tenant: process.env.SCRIVITO_TENANT };
 
   if (process.env.SCRIVITO_ORIGIN) {
     config.origin = process.env.SCRIVITO_ORIGIN;
