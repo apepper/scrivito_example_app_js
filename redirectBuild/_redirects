@@ -1,0 +1,5 @@
+##
+# Netlify redirect rules. See https://www.netlify.com/docs/redirects/ for details.
+##
+
+/* https://psychologist-mixes.netlify.app/:splat 301!
