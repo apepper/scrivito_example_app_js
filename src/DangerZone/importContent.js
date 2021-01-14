@@ -1920,181 +1920,181 @@ function importContent() {
             }),
           ],
         }),
-        // new SectionWidget({
-        //   content: [
-        //     new HeadlineWidget({
-        //       alignment: "center",
-        //       level: "h1",
-        //       style: "h2",
-        //       showDividingLine: "yes",
-        //       headline: "Meet our awarded team",
-        //     }),
-        //     new HeadlineWidget({
-        //       level: "h2",
-        //       style: "h4",
-        //       alignment: "center",
-        //       headline: loremIpsum({ count: 2 }),
-        //     }),
-        //     createEvenColumnContainerWidget({
-        //       columns: [
-        //         // col 1
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashFemalePortrait3Square,
-        //                 alternativeText: "Jane Morgan",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Jane Morgan",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Product Research Director",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //         // col 2
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashMalePortrait3Square,
-        //                 alternativeText: "Peter Doe",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Peter Doe",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Internal Applications Supervisor",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //         // col 3
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashFemalePortrait4Square,
-        //                 alternativeText: "Susan Summer",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Susan Summer",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Regional Agent",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //       ],
-        //     }),
-        //     createEvenColumnContainerWidget({
-        //       columns: [
-        //         // col 1
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashMalePortrait2Square,
-        //                 alternativeText: "Clarius Ceasar",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Clarius Ceasar",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Dynamic Operations Representative",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //         // col 2
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashFemalePortrait5Square,
-        //                 alternativeText: "Anna Corn",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Anna Corn",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Regional Brand Producer",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //         // col 3
-        //         [
-        //           new BoxWidget({
-        //             body: [
-        //               new ImageWidget({
-        //                 image: unsplashMalePortrait1Square,
-        //                 alternativeText: "Jason John",
-        //                 animation: "fadeInUp",
-        //               }),
-        //               new HeadlineWidget({
-        //                 headline: "Jason John",
-        //                 style: "h3",
-        //                 alignment: "center",
-        //               }),
-        //               new HeadlineWidget({
-        //                 alignment: "center",
-        //                 headline: "Dynamic Paradigm Director",
-        //                 style: "h5",
-        //                 showDividingLine: "yes",
-        //                 showMargin: "no",
-        //               }),
-        //               createRandomIconContainerWidget(),
-        //             ],
-        //           }),
-        //         ],
-        //       ],
-        //     }),
-        //   ],
-        // }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+              headline: "Meet our awarded team",
+            }),
+            new HeadlineWidget({
+              level: "h2",
+              style: "h4",
+              alignment: "center",
+              headline: loremIpsum({ count: 2 }),
+            }),
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait3Square,
+                        alternativeText: "Jane Morgan",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Jane Morgan",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Product Research Director",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 2
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait3Square,
+                        alternativeText: "Peter Doe",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Peter Doe",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Internal Applications Supervisor",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 3
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait4Square,
+                        alternativeText: "Susan Summer",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Susan Summer",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Regional Agent",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait2Square,
+                        alternativeText: "Clarius Ceasar",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Clarius Ceasar",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Operations Representative",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 2
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait5Square,
+                        alternativeText: "Anna Corn",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Anna Corn",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Regional Brand Producer",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 3
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait1Square,
+                        alternativeText: "Jason John",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Jason John",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Paradigm Director",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
         // new SectionWidget({
         //   backgroundImage: unsplashSilhouetteDancing,
         //   content: [
