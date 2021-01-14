@@ -2269,817 +2269,817 @@ function importContent() {
       ],
     });
 
-    // PRICING
-    const pricing = Page.create({
-      _path: "/pricing",
-      _permalink: "pricing",
-      title: "Pricing",
-      body: [
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              headline: "A great solution with great features",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-            }),
-            new HeadlineWidget({
-              headline: loremIpsum({ count: 2 }),
-              level: "h2",
-              style: "h4",
-              alignment: "center",
-            }),
-          ],
-        }),
-        new SectionWidget({
-          content: [
-            createEvenColumnContainerWidget({
-              alignment: "stretch",
-              columns: [
-                // col 1
-                [new ImageWidget({ image: ipad, animation: "zoomIn" })],
-                // col 2
-                [
-                  new HeadlineWidget({
-                    level: "h3",
-                    style: "h2",
-                    headline: "Content Management for React Apps",
-                  }),
-                  new TextWidget({
-                    text: loremIpsum({
-                      units: "paragraphs",
-                      format: "html",
-                      count: 1,
-                      paragraphLowerBound: 5,
-                      paragraphUpperBound: 5,
-                    }),
-                  }),
-                  new ButtonWidget({
-                    target: new Scrivito.Link({
-                      title: "Call to action",
-                      obj: root,
-                    }),
-                  }),
-                ],
-              ],
-            }),
-            createEvenColumnContainerWidget({
-              alignment: "stretch",
-              columns: [
-                // col 1
-                [
-                  new HeadlineWidget({
-                    level: "h3",
-                    style: "h2",
-                    headline: "Fully Fledged CMS Service",
-                  }),
-                  new TextWidget({
-                    text: loremIpsum({
-                      units: "paragraphs",
-                      format: "html",
-                      count: 1,
-                      paragraphLowerBound: 5,
-                      paragraphUpperBound: 5,
-                    }),
-                  }),
-                  new ButtonWidget({
-                    target: new Scrivito.Link({
-                      title: "Call to action",
-                      obj: root,
-                    }),
-                  }),
-                ],
-                // col 2
-                [new ImageWidget({ image: iphone, animation: "zoomIn" })],
-              ],
-            }),
-          ],
-        }),
-        new SectionWidget({
-          content: [
-            createEvenColumnContainerWidget({
-              columns: [
-                [createFeaturePanelWidget("fa-check", "Drag & drop widgets")],
-                [createFeaturePanelWidget("fa-cogs", "Easy customization")],
-              ],
-            }),
-            createEvenColumnContainerWidget({
-              columns: [
-                [
-                  createFeaturePanelWidget(
-                    "fa-file-text-o",
-                    "Full documentation"
-                  ),
-                ],
-                [createFeaturePanelWidget("fa-comments-o", "Full support")],
-              ],
-            }),
-            createEvenColumnContainerWidget({
-              columns: [
-                [createFeaturePanelWidget("fa-clone", "Tons of widgets")],
-                [createFeaturePanelWidget("fa-mobile", "Fully responsive")],
-              ],
-            }),
-            new HeadlineWidget({
-              alignment: "center",
-              headline: "Choose your plan",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-            }),
-          ],
-        }),
-        new SectionWidget({
-          backgroundImage: unsplashHotpink,
-          content: [createPricingWidget(root)],
-        }),
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              headline: "Compare all features",
-              level: "h3",
-              style: "h2",
-              showDividingLine: "yes",
-            }),
-            new HeadlineWidget({
-              alignment: "center",
-              headline: loremIpsum({ count: "2" }),
-              level: "h2",
-              style: "h4",
-            }),
-            new TableWidget({
-              rows: [
-                new TableRowWidget({
-                  cell1: "Key feature 1",
-                  cell2: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>5</b></p>",
-                    }),
-                  ],
-                  cell3: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>10</b></p>",
-                    }),
-                  ],
-                  cell4: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>unlimited</b></p>",
-                    }),
-                  ],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 2",
-                  cell2: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>20</b></p>",
-                    }),
-                  ],
-                  cell3: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>40</b></p>",
-                    }),
-                  ],
-                  cell4: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>unlimited</b></p>",
-                    }),
-                  ],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 3",
-                  cell2: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>9/5</b></p>",
-                    }),
-                  ],
-                  cell3: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>12/7</b></p>",
-                    }),
-                  ],
-                  cell4: [
-                    new TextWidget({
-                      alignment: "center",
-                      text: "<p><b>24/7</b></p>",
-                    }),
-                  ],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 4",
-                  cell2: [createCheckIcon()],
-                  cell3: [createCheckIcon()],
-                  cell4: [createCheckIcon()],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 5",
-                  cell2: [createCheckIcon()],
-                  cell3: [createCheckIcon()],
-                  cell4: [createCheckIcon()],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 6",
-                  cell2: [createCheckIcon()],
-                  cell3: [createCheckIcon()],
-                  cell4: [createCheckIcon()],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 7",
-                  cell2: [createCheckIcon()],
-                  cell3: [createCheckIcon()],
-                  cell4: [createCheckIcon()],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 8",
-                  cell2: [new TextWidget({ text: "<p><b>-</b></p>" })],
-                  cell3: [createCheckIcon()],
-                  cell4: [createCheckIcon()],
-                }),
-                new TableRowWidget({
-                  cell1: "Key feature 9",
-                  cell2: [new TextWidget({ text: "<p><b>-</b></p>" })],
-                  cell3: [new TextWidget({ text: "<p><b>-</b></p>" })],
-                  cell4: [createCheckIcon()],
-                }),
-              ],
-              summaryRows: [
-                new TableRowWidget({
-                  cell1: "Prices",
-                  cell2: [
-                    new PriceWidget({
-                      price: "29",
-                      currency: "€",
-                      period: "/mo",
-                    }),
-                  ],
-                  cell3: [
-                    new PriceWidget({
-                      price: "59",
-                      currency: "€",
-                      period: "/mo",
-                    }),
-                  ],
-                  cell4: [
-                    new PriceWidget({
-                      price: "199",
-                      currency: "€",
-                      period: "/mo",
-                    }),
-                  ],
-                }),
-              ],
-              header1: "Features",
-              header2: "Basic",
-              header3: "Team",
-              header4: "Corporate",
-            }),
-          ],
-        }),
-      ],
-    });
+    // // PRICING
+    // const pricing = Page.create({
+    //   _path: "/pricing",
+    //   _permalink: "pricing",
+    //   title: "Pricing",
+    //   body: [
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: "A great solution with great features",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //         }),
+    //         new HeadlineWidget({
+    //           headline: loremIpsum({ count: 2 }),
+    //           level: "h2",
+    //           style: "h4",
+    //           alignment: "center",
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       content: [
+    //         createEvenColumnContainerWidget({
+    //           alignment: "stretch",
+    //           columns: [
+    //             // col 1
+    //             [new ImageWidget({ image: ipad, animation: "zoomIn" })],
+    //             // col 2
+    //             [
+    //               new HeadlineWidget({
+    //                 level: "h3",
+    //                 style: "h2",
+    //                 headline: "Content Management for React Apps",
+    //               }),
+    //               new TextWidget({
+    //                 text: loremIpsum({
+    //                   units: "paragraphs",
+    //                   format: "html",
+    //                   count: 1,
+    //                   paragraphLowerBound: 5,
+    //                   paragraphUpperBound: 5,
+    //                 }),
+    //               }),
+    //               new ButtonWidget({
+    //                 target: new Scrivito.Link({
+    //                   title: "Call to action",
+    //                   obj: root,
+    //                 }),
+    //               }),
+    //             ],
+    //           ],
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           alignment: "stretch",
+    //           columns: [
+    //             // col 1
+    //             [
+    //               new HeadlineWidget({
+    //                 level: "h3",
+    //                 style: "h2",
+    //                 headline: "Fully Fledged CMS Service",
+    //               }),
+    //               new TextWidget({
+    //                 text: loremIpsum({
+    //                   units: "paragraphs",
+    //                   format: "html",
+    //                   count: 1,
+    //                   paragraphLowerBound: 5,
+    //                   paragraphUpperBound: 5,
+    //                 }),
+    //               }),
+    //               new ButtonWidget({
+    //                 target: new Scrivito.Link({
+    //                   title: "Call to action",
+    //                   obj: root,
+    //                 }),
+    //               }),
+    //             ],
+    //             // col 2
+    //             [new ImageWidget({ image: iphone, animation: "zoomIn" })],
+    //           ],
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       content: [
+    //         createEvenColumnContainerWidget({
+    //           columns: [
+    //             [createFeaturePanelWidget("fa-check", "Drag & drop widgets")],
+    //             [createFeaturePanelWidget("fa-cogs", "Easy customization")],
+    //           ],
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           columns: [
+    //             [
+    //               createFeaturePanelWidget(
+    //                 "fa-file-text-o",
+    //                 "Full documentation"
+    //               ),
+    //             ],
+    //             [createFeaturePanelWidget("fa-comments-o", "Full support")],
+    //           ],
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           columns: [
+    //             [createFeaturePanelWidget("fa-clone", "Tons of widgets")],
+    //             [createFeaturePanelWidget("fa-mobile", "Fully responsive")],
+    //           ],
+    //         }),
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: "Choose your plan",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       backgroundImage: unsplashHotpink,
+    //       content: [createPricingWidget(root)],
+    //     }),
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: "Compare all features",
+    //           level: "h3",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //         }),
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: loremIpsum({ count: "2" }),
+    //           level: "h2",
+    //           style: "h4",
+    //         }),
+    //         new TableWidget({
+    //           rows: [
+    //             new TableRowWidget({
+    //               cell1: "Key feature 1",
+    //               cell2: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>5</b></p>",
+    //                 }),
+    //               ],
+    //               cell3: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>10</b></p>",
+    //                 }),
+    //               ],
+    //               cell4: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>unlimited</b></p>",
+    //                 }),
+    //               ],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 2",
+    //               cell2: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>20</b></p>",
+    //                 }),
+    //               ],
+    //               cell3: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>40</b></p>",
+    //                 }),
+    //               ],
+    //               cell4: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>unlimited</b></p>",
+    //                 }),
+    //               ],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 3",
+    //               cell2: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>9/5</b></p>",
+    //                 }),
+    //               ],
+    //               cell3: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>12/7</b></p>",
+    //                 }),
+    //               ],
+    //               cell4: [
+    //                 new TextWidget({
+    //                   alignment: "center",
+    //                   text: "<p><b>24/7</b></p>",
+    //                 }),
+    //               ],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 4",
+    //               cell2: [createCheckIcon()],
+    //               cell3: [createCheckIcon()],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 5",
+    //               cell2: [createCheckIcon()],
+    //               cell3: [createCheckIcon()],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 6",
+    //               cell2: [createCheckIcon()],
+    //               cell3: [createCheckIcon()],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 7",
+    //               cell2: [createCheckIcon()],
+    //               cell3: [createCheckIcon()],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 8",
+    //               cell2: [new TextWidget({ text: "<p><b>-</b></p>" })],
+    //               cell3: [createCheckIcon()],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //             new TableRowWidget({
+    //               cell1: "Key feature 9",
+    //               cell2: [new TextWidget({ text: "<p><b>-</b></p>" })],
+    //               cell3: [new TextWidget({ text: "<p><b>-</b></p>" })],
+    //               cell4: [createCheckIcon()],
+    //             }),
+    //           ],
+    //           summaryRows: [
+    //             new TableRowWidget({
+    //               cell1: "Prices",
+    //               cell2: [
+    //                 new PriceWidget({
+    //                   price: "29",
+    //                   currency: "€",
+    //                   period: "/mo",
+    //                 }),
+    //               ],
+    //               cell3: [
+    //                 new PriceWidget({
+    //                   price: "59",
+    //                   currency: "€",
+    //                   period: "/mo",
+    //                 }),
+    //               ],
+    //               cell4: [
+    //                 new PriceWidget({
+    //                   price: "199",
+    //                   currency: "€",
+    //                   period: "/mo",
+    //                 }),
+    //               ],
+    //             }),
+    //           ],
+    //           header1: "Features",
+    //           header2: "Basic",
+    //           header3: "Team",
+    //           header4: "Corporate",
+    //         }),
+    //       ],
+    //     }),
+    //   ],
+    // });
 
-    Job.create({
-      image: unsplashLaptopKeyboard,
-      title: "SEO specialist",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "John Doe Street 1337",
-      locationLocality: "Berlin",
-      locationPostalCode: "10369",
-      locationCountry: "Germany",
-      employmentType: ["FULL_TIME", "PART_TIME"],
-    });
+    // Job.create({
+    //   image: unsplashLaptopKeyboard,
+    //   title: "SEO specialist",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "John Doe Street 1337",
+    //   locationLocality: "Berlin",
+    //   locationPostalCode: "10369",
+    //   locationCountry: "Germany",
+    //   employmentType: ["FULL_TIME", "PART_TIME"],
+    // });
 
-    Job.create({
-      image: unsplashiPadCharts,
-      title: "Marketing Manager",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "John Doe Street 1337",
-      locationLocality: "Berlin",
-      locationPostalCode: "10359",
-      locationCountry: "Germany",
-      employmentType: ["FULL_TIME", "PART_TIME"],
-    });
+    // Job.create({
+    //   image: unsplashiPadCharts,
+    //   title: "Marketing Manager",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "John Doe Street 1337",
+    //   locationLocality: "Berlin",
+    //   locationPostalCode: "10359",
+    //   locationCountry: "Germany",
+    //   employmentType: ["FULL_TIME", "PART_TIME"],
+    // });
 
-    Job.create({
-      image: unsplashUxDesigner,
-      title: "UX Designer",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "John Doe Street 1337",
-      locationLocality: "New York",
-      locationRegion: "NYC",
-      locationPostalCode: "11001",
-      locationCountry: "USA",
-      employmentType: ["PER_DIEM", "TEMPORARY"],
-    });
+    // Job.create({
+    //   image: unsplashUxDesigner,
+    //   title: "UX Designer",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "John Doe Street 1337",
+    //   locationLocality: "New York",
+    //   locationRegion: "NYC",
+    //   locationPostalCode: "11001",
+    //   locationCountry: "USA",
+    //   employmentType: ["PER_DIEM", "TEMPORARY"],
+    // });
 
-    Job.create({
-      image: unsplashTypistLaptop,
-      title: "Full Stack Developer",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "John Doe Street 1337",
-      locationLocality: "San Francisco",
-      locationRegion: "CA",
-      locationPostalCode: "94101",
-      locationCountry: "USA",
-      employmentType: ["CONTRACTOR", "TEMPORARY"],
-    });
+    // Job.create({
+    //   image: unsplashTypistLaptop,
+    //   title: "Full Stack Developer",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "John Doe Street 1337",
+    //   locationLocality: "San Francisco",
+    //   locationRegion: "CA",
+    //   locationPostalCode: "94101",
+    //   locationCountry: "USA",
+    //   employmentType: ["CONTRACTOR", "TEMPORARY"],
+    // });
 
-    Job.create({
-      image: unsplashNotebookPencil,
-      title: "Texter",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "John Doe Street 1337",
-      locationLocality: "Berlin",
-      locationPostalCode: "10367",
-      locationCountry: "Germany",
-      employmentType: ["INTERN", "VOLUNTEER"],
-    });
+    // Job.create({
+    //   image: unsplashNotebookPencil,
+    //   title: "Texter",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "John Doe Street 1337",
+    //   locationLocality: "Berlin",
+    //   locationPostalCode: "10367",
+    //   locationCountry: "Germany",
+    //   employmentType: ["INTERN", "VOLUNTEER"],
+    // });
 
-    Job.create({
-      image: unsplashMacbookDeveloper,
-      title: "Full Stack Developer",
-      body: createRandomBody(),
-      datePosted: randomPastDate(),
-      validThrough: randomFutureDate(),
-      hiringOrganizationName: "Developers Place Inc.",
-      locationStreetAddress: "Wall Street 1337",
-      locationLocality: "San Francisco",
-      locationRegion: "CA",
-      locationPostalCode: "94103",
-      locationCountry: "USA",
-      employmentType: ["FULL_TIME", "PART_TIME", "OTHER"],
-    });
+    // Job.create({
+    //   image: unsplashMacbookDeveloper,
+    //   title: "Full Stack Developer",
+    //   body: createRandomBody(),
+    //   datePosted: randomPastDate(),
+    //   validThrough: randomFutureDate(),
+    //   hiringOrganizationName: "Developers Place Inc.",
+    //   locationStreetAddress: "Wall Street 1337",
+    //   locationLocality: "San Francisco",
+    //   locationRegion: "CA",
+    //   locationPostalCode: "94103",
+    //   locationCountry: "USA",
+    //   employmentType: ["FULL_TIME", "PART_TIME", "OTHER"],
+    // });
 
-    // Authors for BlogPosts
-    const janeDoe = Author.create({
-      title: "Jane Doe",
-      description: loremIpsum({ units: "sentences", count: 3 }),
-      image: unsplashFemaleBehindWindow,
-    });
+    // // Authors for BlogPosts
+    // const janeDoe = Author.create({
+    //   title: "Jane Doe",
+    //   description: loremIpsum({ units: "sentences", count: 3 }),
+    //   image: unsplashFemaleBehindWindow,
+    // });
 
-    const johnDoe = Author.create({
-      title: "John Doe",
-      description: loremIpsum({ units: "sentences", count: 3 }),
-      image: unsplashMaleWithSunglasses,
-    });
+    // const johnDoe = Author.create({
+    //   title: "John Doe",
+    //   description: loremIpsum({ units: "sentences", count: 3 }),
+    //   image: unsplashMaleWithSunglasses,
+    // });
 
-    const authors = [janeDoe, johnDoe];
+    // const authors = [janeDoe, johnDoe];
 
-    const postImages = [
-      unsplashAllesCandleWoodTable,
-      unsplashAppleWorkstationCalendarIpad,
-      unsplashAppleWorkstationWindcave,
-      unsplashBikelane,
-      unsplashBlackTablesWhiteChairs,
-      unsplashBuildingCornerClouds,
-      unsplashBusinessPaperRedSocks,
-      unsplashBusinessPaperWristwatch,
-      unsplashDeskRuler,
-      unsplashLadyInCoffeeShop,
-      unsplashLaptopKeyboard,
-      unsplashOfficeWindow,
-      unsplashOfficeWithGlass,
-      unsplashOutdoorMeeting,
-      unsplashPlant,
-      unsplashScreenWithClock,
-      unsplashWhiteMeetingRoom,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ];
+    // const postImages = [
+    //   unsplashAllesCandleWoodTable,
+    //   unsplashAppleWorkstationCalendarIpad,
+    //   unsplashAppleWorkstationWindcave,
+    //   unsplashBikelane,
+    //   unsplashBlackTablesWhiteChairs,
+    //   unsplashBuildingCornerClouds,
+    //   unsplashBusinessPaperRedSocks,
+    //   unsplashBusinessPaperWristwatch,
+    //   unsplashDeskRuler,
+    //   unsplashLadyInCoffeeShop,
+    //   unsplashLaptopKeyboard,
+    //   unsplashOfficeWindow,
+    //   unsplashOfficeWithGlass,
+    //   unsplashOutdoorMeeting,
+    //   unsplashPlant,
+    //   unsplashScreenWithClock,
+    //   unsplashWhiteMeetingRoom,
+    //   null,
+    //   null,
+    //   null,
+    //   null,
+    //   null,
+    //   null,
+    // ];
 
-    const eventImages = [
-      unsplashAllesCandleWoodTable,
-      unsplashAppleWorkstationCalendarIpad,
-      unsplashAppleWorkstationWindcave,
-      unsplashBlackTablesWhiteChairs,
-      unsplashBuildingCornerClouds,
-      unsplashBusinessPaperRedSocks,
-      unsplashBusinessPaperWristwatch,
-      unsplashDeskRuler,
-      unsplashLadyInCoffeeShop,
-      unsplashLaptopKeyboard,
-      unsplashOfficeWindow,
-      unsplashOfficeWithGlass,
-      unsplashOutdoorMeeting,
-      unsplashPlant,
-      unsplashScreenWithClock,
-      unsplashWhiteMeetingRoom,
-    ];
+    // const eventImages = [
+    //   unsplashAllesCandleWoodTable,
+    //   unsplashAppleWorkstationCalendarIpad,
+    //   unsplashAppleWorkstationWindcave,
+    //   unsplashBlackTablesWhiteChairs,
+    //   unsplashBuildingCornerClouds,
+    //   unsplashBusinessPaperRedSocks,
+    //   unsplashBusinessPaperWristwatch,
+    //   unsplashDeskRuler,
+    //   unsplashLadyInCoffeeShop,
+    //   unsplashLaptopKeyboard,
+    //   unsplashOfficeWindow,
+    //   unsplashOfficeWithGlass,
+    //   unsplashOutdoorMeeting,
+    //   unsplashPlant,
+    //   unsplashScreenWithClock,
+    //   unsplashWhiteMeetingRoom,
+    // ];
 
-    const locations = [
-      {
-        locationName: "bcc",
-        locationStreetAddress: "Alexanderstr. 11",
-        locationLocality: "Berlin",
-        locationPostalCode: "10178",
-        locationRegion: "",
-        locationCountry: "Germany",
-      },
-      {
-        locationName: "Crowne Plaza",
-        locationStreetAddress: "1605 Broadway",
-        locationLocality: "New York",
-        locationPostalCode: "10019",
-        locationRegion: "NY",
-        locationCountry: "USA",
-      },
-      {
-        locationName: "Convention Center",
-        locationStreetAddress: "1201 South Figueroa Street",
-        locationLocality: "Los Angeles",
-        locationPostalCode: "90015",
-        locationRegion: "CA",
-        locationCountry: "USA",
-      },
-      {
-        locationName: "Empire Riverside Hotel",
-        locationStreetAddress: "Bernhard-Nocht-Straße 97",
-        locationLocality: "Hamburg",
-        locationPostalCode: "20359",
-        locationRegion: "",
-        locationCountry: "Germany",
-      },
-    ];
+    // const locations = [
+    //   {
+    //     locationName: "bcc",
+    //     locationStreetAddress: "Alexanderstr. 11",
+    //     locationLocality: "Berlin",
+    //     locationPostalCode: "10178",
+    //     locationRegion: "",
+    //     locationCountry: "Germany",
+    //   },
+    //   {
+    //     locationName: "Crowne Plaza",
+    //     locationStreetAddress: "1605 Broadway",
+    //     locationLocality: "New York",
+    //     locationPostalCode: "10019",
+    //     locationRegion: "NY",
+    //     locationCountry: "USA",
+    //   },
+    //   {
+    //     locationName: "Convention Center",
+    //     locationStreetAddress: "1201 South Figueroa Street",
+    //     locationLocality: "Los Angeles",
+    //     locationPostalCode: "90015",
+    //     locationRegion: "CA",
+    //     locationCountry: "USA",
+    //   },
+    //   {
+    //     locationName: "Empire Riverside Hotel",
+    //     locationStreetAddress: "Bernhard-Nocht-Straße 97",
+    //     locationLocality: "Hamburg",
+    //     locationPostalCode: "20359",
+    //     locationRegion: "",
+    //     locationCountry: "Germany",
+    //   },
+    // ];
 
-    const titles = [
-      "Javascript Event for Beginners",
-      "Just an Event for Developers",
-      "SEO Event for Designers",
-      "Meeting Event for Designers",
-      "Design Event for Beginners",
-      "Marketing Event for Developers",
-      "Meeting Event for Managers",
-      "Meeting Event for Everyone",
-      "Meeting Event for Javascript Developers",
-      "Management Event for Beginners",
-      "SEO Event for Beginners",
-      "Meeting Event for Developers",
-    ];
+    // const titles = [
+    //   "Javascript Event for Beginners",
+    //   "Just an Event for Developers",
+    //   "SEO Event for Designers",
+    //   "Meeting Event for Designers",
+    //   "Design Event for Beginners",
+    //   "Marketing Event for Developers",
+    //   "Meeting Event for Managers",
+    //   "Meeting Event for Everyone",
+    //   "Meeting Event for Javascript Developers",
+    //   "Management Event for Beginners",
+    //   "SEO Event for Beginners",
+    //   "Meeting Event for Developers",
+    // ];
 
-    const tags = [
-      ["Development"],
-      ["Development"],
-      ["Design", "Marketing"],
-      ["Design"],
-      ["Design"],
-      ["Marketing"],
-      ["Business"],
-      ["Development", "Design", "Marketing", "Business"],
-      ["Development"],
-      ["Management"],
-      ["Marketing"],
-      ["Development"],
-    ];
+    // const tags = [
+    //   ["Development"],
+    //   ["Development"],
+    //   ["Design", "Marketing"],
+    //   ["Design"],
+    //   ["Design"],
+    //   ["Marketing"],
+    //   ["Business"],
+    //   ["Development", "Design", "Marketing", "Business"],
+    //   ["Development"],
+    //   ["Management"],
+    //   ["Marketing"],
+    //   ["Development"],
+    // ];
 
-    // Events
-    for (let i = 0; i < 12; i += 1) {
-      Event.create({
-        date: randomPastDate(),
-        image: random(eventImages),
-        ...random(locations),
-        title: titles[i],
-        tags: tags[i],
-        body: [
-          new SectionWidget({
-            content: [
-              new TextWidget({
-                text: loremIpsum({
-                  units: "paragraphs",
-                  format: "html",
-                  count: 2,
-                  paragraphLowerBound: 1,
-                  paragraphUpperBound: 10,
-                }),
-              }),
-            ],
-          }),
-        ],
-      });
-    }
+    // // Events
+    // for (let i = 0; i < 12; i += 1) {
+    //   Event.create({
+    //     date: randomPastDate(),
+    //     image: random(eventImages),
+    //     ...random(locations),
+    //     title: titles[i],
+    //     tags: tags[i],
+    //     body: [
+    //       new SectionWidget({
+    //         content: [
+    //           new TextWidget({
+    //             text: loremIpsum({
+    //               units: "paragraphs",
+    //               format: "html",
+    //               count: 2,
+    //               paragraphLowerBound: 1,
+    //               paragraphUpperBound: 10,
+    //             }),
+    //           }),
+    //         ],
+    //       }),
+    //     ],
+    //   });
+    // }
 
-    // BlogPosts
-    for (let i = 0; i < 12; i += 1) {
-      BlogPost.create({
-        author: random(authors),
-        title: capitalizeFirstLetter(loremIpsum({ units: "words", count: 5 })),
-        titleImage: random(postImages),
-        subtitle: capitalizeFirstLetter(
-          loremIpsum({ units: "words", count: 7 })
-        ),
-        tags: randomShuffle(DEFAULT_TAGS),
-        publishedAt: randomPastDate(),
-        body: [
-          new SectionWidget({
-            content: [
-              new TextWidget({
-                text: loremIpsum({
-                  units: "paragraphs",
-                  format: "html",
-                  count: 3,
-                  paragraphLowerBound: 1,
-                  paragraphUpperBound: 10,
-                }),
-              }),
-              new ImageWidget({ image: random(postImages.filter(Boolean)) }),
-              new TextWidget({
-                text: loremIpsum({
-                  units: "paragraphs",
-                  format: "html",
-                  count: 3,
-                  paragraphLowerBound: 1,
-                  paragraphUpperBound: 10,
-                }),
-              }),
-            ],
-          }),
-        ],
-      });
-    }
+    // // BlogPosts
+    // for (let i = 0; i < 12; i += 1) {
+    //   BlogPost.create({
+    //     author: random(authors),
+    //     title: capitalizeFirstLetter(loremIpsum({ units: "words", count: 5 })),
+    //     titleImage: random(postImages),
+    //     subtitle: capitalizeFirstLetter(
+    //       loremIpsum({ units: "words", count: 7 })
+    //     ),
+    //     tags: randomShuffle(DEFAULT_TAGS),
+    //     publishedAt: randomPastDate(),
+    //     body: [
+    //       new SectionWidget({
+    //         content: [
+    //           new TextWidget({
+    //             text: loremIpsum({
+    //               units: "paragraphs",
+    //               format: "html",
+    //               count: 3,
+    //               paragraphLowerBound: 1,
+    //               paragraphUpperBound: 10,
+    //             }),
+    //           }),
+    //           new ImageWidget({ image: random(postImages.filter(Boolean)) }),
+    //           new TextWidget({
+    //             text: loremIpsum({
+    //               units: "paragraphs",
+    //               format: "html",
+    //               count: 3,
+    //               paragraphLowerBound: 1,
+    //               paragraphUpperBound: 10,
+    //             }),
+    //           }),
+    //         ],
+    //       }),
+    //     ],
+    //   });
+    // }
 
-    // BLOG
-    const blog = Blog.create({
-      _path: "/blog",
-      _permalink: "blog",
-      title: "Blog",
-      navigationBackgroundImage: unsplashPlant,
-      body: [
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-              headline: "Latest news from our blog",
-            }),
-            new HeadlineWidget({
-              level: "h2",
-              style: "h4",
-              alignment: "center",
-              headline: loremIpsum({ count: 2 }),
-            }),
-            new BlogOverviewWidget({}),
-          ],
-        }),
-      ],
-    });
+    // // BLOG
+    // const blog = Blog.create({
+    //   _path: "/blog",
+    //   _permalink: "blog",
+    //   title: "Blog",
+    //   navigationBackgroundImage: unsplashPlant,
+    //   body: [
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //           headline: "Latest news from our blog",
+    //         }),
+    //         new HeadlineWidget({
+    //           level: "h2",
+    //           style: "h4",
+    //           alignment: "center",
+    //           headline: loremIpsum({ count: 2 }),
+    //         }),
+    //         new BlogOverviewWidget({}),
+    //       ],
+    //     }),
+    //   ],
+    // });
 
-    // WIDGETS AND PAGES
-    const homeV1 = Page.create({
-      _path: "/pages_and_widgets/home_v1",
-      title: "Homepage Variant 1",
-      navigationBackgroundImage: nightSky,
-      navigationHeight: "full-height",
-      navigationSection: [
-        new ColumnContainerWidget({
-          alignment: "stretch",
-          columns: [
-            // col 1
-            new ColumnWidget({
-              colSize: 8,
-              content: [
-                new HeadlineWidget({
-                  headline: capitalizeFirstLetter(
-                    loremIpsum({ units: "words", count: 4 })
-                  ),
-                  style: "h1",
-                }),
-                new TextWidget({
-                  text: loremIpsum({
-                    units: "paragraphs",
-                    format: "html",
-                    count: 1,
-                    paragraphLowerBound: 3,
-                    paragraphUpperBound: 5,
-                  }),
-                }),
-                new ButtonWidget({
-                  target: new Scrivito.Link({
-                    title: "Call to action",
-                    obj: root,
-                  }),
-                }),
-              ],
-            }),
-            // col 2
-            new ColumnWidget({
-              colSize: 4,
-              content: [new ContactFormWidget({})],
-            }),
-          ],
-        }),
-      ],
-      body: [
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              headline: "Our top features",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-            }),
-            createEvenColumnContainerWidget({
-              alignment: "stretch",
-              columns: [
-                // col 1
-                [
-                  new ImageWidget({
-                    image: unsplashMeetingRoomthree,
-                    animation: "fadeInLeft",
-                  }),
-                ],
-                // col 2
-                [
-                  new HeadlineWidget({
-                    level: "h3",
-                    style: "h2",
-                    headline: "Content Management for Professionals",
-                  }),
-                  new TextWidget({
-                    text: loremIpsum({
-                      units: "paragraphs",
-                      format: "html",
-                      count: 1,
-                      paragraphLowerBound: 3,
-                      paragraphUpperBound: 5,
-                    }),
-                  }),
-                  new ButtonWidget({
-                    target: new Scrivito.Link({
-                      title: "Call to action",
-                      obj: root,
-                    }),
-                  }),
-                ],
-              ],
-            }),
-            createEvenColumnContainerWidget({
-              alignment: "stretch",
-              columns: [
-                // col 1
-                [
-                  new HeadlineWidget({
-                    level: "h3",
-                    style: "h2",
-                    headline:
-                      "Are You Asking Your CMS Vendor the Right Questions?",
-                  }),
-                  new TextWidget({
-                    text: `<p>Choosing the right Content Management System (CMS)
-                    for your web project at first could appear to be a
-                    momentous task. However, if you ask the right questions
-                    before you get too deep, your whole project will come
-                    together more easily than you can imagine and you'll
-                    be well on your way to a successful launch.</p><p>Read
-                    about ten things you can ask a CMS vendor to help
-                    you choose the right modern Web CMS (PDF).</p>`,
-                  }),
-                  new ButtonWidget({
-                    target: new Scrivito.Link({
-                      title: "Download PDF",
-                      obj: whatToAskPdf,
-                    }),
-                  }),
-                ],
-                // col 2
-                [
-                  new ImageWidget({
-                    image: unsplashModernChairDesk,
-                    animation: "fadeInRight",
-                  }),
-                ],
-              ],
-            }),
-          ],
-        }),
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-              headline: "Great feature overview",
-            }),
-            new HeadlineWidget({
-              level: "h2",
-              style: "h4",
-              alignment: "center",
-              headline: loremIpsum({ count: 2 }),
-            }),
-            createEvenColumnContainerWidget({
-              columns: [
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-picture-o",
-                    "Drag & drop widgets"
-                  ),
-                ],
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-mouse-pointer",
-                    "WYSIWYG editing"
-                  ),
-                ],
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-cogs",
-                    "Easy customization"
-                  ),
-                ],
-              ],
-            }),
-            createEvenColumnContainerWidget({
-              columns: [
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-comments-o",
-                    "Full support"
-                  ),
-                ],
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-clone",
-                    "Tons of widgets"
-                  ),
-                ],
-                [
-                  createBoxWidgetWithIconHeadlineAndText(
-                    "fa-mobile",
-                    "Fully responsive"
-                  ),
-                ],
-              ],
-            }),
-          ],
-        }),
-        new SectionWidget({
-          useFullWidth: "yes",
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              headline: "Watch our video",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-            }),
-            new VideoWidget({
-              source: videoWaterfall1,
-            }),
-          ],
-        }),
-        new SectionWidget({
-          content: [
-            new HeadlineWidget({
-              alignment: "center",
-              level: "h1",
-              style: "h2",
-              showDividingLine: "yes",
-              headline: "Our latest blog news",
-            }),
-            new BlogOverviewWidget({
-              maxItems: 2,
-            }),
-            new ButtonWidget({
-              alignment: "center",
-              target: new Scrivito.Link({
-                title: "Load all blog entries",
-                obj: blog,
-              }),
-            }),
-          ],
-        }),
-      ],
-    });
+    // // WIDGETS AND PAGES
+    // const homeV1 = Page.create({
+    //   _path: "/pages_and_widgets/home_v1",
+    //   title: "Homepage Variant 1",
+    //   navigationBackgroundImage: nightSky,
+    //   navigationHeight: "full-height",
+    //   navigationSection: [
+    //     new ColumnContainerWidget({
+    //       alignment: "stretch",
+    //       columns: [
+    //         // col 1
+    //         new ColumnWidget({
+    //           colSize: 8,
+    //           content: [
+    //             new HeadlineWidget({
+    //               headline: capitalizeFirstLetter(
+    //                 loremIpsum({ units: "words", count: 4 })
+    //               ),
+    //               style: "h1",
+    //             }),
+    //             new TextWidget({
+    //               text: loremIpsum({
+    //                 units: "paragraphs",
+    //                 format: "html",
+    //                 count: 1,
+    //                 paragraphLowerBound: 3,
+    //                 paragraphUpperBound: 5,
+    //               }),
+    //             }),
+    //             new ButtonWidget({
+    //               target: new Scrivito.Link({
+    //                 title: "Call to action",
+    //                 obj: root,
+    //               }),
+    //             }),
+    //           ],
+    //         }),
+    //         // col 2
+    //         new ColumnWidget({
+    //           colSize: 4,
+    //           content: [new ContactFormWidget({})],
+    //         }),
+    //       ],
+    //     }),
+    //   ],
+    //   body: [
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: "Our top features",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           alignment: "stretch",
+    //           columns: [
+    //             // col 1
+    //             [
+    //               new ImageWidget({
+    //                 image: unsplashMeetingRoomthree,
+    //                 animation: "fadeInLeft",
+    //               }),
+    //             ],
+    //             // col 2
+    //             [
+    //               new HeadlineWidget({
+    //                 level: "h3",
+    //                 style: "h2",
+    //                 headline: "Content Management for Professionals",
+    //               }),
+    //               new TextWidget({
+    //                 text: loremIpsum({
+    //                   units: "paragraphs",
+    //                   format: "html",
+    //                   count: 1,
+    //                   paragraphLowerBound: 3,
+    //                   paragraphUpperBound: 5,
+    //                 }),
+    //               }),
+    //               new ButtonWidget({
+    //                 target: new Scrivito.Link({
+    //                   title: "Call to action",
+    //                   obj: root,
+    //                 }),
+    //               }),
+    //             ],
+    //           ],
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           alignment: "stretch",
+    //           columns: [
+    //             // col 1
+    //             [
+    //               new HeadlineWidget({
+    //                 level: "h3",
+    //                 style: "h2",
+    //                 headline:
+    //                   "Are You Asking Your CMS Vendor the Right Questions?",
+    //               }),
+    //               new TextWidget({
+    //                 text: `<p>Choosing the right Content Management System (CMS)
+    //                 for your web project at first could appear to be a
+    //                 momentous task. However, if you ask the right questions
+    //                 before you get too deep, your whole project will come
+    //                 together more easily than you can imagine and you'll
+    //                 be well on your way to a successful launch.</p><p>Read
+    //                 about ten things you can ask a CMS vendor to help
+    //                 you choose the right modern Web CMS (PDF).</p>`,
+    //               }),
+    //               new ButtonWidget({
+    //                 target: new Scrivito.Link({
+    //                   title: "Download PDF",
+    //                   obj: whatToAskPdf,
+    //                 }),
+    //               }),
+    //             ],
+    //             // col 2
+    //             [
+    //               new ImageWidget({
+    //                 image: unsplashModernChairDesk,
+    //                 animation: "fadeInRight",
+    //               }),
+    //             ],
+    //           ],
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //           headline: "Great feature overview",
+    //         }),
+    //         new HeadlineWidget({
+    //           level: "h2",
+    //           style: "h4",
+    //           alignment: "center",
+    //           headline: loremIpsum({ count: 2 }),
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           columns: [
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-picture-o",
+    //                 "Drag & drop widgets"
+    //               ),
+    //             ],
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-mouse-pointer",
+    //                 "WYSIWYG editing"
+    //               ),
+    //             ],
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-cogs",
+    //                 "Easy customization"
+    //               ),
+    //             ],
+    //           ],
+    //         }),
+    //         createEvenColumnContainerWidget({
+    //           columns: [
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-comments-o",
+    //                 "Full support"
+    //               ),
+    //             ],
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-clone",
+    //                 "Tons of widgets"
+    //               ),
+    //             ],
+    //             [
+    //               createBoxWidgetWithIconHeadlineAndText(
+    //                 "fa-mobile",
+    //                 "Fully responsive"
+    //               ),
+    //             ],
+    //           ],
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       useFullWidth: "yes",
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           headline: "Watch our video",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //         }),
+    //         new VideoWidget({
+    //           source: videoWaterfall1,
+    //         }),
+    //       ],
+    //     }),
+    //     new SectionWidget({
+    //       content: [
+    //         new HeadlineWidget({
+    //           alignment: "center",
+    //           level: "h1",
+    //           style: "h2",
+    //           showDividingLine: "yes",
+    //           headline: "Our latest blog news",
+    //         }),
+    //         new BlogOverviewWidget({
+    //           maxItems: 2,
+    //         }),
+    //         new ButtonWidget({
+    //           alignment: "center",
+    //           target: new Scrivito.Link({
+    //             title: "Load all blog entries",
+    //             obj: blog,
+    //           }),
+    //         }),
+    //       ],
+    //     }),
+    //   ],
+    // });
     // const homeV2 = Page.create({
     //   _path: "/pages_and_widgets/home_v2",
     //   title: "Homepage Variant 2",
