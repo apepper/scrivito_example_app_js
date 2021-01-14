@@ -12,3 +12,5 @@ const Page = Scrivito.provideObjClass("Page", {
 });
 
 export default Page;
+
+window.Page = Page;

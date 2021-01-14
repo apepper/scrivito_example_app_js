@@ -13,3 +13,5 @@ const HeadlineWidget = Scrivito.provideWidgetClass("HeadlineWidget", {
 });
 
 export default HeadlineWidget;
+
+window.HeadlineWidget = HeadlineWidget;

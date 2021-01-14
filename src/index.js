@@ -8,6 +8,8 @@ import App from "./App";
 import "./config";
 import "./assets/stylesheets/index.scss";
 
+import "./DangerZone/index";
+
 if (window.preloadDump) {
   Scrivito.preload(window.preloadDump).then(({ dumpLoaded }) => {
     dumpLoaded ? hydrateApp() : renderApp();

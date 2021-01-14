@@ -9,3 +9,5 @@ const TextWidget = Scrivito.provideWidgetClass("TextWidget", {
 });
 
 export default TextWidget;
+
+window.TextWidget = TextWidget;

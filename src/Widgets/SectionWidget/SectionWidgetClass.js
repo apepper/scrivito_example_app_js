@@ -26,3 +26,5 @@ const SectionWidget = Scrivito.provideWidgetClass("SectionWidget", {
 });
 
 export default SectionWidget;
+
+window.SectionWidget = SectionWidget;
