@@ -1600,530 +1600,530 @@ function importContent() {
       ],
     });
 
-    // // ABOUT
-    // const ourWork = Page.create({
-    //   _path: "/about/our_work",
-    //   title: "Our Work",
-    //   body: [
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //           headline: "Our awarded work",
-    //         }),
-    //         new HeadlineWidget({
-    //           level: "h2",
-    //           style: "h4",
-    //           alignment: "center",
-    //           headline: loremIpsum({ count: 2 }),
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       useFullWidth: "yes",
-    //       showPadding: "no",
-    //       content: [
-    //         new ThumbnailGalleryWidget({
-    //           showTags: "yes",
-    //           images: [
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 01",
-    //               image: unsplashGlovedTweed,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 02",
-    //               image: unsplashDeskMug,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 03",
-    //               image: unsplashYellowWatchTyping,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 04",
-    //               image: unsplashMouseWoodenDesk,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 05",
-    //               image: unsplashWatchTypeBookCoffee,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 06",
-    //               image: unsplashGoldWatchCufflinks,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 07",
-    //               image: unsplashWritingPapers,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 08",
-    //               image: unsplashGlassesOnMac,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 09",
-    //               image: unsplashBusyStreetDusk,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 10",
-    //               image: unsplashBwCoffeeKeyboardMouse,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 11",
-    //               image: unsplashBwSuitPolkadotsLaptop,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 12",
-    //               image: unsplashCactusMacPurple,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 13",
-    //               image: unsplashComputerBeCreative,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 14",
-    //               image: unsplashDeveloperSunrise,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 15",
-    //               image: unsplashDistractingWindowsTable,
-    //             }),
-    //             createThumbnailGalleryImageWidget({
-    //               title: "Project 16",
-    //               image: unsplashEmptyCafeWindows,
-    //             }),
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // });
+    // ABOUT
+    const ourWork = Page.create({
+      _path: "/about/our_work",
+      title: "Our Work",
+      body: [
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+              headline: "Our awarded work",
+            }),
+            new HeadlineWidget({
+              level: "h2",
+              style: "h4",
+              alignment: "center",
+              headline: loremIpsum({ count: 2 }),
+            }),
+          ],
+        }),
+        new SectionWidget({
+          useFullWidth: "yes",
+          showPadding: "no",
+          content: [
+            new ThumbnailGalleryWidget({
+              showTags: "yes",
+              images: [
+                createThumbnailGalleryImageWidget({
+                  title: "Project 01",
+                  image: unsplashGlovedTweed,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 02",
+                  image: unsplashDeskMug,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 03",
+                  image: unsplashYellowWatchTyping,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 04",
+                  image: unsplashMouseWoodenDesk,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 05",
+                  image: unsplashWatchTypeBookCoffee,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 06",
+                  image: unsplashGoldWatchCufflinks,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 07",
+                  image: unsplashWritingPapers,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 08",
+                  image: unsplashGlassesOnMac,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 09",
+                  image: unsplashBusyStreetDusk,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 10",
+                  image: unsplashBwCoffeeKeyboardMouse,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 11",
+                  image: unsplashBwSuitPolkadotsLaptop,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 12",
+                  image: unsplashCactusMacPurple,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 13",
+                  image: unsplashComputerBeCreative,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 14",
+                  image: unsplashDeveloperSunrise,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 15",
+                  image: unsplashDistractingWindowsTable,
+                }),
+                createThumbnailGalleryImageWidget({
+                  title: "Project 16",
+                  image: unsplashEmptyCafeWindows,
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
 
-    // const ourClients = Page.create({
-    //   _path: "/about/our_clients",
-    //   _permalink: "clients",
-    //   title: "Our Clients",
-    // });
-    // ourClients.update({
-    //   body: [
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: "Clients and references",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //         }),
-    //         new HeadlineWidget({
-    //           headline: loremIpsum({
-    //             count: 3,
-    //             sentenceLowerBound: 12,
-    //           }),
-    //           level: "h2",
-    //           style: "h4",
-    //           alignment: "center",
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       useFullWidth: "yes",
-    //       content: [
-    //         new CarouselWidget({
-    //           images: [
-    //             unsplashDualingLaptops,
-    //             unsplashClosingLaptop,
-    //             unsplashDeskLaptop,
-    //           ],
-    //           showDescription: "yes",
-    //           descriptionLogo: logo1,
-    //           description: carouselProjectDescription({ target: ourClients }),
-    //         }),
-    //         new CarouselWidget({
-    //           images: [
-    //             unsplashEurekaTower,
-    //             unsplashNightBuilding,
-    //             unsplashSkyscraperNight,
-    //           ],
-    //           showDescription: "yes",
-    //           descriptionLogo: logo2,
-    //           description: carouselProjectDescription({ target: ourClients }),
-    //         }),
-    //         new CarouselWidget({
-    //           images: [
-    //             unsplashLongWhiteTable,
-    //             unsplashSpeakerShelf,
-    //             unsplashSparseDesk,
-    //           ],
-    //           showDescription: "yes",
-    //           descriptionLogo: logo3,
-    //           description: carouselProjectDescription({ target: ourClients }),
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: "And many many more...",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           alignment: "stretch",
-    //           columns: [
-    //             [new ImageWidget({ image: logo1, alignment: "center" })],
-    //             [new ImageWidget({ image: logo2, alignment: "center" })],
-    //             [new ImageWidget({ image: logo3, alignment: "center" })],
-    //             [new ImageWidget({ image: logo4, alignment: "center" })],
-    //           ],
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           alignment: "stretch",
-    //           columns: [
-    //             [new ImageWidget({ image: logo5, alignment: "center" })],
-    //             [new ImageWidget({ image: logo6, alignment: "center" })],
-    //             [new ImageWidget({ image: logo7, alignment: "center" })],
-    //             [new ImageWidget({ image: logo8, alignment: "center" })],
-    //           ],
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           alignment: "stretch",
-    //           columns: [
-    //             [new ImageWidget({ image: logo8, alignment: "center" })],
-    //             [new ImageWidget({ image: logo4, alignment: "center" })],
-    //             [new ImageWidget({ image: logo5, alignment: "center" })],
-    //             [new ImageWidget({ image: logo2, alignment: "center" })],
-    //           ],
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           alignment: "stretch",
-    //           columns: [
-    //             [new ImageWidget({ image: logo1, alignment: "center" })],
-    //             [new ImageWidget({ image: logo8, alignment: "center" })],
-    //             [new ImageWidget({ image: logo2, alignment: "center" })],
-    //             [new ImageWidget({ image: logo3, alignment: "center" })],
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: "What our clients say",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       backgroundImage: unsplashWhiteMeetingRoom,
-    //       content: [
-    //         new TestimonialSliderWidget({
-    //           testimonials: [
-    //             new TestimonialWidget({
-    //               testimonial: loremIpsum({ units: "sentences", count: 2 }),
-    //               author: "Anna Boris, CEO @ United Company",
-    //               authorImage: unsplashFemalePortrait4Square,
-    //             }),
-    //             new TestimonialWidget({
-    //               testimonial: loremIpsum({ units: "sentences", count: 2 }),
-    //               author: "Derik Hoff, CTO @ Ultimate Business",
-    //               authorImage: unsplashMalePortrait2Square,
-    //             }),
-    //             new TestimonialWidget({
-    //               testimonial: loremIpsum({ units: "sentences", count: 2 }),
-    //               author: "Jane Doe, CEO @ Finances Inc.",
-    //               authorImage: unsplashFemalePortrait3Square,
-    //             }),
-    //             new TestimonialWidget({
-    //               testimonial: loremIpsum({ units: "sentences", count: 2 }),
-    //               author: "Christopher Stan, CEO @ InnoTech",
-    //               authorImage: unsplashMalePortrait3Square,
-    //             }),
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // });
+    const ourClients = Page.create({
+      _path: "/about/our_clients",
+      _permalink: "clients",
+      title: "Our Clients",
+    });
+    ourClients.update({
+      body: [
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              headline: "Clients and references",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+            }),
+            new HeadlineWidget({
+              headline: loremIpsum({
+                count: 3,
+                sentenceLowerBound: 12,
+              }),
+              level: "h2",
+              style: "h4",
+              alignment: "center",
+            }),
+          ],
+        }),
+        new SectionWidget({
+          useFullWidth: "yes",
+          content: [
+            new CarouselWidget({
+              images: [
+                unsplashDualingLaptops,
+                unsplashClosingLaptop,
+                unsplashDeskLaptop,
+              ],
+              showDescription: "yes",
+              descriptionLogo: logo1,
+              description: carouselProjectDescription({ target: ourClients }),
+            }),
+            new CarouselWidget({
+              images: [
+                unsplashEurekaTower,
+                unsplashNightBuilding,
+                unsplashSkyscraperNight,
+              ],
+              showDescription: "yes",
+              descriptionLogo: logo2,
+              description: carouselProjectDescription({ target: ourClients }),
+            }),
+            new CarouselWidget({
+              images: [
+                unsplashLongWhiteTable,
+                unsplashSpeakerShelf,
+                unsplashSparseDesk,
+              ],
+              showDescription: "yes",
+              descriptionLogo: logo3,
+              description: carouselProjectDescription({ target: ourClients }),
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              headline: "And many many more...",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+            }),
+            createEvenColumnContainerWidget({
+              alignment: "stretch",
+              columns: [
+                [new ImageWidget({ image: logo1, alignment: "center" })],
+                [new ImageWidget({ image: logo2, alignment: "center" })],
+                [new ImageWidget({ image: logo3, alignment: "center" })],
+                [new ImageWidget({ image: logo4, alignment: "center" })],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              alignment: "stretch",
+              columns: [
+                [new ImageWidget({ image: logo5, alignment: "center" })],
+                [new ImageWidget({ image: logo6, alignment: "center" })],
+                [new ImageWidget({ image: logo7, alignment: "center" })],
+                [new ImageWidget({ image: logo8, alignment: "center" })],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              alignment: "stretch",
+              columns: [
+                [new ImageWidget({ image: logo8, alignment: "center" })],
+                [new ImageWidget({ image: logo4, alignment: "center" })],
+                [new ImageWidget({ image: logo5, alignment: "center" })],
+                [new ImageWidget({ image: logo2, alignment: "center" })],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              alignment: "stretch",
+              columns: [
+                [new ImageWidget({ image: logo1, alignment: "center" })],
+                [new ImageWidget({ image: logo8, alignment: "center" })],
+                [new ImageWidget({ image: logo2, alignment: "center" })],
+                [new ImageWidget({ image: logo3, alignment: "center" })],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              headline: "What our clients say",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+            }),
+          ],
+        }),
+        new SectionWidget({
+          backgroundImage: unsplashWhiteMeetingRoom,
+          content: [
+            new TestimonialSliderWidget({
+              testimonials: [
+                new TestimonialWidget({
+                  testimonial: loremIpsum({ units: "sentences", count: 2 }),
+                  author: "Anna Boris, CEO @ United Company",
+                  authorImage: unsplashFemalePortrait4Square,
+                }),
+                new TestimonialWidget({
+                  testimonial: loremIpsum({ units: "sentences", count: 2 }),
+                  author: "Derik Hoff, CTO @ Ultimate Business",
+                  authorImage: unsplashMalePortrait2Square,
+                }),
+                new TestimonialWidget({
+                  testimonial: loremIpsum({ units: "sentences", count: 2 }),
+                  author: "Jane Doe, CEO @ Finances Inc.",
+                  authorImage: unsplashFemalePortrait3Square,
+                }),
+                new TestimonialWidget({
+                  testimonial: loremIpsum({ units: "sentences", count: 2 }),
+                  author: "Christopher Stan, CEO @ InnoTech",
+                  authorImage: unsplashMalePortrait3Square,
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
 
-    // const about = Page.create({
-    //   _path: "/about",
-    //   _permalink: "about",
-    //   title: "About",
-    //   childOrder: [ourWork, ourClients, jobs, contact, events],
-    //   navigationHeight: "medium-height",
-    //   navigationBackgroundImage: unsplashDimLaptopStand,
-    //   body: [
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           headline: "Who we are",
-    //           level: "h1",
-    //           style: "h2",
-    //         }),
-    //         new HeadlineWidget({
-    //           level: "h2",
-    //           style: "h4",
-    //           headline: loremIpsum({ count: 3 }),
-    //         }),
-    //         new TextWidget({
-    //           text: loremIpsum({
-    //             units: "paragraphs",
-    //             format: "html",
-    //             count: 4,
-    //             paragraphLowerBound: 4,
-    //             paragraphUpperBound: 10,
-    //           }),
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       backgroundImage: unsplashNeonTrue,
-    //       content: [
-    //         createEvenColumnContainerWidget({
-    //           columns: [
-    //             // col 1
-    //             [
-    //               new FactWidget({
-    //                 value: "134",
-    //                 key: loremIpsum({ units: "words", count: 3 }),
-    //               }),
-    //             ],
-    //             // col 2
-    //             [
-    //               new FactWidget({
-    //                 value: "43",
-    //                 key: loremIpsum({ units: "words", count: 3 }),
-    //               }),
-    //             ],
-    //             // col 3
-    //             [
-    //               new FactWidget({
-    //                 value: "13",
-    //                 key: loremIpsum({ units: "words", count: 3 }),
-    //               }),
-    //             ],
-    //             // col 4
-    //             [
-    //               new FactWidget({
-    //                 value: "65",
-    //                 key: loremIpsum({ units: "words", count: 3 }),
-    //               }),
-    //             ],
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //           headline: "Meet our awarded team",
-    //         }),
-    //         new HeadlineWidget({
-    //           level: "h2",
-    //           style: "h4",
-    //           alignment: "center",
-    //           headline: loremIpsum({ count: 2 }),
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           columns: [
-    //             // col 1
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashFemalePortrait3Square,
-    //                     alternativeText: "Jane Morgan",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Jane Morgan",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Product Research Director",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //             // col 2
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashMalePortrait3Square,
-    //                     alternativeText: "Peter Doe",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Peter Doe",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Internal Applications Supervisor",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //             // col 3
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashFemalePortrait4Square,
-    //                     alternativeText: "Susan Summer",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Susan Summer",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Regional Agent",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //           ],
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           columns: [
-    //             // col 1
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashMalePortrait2Square,
-    //                     alternativeText: "Clarius Ceasar",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Clarius Ceasar",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Dynamic Operations Representative",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //             // col 2
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashFemalePortrait5Square,
-    //                     alternativeText: "Anna Corn",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Anna Corn",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Regional Brand Producer",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //             // col 3
-    //             [
-    //               new BoxWidget({
-    //                 body: [
-    //                   new ImageWidget({
-    //                     image: unsplashMalePortrait1Square,
-    //                     alternativeText: "Jason John",
-    //                     animation: "fadeInUp",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     headline: "Jason John",
-    //                     style: "h3",
-    //                     alignment: "center",
-    //                   }),
-    //                   new HeadlineWidget({
-    //                     alignment: "center",
-    //                     headline: "Dynamic Paradigm Director",
-    //                     style: "h5",
-    //                     showDividingLine: "yes",
-    //                     showMargin: "no",
-    //                   }),
-    //                   createRandomIconContainerWidget(),
-    //                 ],
-    //               }),
-    //             ],
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       backgroundImage: unsplashSilhouetteDancing,
-    //       content: [
-    //         new HeadlineWidget({
-    //           headline: "We are hiring",
-    //           style: "h1",
-    //           alignment: "center",
-    //         }),
-    //         new TextWidget({
-    //           alignment: "center",
-    //           text: loremIpsum({
-    //             units: "paragraphs",
-    //             format: "html",
-    //             count: 1,
-    //             paragraphLowerBound: 4,
-    //             paragraphUpperBound: 5,
-    //           }),
-    //         }),
-    //         new ButtonWidget({
-    //           alignment: "center",
-    //           target: new Scrivito.Link({
-    //             title: "See full job list",
-    //             obj: jobs,
-    //           }),
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // });
+    const about = Page.create({
+      _path: "/about",
+      _permalink: "about",
+      title: "About",
+      childOrder: [ourWork, ourClients, jobs, contact, events],
+      navigationHeight: "medium-height",
+      navigationBackgroundImage: unsplashDimLaptopStand,
+      body: [
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              headline: "Who we are",
+              level: "h1",
+              style: "h2",
+            }),
+            new HeadlineWidget({
+              level: "h2",
+              style: "h4",
+              headline: loremIpsum({ count: 3 }),
+            }),
+            new TextWidget({
+              text: loremIpsum({
+                units: "paragraphs",
+                format: "html",
+                count: 4,
+                paragraphLowerBound: 4,
+                paragraphUpperBound: 10,
+              }),
+            }),
+          ],
+        }),
+        new SectionWidget({
+          backgroundImage: unsplashNeonTrue,
+          content: [
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new FactWidget({
+                    value: "134",
+                    key: loremIpsum({ units: "words", count: 3 }),
+                  }),
+                ],
+                // col 2
+                [
+                  new FactWidget({
+                    value: "43",
+                    key: loremIpsum({ units: "words", count: 3 }),
+                  }),
+                ],
+                // col 3
+                [
+                  new FactWidget({
+                    value: "13",
+                    key: loremIpsum({ units: "words", count: 3 }),
+                  }),
+                ],
+                // col 4
+                [
+                  new FactWidget({
+                    value: "65",
+                    key: loremIpsum({ units: "words", count: 3 }),
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+              headline: "Meet our awarded team",
+            }),
+            new HeadlineWidget({
+              level: "h2",
+              style: "h4",
+              alignment: "center",
+              headline: loremIpsum({ count: 2 }),
+            }),
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait3Square,
+                        alternativeText: "Jane Morgan",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Jane Morgan",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Product Research Director",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 2
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait3Square,
+                        alternativeText: "Peter Doe",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Peter Doe",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Internal Applications Supervisor",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 3
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait4Square,
+                        alternativeText: "Susan Summer",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Susan Summer",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Regional Agent",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait2Square,
+                        alternativeText: "Clarius Ceasar",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Clarius Ceasar",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Operations Representative",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 2
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait5Square,
+                        alternativeText: "Anna Corn",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Anna Corn",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Regional Brand Producer",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 3
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait1Square,
+                        alternativeText: "Jason John",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Jason John",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Paradigm Director",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          backgroundImage: unsplashSilhouetteDancing,
+          content: [
+            new HeadlineWidget({
+              headline: "We are hiring",
+              style: "h1",
+              alignment: "center",
+            }),
+            new TextWidget({
+              alignment: "center",
+              text: loremIpsum({
+                units: "paragraphs",
+                format: "html",
+                count: 1,
+                paragraphLowerBound: 4,
+                paragraphUpperBound: 5,
+              }),
+            }),
+            new ButtonWidget({
+              alignment: "center",
+              target: new Scrivito.Link({
+                title: "See full job list",
+                obj: jobs,
+              }),
+            }),
+          ],
+        }),
+      ],
+    });
 
     // // PRODUCT
     // const product = Page.create({
