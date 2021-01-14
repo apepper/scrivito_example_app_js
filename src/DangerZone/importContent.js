@@ -2014,85 +2014,85 @@ function importContent() {
                 ],
               ],
             }),
-            // createEvenColumnContainerWidget({
-            //   columns: [
-            //     // col 1
-            //     [
-            //       new BoxWidget({
-            //         body: [
-            //           new ImageWidget({
-            //             image: unsplashMalePortrait2Square,
-            //             alternativeText: "Clarius Ceasar",
-            //             animation: "fadeInUp",
-            //           }),
-            //           new HeadlineWidget({
-            //             headline: "Clarius Ceasar",
-            //             style: "h3",
-            //             alignment: "center",
-            //           }),
-            //           new HeadlineWidget({
-            //             alignment: "center",
-            //             headline: "Dynamic Operations Representative",
-            //             style: "h5",
-            //             showDividingLine: "yes",
-            //             showMargin: "no",
-            //           }),
-            //           createRandomIconContainerWidget(),
-            //         ],
-            //       }),
-            //     ],
-            //     // col 2
-            //     [
-            //       new BoxWidget({
-            //         body: [
-            //           new ImageWidget({
-            //             image: unsplashFemalePortrait5Square,
-            //             alternativeText: "Anna Corn",
-            //             animation: "fadeInUp",
-            //           }),
-            //           new HeadlineWidget({
-            //             headline: "Anna Corn",
-            //             style: "h3",
-            //             alignment: "center",
-            //           }),
-            //           new HeadlineWidget({
-            //             alignment: "center",
-            //             headline: "Regional Brand Producer",
-            //             style: "h5",
-            //             showDividingLine: "yes",
-            //             showMargin: "no",
-            //           }),
-            //           createRandomIconContainerWidget(),
-            //         ],
-            //       }),
-            //     ],
-            //     // col 3
-            //     [
-            //       new BoxWidget({
-            //         body: [
-            //           new ImageWidget({
-            //             image: unsplashMalePortrait1Square,
-            //             alternativeText: "Jason John",
-            //             animation: "fadeInUp",
-            //           }),
-            //           new HeadlineWidget({
-            //             headline: "Jason John",
-            //             style: "h3",
-            //             alignment: "center",
-            //           }),
-            //           new HeadlineWidget({
-            //             alignment: "center",
-            //             headline: "Dynamic Paradigm Director",
-            //             style: "h5",
-            //             showDividingLine: "yes",
-            //             showMargin: "no",
-            //           }),
-            //           createRandomIconContainerWidget(),
-            //         ],
-            //       }),
-            //     ],
-            //   ],
-            // }),
+            createEvenColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait2Square,
+                        alternativeText: "Clarius Ceasar",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Clarius Ceasar",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Operations Representative",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 2
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashFemalePortrait5Square,
+                        alternativeText: "Anna Corn",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Anna Corn",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Regional Brand Producer",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+                // col 3
+                [
+                  new BoxWidget({
+                    body: [
+                      new ImageWidget({
+                        image: unsplashMalePortrait1Square,
+                        alternativeText: "Jason John",
+                        animation: "fadeInUp",
+                      }),
+                      new HeadlineWidget({
+                        headline: "Jason John",
+                        style: "h3",
+                        alignment: "center",
+                      }),
+                      new HeadlineWidget({
+                        alignment: "center",
+                        headline: "Dynamic Paradigm Director",
+                        style: "h5",
+                        showDividingLine: "yes",
+                        showMargin: "no",
+                      }),
+                      createRandomIconContainerWidget(),
+                    ],
+                  }),
+                ],
+              ],
+            }),
           ],
         }),
         // new SectionWidget({
