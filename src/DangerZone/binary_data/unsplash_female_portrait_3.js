@@ -1,0 +1,6 @@
+/* eslint linebreak-style: 0 */
+
+export default {
+  filename: 'michael-dam-258165.jpg',
+  url: 'https://scrivito-example-binary-content.s3-eu-west-1.amazonaws.com/images/unsplash-4k/michael-dam-258165.jpg',
+};
