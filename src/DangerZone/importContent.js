@@ -1037,167 +1037,167 @@ function importContent() {
       // Content is at the bottom of the file
     });
 
-    // // Path less Objs
-    // const jobs = Page.create({
-    //   _path: "/about/jobs",
-    //   _permalink: "jobs",
-    //   title: "Jobs",
-    //   body: [
-    //     new SectionWidget({
-    //       backgroundImage: unsplashWoodTable,
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           style: "h1",
-    //           headline: "Join our awarded team",
-    //         }),
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           level: "h2",
-    //           style: "h4",
-    //           headline: loremIpsum({ count: 3 }),
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: "We are hiring the following positions",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //         }),
-    //         new JobOverviewWidget({}),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: "Why it's great to work with us",
-    //           level: "h1",
-    //           style: "h2",
-    //           showDividingLine: "yes",
-    //         }),
-    //         new HeadlineWidget({
-    //           alignment: "center",
-    //           headline: loremIpsum({ count: 2 }),
-    //           level: "h2",
-    //           style: "h4",
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       useFullWidth: "yes",
-    //       content: [
-    //         new CarouselWidget({
-    //           images: [
-    //             unsplashWhiteMeetingRoom,
-    //             unsplashDoMoreDesk,
-    //             unsplashTwoLaptopsPencil,
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         createEvenColumnContainerWidget({
-    //           columns: [
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-star",
-    //                 "Great environment"
-    //               ),
-    //             ],
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-users",
-    //                 "Awarded team"
-    //               ),
-    //             ],
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-money",
-    //                 "Fair payment"
-    //               ),
-    //             ],
-    //           ],
-    //         }),
-    //         createEvenColumnContainerWidget({
-    //           columns: [
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-child",
-    //                 "Daily free meal"
-    //               ),
-    //             ],
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-laptop",
-    //                 "The best equipment"
-    //               ),
-    //             ],
-    //             [
-    //               createBoxWidgetWithIconHeadlineAndText(
-    //                 "fa-heartbeat",
-    //                 "Sport activity"
-    //               ),
-    //             ],
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // });
-    // const contact = Page.create({
-    //   _path: "/about/contact",
-    //   _permalink: "contact",
-    //   title: "Contact",
-    //   body: [
-    //     new SectionWidget({
-    //       showPadding: "no",
-    //       useFullWidth: "yes",
-    //       content: [
-    //         new GoogleMapsWidget({
-    //           address: "TV tower, Berlin, Germany",
-    //           zoom: "15",
-    //           showWidgets: "yes",
-    //           content: [
-    //             createAddressWidget({ showBorderBottom: true }),
-    //             createRandomIconContainerWidget(),
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //     new SectionWidget({
-    //       content: [
-    //         new BoxWidget({
-    //           useOffset: "yes",
-    //           body: [
-    //             new HeadlineWidget({
-    //               alignment: "center",
-    //               headline: "Get in touch with us",
-    //               level: "h1",
-    //               style: "h2",
-    //               showDividingLine: "yes",
-    //             }),
-    //             new HeadlineWidget({
-    //               alignment: "center",
-    //               level: "h2",
-    //               style: "h4",
-    //               headline: loremIpsum({ count: 3 }),
-    //             }),
-    //             new ContactFormWidget({
-    //               agreementText: loremIpsum({ count: 3 }),
-    //               buttonText: "Send message now",
-    //             }),
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // });
+    // Path less Objs
+    const jobs = Page.create({
+      _path: "/about/jobs",
+      _permalink: "jobs",
+      title: "Jobs",
+      body: [
+        new SectionWidget({
+          backgroundImage: unsplashWoodTable,
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              style: "h1",
+              headline: "Join our awarded team",
+            }),
+            new HeadlineWidget({
+              alignment: "center",
+              level: "h2",
+              style: "h4",
+              headline: loremIpsum({ count: 3 }),
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              headline: "We are hiring the following positions",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+            }),
+            new JobOverviewWidget({}),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new HeadlineWidget({
+              alignment: "center",
+              headline: "Why it's great to work with us",
+              level: "h1",
+              style: "h2",
+              showDividingLine: "yes",
+            }),
+            new HeadlineWidget({
+              alignment: "center",
+              headline: loremIpsum({ count: 2 }),
+              level: "h2",
+              style: "h4",
+            }),
+          ],
+        }),
+        new SectionWidget({
+          useFullWidth: "yes",
+          content: [
+            new CarouselWidget({
+              images: [
+                unsplashWhiteMeetingRoom,
+                unsplashDoMoreDesk,
+                unsplashTwoLaptopsPencil,
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            createEvenColumnContainerWidget({
+              columns: [
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-star",
+                    "Great environment"
+                  ),
+                ],
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-users",
+                    "Awarded team"
+                  ),
+                ],
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-money",
+                    "Fair payment"
+                  ),
+                ],
+              ],
+            }),
+            createEvenColumnContainerWidget({
+              columns: [
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-child",
+                    "Daily free meal"
+                  ),
+                ],
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-laptop",
+                    "The best equipment"
+                  ),
+                ],
+                [
+                  createBoxWidgetWithIconHeadlineAndText(
+                    "fa-heartbeat",
+                    "Sport activity"
+                  ),
+                ],
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
+    const contact = Page.create({
+      _path: "/about/contact",
+      _permalink: "contact",
+      title: "Contact",
+      body: [
+        new SectionWidget({
+          showPadding: "no",
+          useFullWidth: "yes",
+          content: [
+            new GoogleMapsWidget({
+              address: "TV tower, Berlin, Germany",
+              zoom: "15",
+              showWidgets: "yes",
+              content: [
+                createAddressWidget({ showBorderBottom: true }),
+                createRandomIconContainerWidget(),
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          content: [
+            new BoxWidget({
+              useOffset: "yes",
+              body: [
+                new HeadlineWidget({
+                  alignment: "center",
+                  headline: "Get in touch with us",
+                  level: "h1",
+                  style: "h2",
+                  showDividingLine: "yes",
+                }),
+                new HeadlineWidget({
+                  alignment: "center",
+                  level: "h2",
+                  style: "h4",
+                  headline: loremIpsum({ count: 3 }),
+                }),
+                new ContactFormWidget({
+                  agreementText: loremIpsum({ count: 3 }),
+                  buttonText: "Send message now",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
     // const imprint = Page.create({
     //   title: "Imprint",
     //   _permalink: "imprint",
