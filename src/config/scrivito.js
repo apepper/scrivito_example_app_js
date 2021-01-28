@@ -1,10 +1,26 @@
 import * as Scrivito from "scrivito";
 
 export function configureScrivito(options) {
+  const baseUrls = {
+    default: "http://localhost:8080/en",
+
+    german: "http://localhost:8080/de",
+    polish: "http://localhost:8080/pl",
+  };
+
   const config = {
     adoptUi: true,
     autoConvertAttributes: true,
+    baseUrlForSite: (siteId) => baseUrls[siteId],
     optimizedWidgetLoading: true,
+    siteForUrl: (url) =>
+      Object.keys(baseUrls)
+        .map((siteId) =>
+          url.startsWith(baseUrls[siteId])
+            ? { siteId, baseUrl: baseUrls[siteId] }
+            : undefined
+        )
+        .filter((result) => result)[0],
     strictSearchOperators: true,
     contentTagsForEmptyAttributes: false,
     tenant: process.env.SCRIVITO_TENANT,
