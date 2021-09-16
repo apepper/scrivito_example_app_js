@@ -3,7 +3,11 @@ import * as Scrivito from "scrivito";
 import getMetadata from "../../utils/getMetadata";
 
 Scrivito.registerComponent("SocialCardsTab", ({ obj }) => (
-  <div className="">
+  <div
+    className={
+      "scrivito_ui_context_theme_dark" /* or "scrivito_ui_context_theme_light" */
+    }
+  >
     <div className="scrivito_detail_content">
       <div className="row">
         <div className="col-sm-6">
