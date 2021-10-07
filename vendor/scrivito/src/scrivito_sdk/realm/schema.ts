@@ -1,7 +1,7 @@
 import { BasicField } from 'scrivito_sdk/models';
 import {
   AttributeTypeWithMandatoryOptions,
-  NormalizedTypeInfo,
+  TypeInfo,
 } from 'scrivito_sdk/models/type_info';
 import {
   AppClass,
@@ -12,8 +12,10 @@ import {
   WidgetClass,
 } from 'scrivito_sdk/realm';
 
-export interface ConvenienceObjClassDefinition {
-  attributes?: CustomAttributesDefinition;
+export interface ConvenienceObjClassDefinition<
+  Attributes extends ConvenienceAttributesDefinition = ConvenienceAttributesDefinition
+> {
+  attributes?: Attributes;
   extend?: ObjClass;
   extractTextAttributes?: string[];
   name?: string;
@@ -23,8 +25,10 @@ export interface ConvenienceObjClassDefinition {
   validAsRoot?: boolean;
 }
 
-export interface ConvenienceWidgetClassDefinition {
-  attributes?: CustomAttributesDefinition;
+export interface ConvenienceWidgetClassDefinition<
+  Attributes extends ConvenienceAttributesDefinition = ConvenienceAttributesDefinition
+> {
+  attributes?: Attributes;
   extend?: WidgetClass;
   extractTextAttributes?: string[];
   name?: string;
@@ -32,9 +36,23 @@ export interface ConvenienceWidgetClassDefinition {
   onlyInside?: string[] | string;
 }
 
-interface CustomAttributesDefinition {
-  [attributeName: string]: CustomAttributeDefinition;
+export interface ConvenienceAttributesDefinition {
+  [attributeName: string]: ConvenienceAttributeDefinition;
 }
+
+export type NormalizedAttributesDefinition<
+  AttrsDef extends ConvenienceAttributesDefinition
+> = {
+  [AttrName in keyof AttrsDef]: NormalizedAttributeDefinition<
+    AttrsDef[AttrName]
+  >;
+};
+
+type NormalizedAttributeDefinition<
+  K extends ConvenienceAttributeDefinition
+> = K extends AttributeTypesWithoutOptions | AttributeTypesWithOptionalOptions
+  ? [K]
+  : K;
 
 // All attributes which only their type can be defined (no options).
 type AttributeTypesWithoutOptions = Exclude<
@@ -49,7 +67,7 @@ type AttributeTypesWithOptionalOptions = Exclude<
   AttributeTypeWithMandatoryOptions | AttributeTypesWithoutOptions
 >;
 
-type CustomAttributeDefinition =
+type ConvenienceAttributeDefinition =
   | AttributeTypesWithoutOptions
   | AttributeTypesWithOptionalOptions
   | {
@@ -68,7 +86,7 @@ type AttributeDefinitionOptionsMapping = {
 };
 
 export interface AttributesDefinition {
-  [key: string]: NormalizedTypeInfo<AttributeType>;
+  [key: string]: TypeInfo<AttributeType>;
 }
 
 interface ObjClassDefinition {
@@ -117,7 +135,7 @@ export class Schema {
     return new BasicField<T>(
       model._scrivitoPrivateContent,
       attributeName,
-      typeInfo as NormalizedTypeInfo<T>
+      typeInfo as TypeInfo<T>
     );
   }
 
@@ -200,7 +218,7 @@ export class Schema {
     return this.definition.onlyAsRoot;
   }
 
-  attribute(name: string): NormalizedTypeInfo<AttributeType> | undefined {
+  attribute(name: string): TypeInfo<AttributeType> | undefined {
     return this.attributes[name];
   }
 
@@ -217,8 +235,8 @@ export function isAppClass(object: object): object is AppClass {
 }
 
 function normalizeAttributeDefinition(
-  attrDefinition: CustomAttributeDefinition
-): NormalizedTypeInfo<AttributeType> {
+  attrDefinition: ConvenienceAttributeDefinition
+): TypeInfo<AttributeType> {
   if (typeof attrDefinition === 'string') {
     return [attrDefinition];
   }

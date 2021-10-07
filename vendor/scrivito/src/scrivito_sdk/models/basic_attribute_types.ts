@@ -3,7 +3,7 @@ import { BasicObj } from 'scrivito_sdk/models/basic_obj';
 import { BasicWidget } from 'scrivito_sdk/models/basic_widget';
 import { Binary } from 'scrivito_sdk/models/binary';
 import { ObjUnavailable } from 'scrivito_sdk/models/obj_unavailable';
-import { TypeInfo } from 'scrivito_sdk/models/type_info';
+import { ConvenienceTypeInfo } from 'scrivito_sdk/models/type_info';
 
 export interface BasicAttributeMapping {
   binary: Binary | null;
@@ -97,5 +97,8 @@ interface BasicCustomAttributeDict {
 }
 
 type AnyCustomAttributeValueAndTypeForUpdate = {
-  [Type in AttributeType]: [BasicAttributeValue<Type>, TypeInfo<Type>];
+  [Type in AttributeType]: [
+    BasicAttributeValue<Type>,
+    ConvenienceTypeInfo<Type>
+  ];
 }[AttributeType];

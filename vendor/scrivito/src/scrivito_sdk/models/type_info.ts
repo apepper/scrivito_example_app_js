@@ -2,7 +2,7 @@ import { AttributeType } from 'scrivito_sdk/models/basic_attribute_types';
 
 export type AttributeTypeWithMandatoryOptions = 'enum' | 'multienum';
 
-interface NormalizedTypeOptionsMapping {
+interface TypeOptionsMapping {
   enum: { values: string[] };
   multienum: { values: string[] };
   reference: { validClasses: string[] };
@@ -10,18 +10,16 @@ interface NormalizedTypeOptionsMapping {
   widgetlist: { validClasses: string[] };
 }
 
-export type NormalizedTypeInfo<
+export type TypeInfo<
   Type extends AttributeType
-> = Type extends keyof NormalizedTypeOptionsMapping
-  ? TypeInfoWithOptions<Type>
-  : [Type];
+> = Type extends keyof TypeOptionsMapping ? TypeInfoWithOptions<Type> : [Type];
 
 type TypeInfoWithOptions<
-  Type extends keyof NormalizedTypeOptionsMapping
+  Type extends keyof TypeOptionsMapping
 > = Type extends AttributeTypeWithMandatoryOptions
-  ? [Type, NormalizedTypeOptionsMapping[Type]]
-  : [Type, NormalizedTypeOptionsMapping[Type]] | [Type];
+  ? [Type, TypeOptionsMapping[Type]]
+  : [Type, TypeOptionsMapping[Type]] | [Type];
 
-export type TypeInfo<Type extends AttributeType> =
-  | NormalizedTypeInfo<Type>
+export type ConvenienceTypeInfo<Type extends AttributeType> =
+  | TypeInfo<Type>
   | Exclude<Type, AttributeTypeWithMandatoryOptions>;

@@ -1,12 +1,12 @@
 import { ArgumentError, InternalError } from 'scrivito_sdk/common';
-import { AttributeType, BasicWidget } from 'scrivito_sdk/models';
+import { BasicWidget } from 'scrivito_sdk/models';
 import { assertValidAttributeName } from 'scrivito_sdk/realm/assert_valid_attribute_name';
 
 import { AttrDict } from 'scrivito_sdk/realm/attribute_types';
 import { initialAttributesFor } from 'scrivito_sdk/realm/initial_attributes_for';
 import { Obj } from 'scrivito_sdk/realm/obj';
 import { objClassNameFor } from 'scrivito_sdk/realm/registry';
-import { Schema } from 'scrivito_sdk/realm/schema';
+import { AttributesDefinition, Schema } from 'scrivito_sdk/realm/schema';
 import {
   AttributeValue,
   unwrapAppAttributes,
@@ -14,22 +14,38 @@ import {
 } from 'scrivito_sdk/realm/wrap_in_app_class';
 import { readAppAttribute, updateAppAttributes } from './app_model_accessor';
 
-export interface WidgetClass {
+interface WidgetSystemAttributes {
+  _id: string;
+}
+
+type WidgetAttributes<
+  AttrsDef extends AttributesDefinition
+> = WidgetSystemAttributes & AttrDict<AttrsDef>;
+type WidgetUpdateAttributes<AttrsDef extends AttributesDefinition> = Omit<
+  WidgetAttributes<AttrsDef>,
+  '_id'
+>;
+
+export interface WidgetClass<
+  AttrsDef extends AttributesDefinition = AttributesDefinition
+> {
   /** @internal */
   readonly _scrivitoPrivateSchema?: Schema;
 
-  new (attributes?: AttrDict): Widget;
+  new (attributes?: Partial<WidgetAttributes<AttrsDef>>): Widget<AttrsDef>;
 }
 
 /** @public */
-export class Widget {
+export class Widget<
+  AttrsDef extends AttributesDefinition = AttributesDefinition
+> {
   /** @internal */
   readonly _scrivitoPrivateContent: BasicWidget;
 
   /** @internal */
   static readonly _scrivitoPrivateSchema?: Schema;
 
-  constructor(attributes: AttrDict = {}) {
+  constructor(attributes: Partial<WidgetAttributes<AttrsDef>> = {}) {
     const appClassName = objClassNameFor(this.constructor as WidgetClass);
 
     if (!appClassName) {
@@ -74,13 +90,15 @@ export class Widget {
     return this._scrivitoPrivateContent.objClass();
   }
 
-  get<T extends AttributeType>(attributeName: string): AttributeValue<T> {
+  get<AttributeName extends string & keyof AttrsDef>(
+    attributeName: AttributeName
+  ): AttributeValue<AttrsDef[AttributeName][0]> {
     assertValidAttributeName(attributeName);
 
     return readAppAttribute(this, attributeName)!;
   }
 
-  update(attributes: Partial<AttrDict>): void {
+  update(attributes: Partial<WidgetUpdateAttributes<AttrsDef>>): void {
     updateAppAttributes(this, attributes);
   }
 
@@ -90,10 +108,10 @@ export class Widget {
     return wrapInAppClass(basicObj);
   }
 
-  copy(): Widget {
+  copy(): Widget<AttrsDef> {
     const basicWidget = this._scrivitoPrivateContent.copy();
 
-    return wrapInAppClass(basicWidget);
+    return wrapInAppClass(basicWidget) as Widget<AttrsDef>;
   }
 
   destroy(): void {

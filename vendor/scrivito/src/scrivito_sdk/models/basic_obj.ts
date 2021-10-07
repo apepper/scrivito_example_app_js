@@ -71,7 +71,7 @@ import { MetadataCollection } from 'scrivito_sdk/models/metadata_collection';
 import { objSpaceScope } from 'scrivito_sdk/models/obj_scope';
 import { objSpaceScopeExcludingDeleted } from 'scrivito_sdk/models/obj_space_scope_excluding_deleted';
 import { restrictToSite } from 'scrivito_sdk/models/restrict_to_site';
-import { TypeInfo } from 'scrivito_sdk/models/type_info';
+import { ConvenienceTypeInfo } from 'scrivito_sdk/models/type_info';
 import { withBatchedUpdates } from 'scrivito_sdk/state';
 
 interface WidgetInsertionBefore {
@@ -264,7 +264,7 @@ export class BasicObj implements ContentValueProvider {
 
   get<Type extends AttributeType>(
     attributeName: string,
-    typeInfo: TypeInfo<Type>
+    typeInfo: ConvenienceTypeInfo<Type>
   ): BasicAttributeValue<Type> {
     return getContentValue(this, attributeName, typeInfo);
   }

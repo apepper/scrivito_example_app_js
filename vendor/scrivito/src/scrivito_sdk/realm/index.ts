@@ -7,7 +7,10 @@ export { Link } from 'scrivito_sdk/realm/link';
 export type { LinkAttributes } from 'scrivito_sdk/realm/link';
 export { setCurrentSiteIdHandler } from 'scrivito_sdk/realm/current_site_id';
 export { enableStrictSearchOperators } from 'scrivito_sdk/realm/strict_search_operators';
-export type { AttributeValue } from 'scrivito_sdk/realm/attribute_types';
+export type {
+  AttrDict,
+  AttributeValue,
+} from 'scrivito_sdk/realm/attribute_types';
 export type { AttributeType } from 'scrivito_sdk/models';
 
 export {

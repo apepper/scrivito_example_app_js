@@ -55,7 +55,7 @@ type BasicValueToAttributeValue<T> = T extends BasicObj[]
   ? Binary
   : T;
 
-interface AttributeMapping {
+export interface AttributeMapping {
   binary: Binary | null;
   boolean: boolean;
   date: Date | null;

@@ -15,7 +15,7 @@ import {
   restrictToObjClass,
 } from 'scrivito_sdk/models';
 
-import { Obj, ObjClass } from 'scrivito_sdk/realm';
+import { AttributesDefinition, Obj, ObjClass } from 'scrivito_sdk/realm';
 import { initialAttributesFor } from 'scrivito_sdk/realm/initial_attributes_for';
 import { ObjAttributes } from 'scrivito_sdk/realm/obj';
 import { ObjSearch, SearchValue } from 'scrivito_sdk/realm/obj_search';
@@ -27,8 +27,11 @@ import {
 import { objClassNameFor } from './registry';
 
 export interface SiteContext {
-  create(params?: ObjAttributes): Obj;
-  createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj>;
+  create(params?: Partial<ObjAttributes<AttributesDefinition>>): Obj;
+  createFromFile(
+    file: File,
+    attributes?: Partial<ObjAttributes<AttributesDefinition>>
+  ): Promise<Obj>;
   get(objId: string): Obj | null;
   getIncludingDeleted(objId: string): Obj | null;
   getByPath(path: string): Obj | null;
@@ -99,7 +102,7 @@ export class BasicSiteContext implements SiteContext {
     return this.getSearch().andFullTextOf(attribute, operator, value, boost);
   }
 
-  create(attributes: ObjAttributes = {}): Obj {
+  create(attributes: Partial<ObjAttributes<AttributesDefinition>> = {}): Obj {
     const objClassName = this.objClassNameForCreate();
 
     assertValidCreateAttributes(attributes);
@@ -118,7 +121,10 @@ export class BasicSiteContext implements SiteContext {
     return wrapInAppClass(basicObj);
   }
 
-  createFromFile(file: File, attributes: ObjAttributes = {}): Promise<Obj> {
+  createFromFile(
+    file: File,
+    attributes: Partial<ObjAttributes<AttributesDefinition>> = {}
+  ): Promise<Obj> {
     const objClassName = this.objClassNameForCreate();
 
     assertValidFile(file);

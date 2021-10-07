@@ -1,7 +1,6 @@
 import { checkArgumentsFor, tcomb as t } from 'scrivito_sdk/common';
 import { Modification } from 'scrivito_sdk/data';
 import {
-  AttributeType,
   BasicObj,
   FieldBoost,
   FullTextSearchOperator,
@@ -18,7 +17,7 @@ import {
   versionOnSite,
   versionsOnAllSites,
 } from 'scrivito_sdk/models';
-import { ObjSearch, Widget } from 'scrivito_sdk/realm';
+import { AttributesDefinition, ObjSearch, Widget } from 'scrivito_sdk/realm';
 import {
   readAppAttribute,
   updateAppAttributes,
@@ -42,29 +41,52 @@ import {
   wrapInAppClass,
 } from 'scrivito_sdk/realm/wrap_in_app_class';
 
-export type ObjAttributes = AttrDict;
+interface ObjSystemAttributes {
+  _contentId: string;
+  _id: string;
+  _language: string | null;
+  _path: string | null;
+  _permalink: string | null;
+  _siteId: string | null;
+
+  /** @internal */
+  _restriction: [string] | null;
+
+  /** @internal */
+  _modification: string | null;
+}
+
+export type ObjAttributes<
+  AttrsDef extends AttributesDefinition
+> = ObjSystemAttributes & AttrDict<AttrsDef>;
+type ObjUpdateAttributes<AttrsDef extends AttributesDefinition> = Omit<
+  ObjAttributes<AttrsDef>,
+  '_id'
+>;
 
 type ReferenceMapping = (refId: string) => string | undefined;
 
-export interface ObjClass {
+export interface ObjClass<
+  AttrsDef extends AttributesDefinition = AttributesDefinition
+> {
   /** @internal */
   readonly _scrivitoPrivateSchema?: Schema;
 
   /** bogus constructor, to let TypeScript understand that this is a class. */
-  new (dontUseThis: never): Obj;
+  new (dontUseThis: never): Obj<AttrsDef>;
 
-  get(id: string): Obj | null;
+  get(id: string): Obj<AttrsDef> | null;
 
   /** @internal */
-  getIncludingDeleted(id: string): Obj | null;
+  getIncludingDeleted(id: string): Obj<AttrsDef> | null;
 
-  getByPath(path: string): Obj | null;
+  getByPath(path: string): Obj<AttrsDef> | null;
 
-  getByPermalink(permalink: string): Obj | null;
+  getByPermalink(permalink: string): Obj<AttrsDef> | null;
 
   all(): ObjSearch;
 
-  root(): Obj | null;
+  root(): Obj<AttrsDef> | null;
 
   where(
     attribute: SearchField,
@@ -80,9 +102,12 @@ export interface ObjClass {
     boost?: FieldBoost
   ): ObjSearch;
 
-  create(attributes?: ObjAttributes): Obj;
+  create(attributes?: Partial<ObjAttributes<AttrsDef>>): Obj<AttrsDef>;
 
-  createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj>;
+  createFromFile(
+    file: File,
+    attributes?: Partial<ObjAttributes<AttrsDef>>
+  ): Promise<Obj<AttrsDef>>;
 
   onAllSites(): SiteContext;
 
@@ -113,7 +138,7 @@ function getBasicSiteContext(
 }
 
 /** @public */
-export class Obj {
+export class Obj<AttrsDef extends AttributesDefinition = AttributesDefinition> {
   /** @internal */
   readonly _scrivitoPrivateContent!: BasicObj;
 
@@ -178,11 +203,16 @@ export class Obj {
     );
   }
 
-  static create(attributes?: ObjAttributes): Obj {
+  static create(
+    attributes?: Partial<ObjAttributes<AttributesDefinition>>
+  ): Obj {
     return currentSiteContext(this).create(attributes);
   }
 
-  static createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj> {
+  static createFromFile(
+    file: File,
+    attributes?: Partial<ObjAttributes<AttributesDefinition>>
+  ): Promise<Obj> {
     return currentSiteContext(this).createFromFile(file, attributes);
   }
 
@@ -203,13 +233,15 @@ export class Obj {
     return this._scrivitoPrivateContent.objClass();
   }
 
-  get<T extends AttributeType>(attributeName: string): AttributeValue<T> {
+  get<AttributeName extends string & keyof AttrsDef>(
+    attributeName: AttributeName
+  ): AttributeValue<AttrsDef[AttributeName][0]> {
     assertValidAttributeName(attributeName);
 
     return readAppAttribute(this, attributeName)!;
   }
 
-  update(attributes: Partial<AttrDict>): void {
+  update(attributes: Partial<ObjUpdateAttributes<AttrsDef>>): void {
     updateAppAttributes(this, attributes);
   }
 
@@ -358,10 +390,10 @@ export class Obj {
     return wrapInAppClass(this._scrivitoPrivateContent.widgets());
   }
 
-  copy(): Promise<Obj> {
+  copy(): Promise<Obj<AttrsDef>> {
     return this._scrivitoPrivateContent
       .copyAsync({ _path: null })
-      .then((obj) => wrapInAppClass(obj));
+      .then((obj) => wrapInAppClass(obj) as Obj<AttrsDef>);
   }
 
   destroy(): void {

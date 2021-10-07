@@ -1,7 +1,7 @@
 import { contains } from 'underscore';
 
 import { ArgumentError } from 'scrivito_sdk/common';
-import { AttributeType, NormalizedTypeInfo } from 'scrivito_sdk/models';
+import { AttributeType, TypeInfo } from 'scrivito_sdk/models';
 import { Schema } from './schema';
 
 const ATTRIBUTE_TYPES_WHITELIST = ['string', 'html', 'widgetlist'];
@@ -45,7 +45,7 @@ function assertValidBinaryAttribute(
 
 function assertValidExtractTextAttribute(
   attribute: string,
-  definition: NormalizedTypeInfo<AttributeType> | undefined
+  definition: TypeInfo<AttributeType> | undefined
 ): void {
   if (!definition) {
     throw new ArgumentError(

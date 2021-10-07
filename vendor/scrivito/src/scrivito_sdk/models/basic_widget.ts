@@ -25,7 +25,7 @@ import {
 } from 'scrivito_sdk/models/basic_attribute_types';
 import { BasicField } from 'scrivito_sdk/models/basic_field';
 import { BasicObj } from 'scrivito_sdk/models/basic_obj';
-import { TypeInfo } from 'scrivito_sdk/models/type_info';
+import { ConvenienceTypeInfo } from 'scrivito_sdk/models/type_info';
 import { withBatchedUpdates } from 'scrivito_sdk/state';
 
 export interface BasicWidgetAttributes {
@@ -165,7 +165,7 @@ export class BasicWidget implements ContentValueProvider {
 
   get<Type extends AttributeType>(
     attributeName: string,
-    typeInfo: TypeInfo<Type>
+    typeInfo: ConvenienceTypeInfo<Type>
   ): BasicAttributeValue<Type> {
     return getContentValue(this, attributeName, typeInfo);
   }

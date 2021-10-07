@@ -3,16 +3,16 @@
 import type { History as History_2 } from 'history';
 import * as React_2 from 'react';
 
-declare type AppClass = ObjClass | WidgetClass;
+declare type AppClass<AttrsDef extends AttributesDefinition = AttributesDefinition> = ObjClass<AttrsDef> | WidgetClass<AttrsDef>;
 
 /** @public */
 export declare class ArgumentError extends ScrivitoError {
     constructor(message: string);
 }
 
-declare interface AttrDict {
-    [key: string]: AttributeValue | SystemAttributeValue;
-}
+declare type AttrDict<AttrsDef extends AttributesDefinition> = {
+    [AttrName in keyof AttrsDef]: AttributeMapping[AttrsDef[AttrName][0]];
+};
 
 declare type AttributeDefinitionOptionsMapping = {
     enum: {
@@ -63,6 +63,10 @@ declare interface AttributeMapping {
     widgetlist: Widget[];
 }
 
+declare interface AttributesDefinition {
+    [key: string]: TypeInfo<AttributeType>;
+}
+
 declare interface AttributesEditingConfig {
     [attributeName: string]: AttributeEditingConfig;
 }
@@ -75,7 +79,7 @@ declare type AttributeTypesWithoutOptions = Exclude<AttributeType, keyof Attribu
 
 declare type AttributeTypeWithMandatoryOptions = 'enum' | 'multienum';
 
-declare type AttributeValidationCallback<T extends Obj | Widget> = (attributeValue: AttributeValue, options: T extends Obj ? ObjAttributeValidationCallbackParams : WidgetAttributeValidationCallbackParams) => ValidationResult;
+declare type AttributeValidationCallback<T extends Obj | Widget> = (attributeValue: AttributeValue_2, options: T extends Obj ? ObjAttributeValidationCallbackParams : WidgetAttributeValidationCallbackParams) => ValidationResult;
 
 declare type AttributeValidationConstraints = object | AttributeValidationConstraintsWithOptions;
 
@@ -95,11 +99,11 @@ AttributeValidationName,
 ...Array<AttributeValidationConstraints | AttributeValidationCallback<T>>
 ];
 
-declare type AttributeValue = Link | Link[] | Obj | Obj[] | Widget | Widget[] | Binary | boolean | Date | number | string | string[] | null;
+declare type AttributeValue<Type extends AttributeType> = AttributeMapping[Type];
 
-declare type AttributeValue_2<Type extends AttributeType> = AttributeMapping[Type];
+declare type AttributeValue_2 = AttributeMapping[keyof AttributeMapping];
 
-declare type AttributeValueFunction = () => AttributeValue;
+declare type AttributeValueFunction = () => AttributeValue_2;
 
 declare interface AuthGroups {
     [groupId: string]: string;
@@ -252,8 +256,19 @@ declare interface ContentTagProps {
 
 declare type ContentValidationCallback<T extends Obj | Widget> = (content: T) => ValidationResult;
 
-declare interface ConvenienceObjClassDefinition {
-    attributes?: CustomAttributesDefinition;
+declare type ConvenienceAttributeDefinition = AttributeTypesWithoutOptions | AttributeTypesWithOptionalOptions | {
+    [Type in keyof AttributeDefinitionOptionsMapping]: [
+    Type,
+    AttributeDefinitionOptionsMapping[Type]
+    ];
+}[keyof AttributeDefinitionOptionsMapping];
+
+declare interface ConvenienceAttributesDefinition {
+    [attributeName: string]: ConvenienceAttributeDefinition;
+}
+
+declare interface ConvenienceObjClassDefinition<Attributes extends ConvenienceAttributesDefinition = ConvenienceAttributesDefinition> {
+    attributes?: Attributes;
     extend?: ObjClass;
     extractTextAttributes?: string[];
     name?: string;
@@ -263,8 +278,8 @@ declare interface ConvenienceObjClassDefinition {
     validAsRoot?: boolean;
 }
 
-declare interface ConvenienceWidgetClassDefinition {
-    attributes?: CustomAttributesDefinition;
+declare interface ConvenienceWidgetClassDefinition<Attributes extends ConvenienceAttributesDefinition = ConvenienceAttributesDefinition> {
+    attributes?: Attributes;
     extend?: WidgetClass;
     extractTextAttributes?: string[];
     name?: string;
@@ -273,10 +288,10 @@ declare interface ConvenienceWidgetClassDefinition {
 }
 
 /** @public */
-export declare function createObjClass(definition: ConvenienceObjClassDefinition): ObjClass;
+export declare function createObjClass<Attributes extends ConvenienceAttributesDefinition>(definition: ConvenienceObjClassDefinition<Attributes>): ObjClass<NormalizedAttributesDefinition<Attributes>>;
 
 /** @public */
-export declare function createWidgetClass(definition: ConvenienceWidgetClassDefinition): WidgetClass;
+export declare function createWidgetClass<Attributes extends ConvenienceAttributesDefinition>(definition: ConvenienceWidgetClassDefinition<Attributes>): WidgetClass<NormalizedAttributesDefinition<Attributes>>;
 
 /** @public */
 export declare function currentEditor(): Editor | null;
@@ -298,17 +313,6 @@ export declare function currentWorkspace(): Workspace;
 
 /** @public */
 export declare function currentWorkspaceId(): string;
-
-declare type CustomAttributeDefinition = AttributeTypesWithoutOptions | AttributeTypesWithOptionalOptions | {
-    [Type in keyof AttributeDefinitionOptionsMapping]: [
-    Type,
-    AttributeDefinitionOptionsMapping[Type]
-    ];
-}[keyof AttributeDefinitionOptionsMapping];
-
-declare interface CustomAttributesDefinition {
-    [attributeName: string]: CustomAttributeDefinition;
-}
 
 declare interface CustomMenuItem {
     id: string;
@@ -390,13 +394,13 @@ declare type Hash = string | null;
 export declare const ImageTag: React_2.FunctionComponent<{
     [key: string]: unknown;
     attribute?: string | undefined;
-    content?: Binary | Obj | null | undefined;
+    content?: Binary | Obj<AttributesDefinition> | null | undefined;
     width?: Width;
     onLoad?: React_2.ImgHTMLAttributes<HTMLImageElement>['onLoad'];
 }>;
 
 declare interface InitialContent {
-    [attributeName: string]: AttributeValue | AttributeValueFunction;
+    [attributeName: string]: AttributeValue_2 | AttributeValueFunction;
 }
 
 declare type InitializeCallback<T extends Obj | Widget> = (instance: T) => void;
@@ -442,7 +446,7 @@ declare interface LinkAttributes {
 /** @public */
 export declare const LinkTag: React_2.FunctionComponent<{
     [key: string]: unknown;
-    to?: Obj | Link | null | undefined;
+    to?: Obj<AttributesDefinition> | Link | null | undefined;
     target?: string | undefined;
     rel?: string | undefined;
     params?: false | QueryParameters | null | undefined;
@@ -492,6 +496,12 @@ declare interface MultisiteConfig {
 /** @public */
 export declare function navigateTo(target: Target | TargetFunction, options?: Options): void;
 
+declare type NormalizedAttributeDefinition<K extends ConvenienceAttributeDefinition> = K extends AttributeTypesWithoutOptions | AttributeTypesWithOptionalOptions ? [K] : K;
+
+declare type NormalizedAttributesDefinition<AttrsDef extends ConvenienceAttributesDefinition> = {
+    [AttrName in keyof AttrsDef]: NormalizedAttributeDefinition<AttrsDef[AttrName]>;
+};
+
 /** @public */
 export declare const NotFoundErrorPage: React_2.ComponentType<NotFoundErrorPageProps>;
 
@@ -500,7 +510,7 @@ declare interface NotFoundErrorPageProps {
 }
 
 /** @public */
-export declare class Obj {
+export declare class Obj<AttrsDef extends AttributesDefinition = AttributesDefinition> {
     static get(id: string): Obj | null;
     static getByPath(path: string): Obj | null;
     static getByPermalink(permalink: string): Obj | null;
@@ -508,14 +518,14 @@ export declare class Obj {
     static root(): Obj | null;
     static where(attribute: SearchField, operator: SearchOperator, value: SearchValue, boost?: FieldBoost): ObjSearch;
     static whereFullTextOf(attribute: SearchField, operator: FullTextSearchOperator, value: SearchValue, boost?: FieldBoost): ObjSearch;
-    static create(attributes?: ObjAttributes): Obj;
-    static createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj>;
+    static create(attributes?: Partial<ObjAttributes<AttributesDefinition>>): Obj;
+    static createFromFile(file: File, attributes?: Partial<ObjAttributes<AttributesDefinition>>): Promise<Obj>;
     static onAllSites(): SiteContext;
     static onSite(siteId: string): SiteContext;
     id(): string;
     objClass(): string;
-    get<T extends AttributeType>(attributeName: string): AttributeValue_2<T>;
-    update(attributes: Partial<AttrDict>): void;
+    get<AttributeName extends string & keyof AttrsDef>(attributeName: AttributeName): AttributeValue<AttrsDef[AttributeName][0]>;
+    update(attributes: Partial<ObjUpdateAttributes<AttrsDef>>): void;
     versionsOnAllSites(): Obj[];
     versionOnSite(siteId: string): Obj | null;
     createdAt(): Date | null;
@@ -549,11 +559,11 @@ export declare class Obj {
     updateReferences(mapping: ReferenceMapping): Promise<void>;
     widget(id: string): Widget | null;
     widgets(): Widget[];
-    copy(): Promise<Obj>;
+    copy(): Promise<Obj<AttrsDef>>;
     destroy(): void;
 }
 
-declare type ObjAttributes = AttrDict;
+declare type ObjAttributes<AttrsDef extends AttributesDefinition> = ObjSystemAttributes & AttrDict<AttrsDef>;
 
 declare interface ObjAttributeValidationCallbackParams {
     name: string;
@@ -561,18 +571,18 @@ declare interface ObjAttributeValidationCallbackParams {
     content: Obj;
 }
 
-declare interface ObjClass {
+declare interface ObjClass<AttrsDef extends AttributesDefinition = AttributesDefinition> {
     /** bogus constructor, to let TypeScript understand that this is a class. */
-    new (dontUseThis: never): Obj;
-    get(id: string): Obj | null;
-    getByPath(path: string): Obj | null;
-    getByPermalink(permalink: string): Obj | null;
+    new (dontUseThis: never): Obj<AttrsDef>;
+    get(id: string): Obj<AttrsDef> | null;
+    getByPath(path: string): Obj<AttrsDef> | null;
+    getByPermalink(permalink: string): Obj<AttrsDef> | null;
     all(): ObjSearch;
-    root(): Obj | null;
+    root(): Obj<AttrsDef> | null;
     where(attribute: SearchField, operator: SearchOperator, value: SearchValue, boost?: FieldBoost): ObjSearch;
     whereFullTextOf(attribute: SearchField, operator: FullTextSearchOperator, value: SearchValue, boost?: FieldBoost): ObjSearch;
-    create(attributes?: ObjAttributes): Obj;
-    createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj>;
+    create(attributes?: Partial<ObjAttributes<AttrsDef>>): Obj<AttrsDef>;
+    createFromFile(file: File, attributes?: Partial<ObjAttributes<AttrsDef>>): Promise<Obj<AttrsDef>>;
     onAllSites(): SiteContext;
     onSite(siteId: string): SiteContext;
 }
@@ -611,6 +621,17 @@ export declare class ObjSearch {
     order(attributes: OrderAttributes): this;
     count(): number;
 }
+
+declare interface ObjSystemAttributes {
+    _contentId: string;
+    _id: string;
+    _language: string | null;
+    _path: string | null;
+    _permalink: string | null;
+    _siteId: string | null;
+}
+
+declare type ObjUpdateAttributes<AttrsDef extends AttributesDefinition> = Omit<ObjAttributes<AttrsDef>, '_id'>;
 
 /** @public */
 export declare function openDialog(name: string): void;
@@ -676,10 +697,16 @@ export declare function provideEditingConfig(className: string, editingConfig: O
 export declare function provideEditingConfig(className: string, editingConfig: WidgetEditingConfig): void;
 
 /** @public */
-export declare function provideObjClass(name: string, definition: ConvenienceObjClassDefinition | ObjClass): ObjClass;
+export declare function provideObjClass<Attributes extends ConvenienceAttributesDefinition>(name: string, definition: ConvenienceObjClassDefinition<Attributes>): ObjClass<NormalizedAttributesDefinition<Attributes>>;
 
 /** @public */
-export declare function provideWidgetClass(name: string, definition: ConvenienceWidgetClassDefinition | WidgetClass): WidgetClass;
+export declare function provideObjClass<AttrsDef extends AttributesDefinition>(name: string, definition: ObjClass<AttrsDef>): ObjClass<AttrsDef>;
+
+/** @public */
+export declare function provideWidgetClass<Attributes extends ConvenienceAttributesDefinition>(name: string, definition: ConvenienceWidgetClassDefinition<Attributes>): WidgetClass<NormalizedAttributesDefinition<Attributes>>;
+
+/** @public */
+export declare function provideWidgetClass<AttrsDef extends AttributesDefinition>(name: string, definition: WidgetClass<AttrsDef>): WidgetClass<AttrsDef>;
 
 declare interface QueryParameters {
     [key: string]: string | null | Array<string | null>;
@@ -745,8 +772,8 @@ declare interface SharedEditingConfig<T extends Obj | Widget> {
 declare type SingleSearchValue = BackendSingleSearchValue | Date | Obj;
 
 declare interface SiteContext {
-    create(params?: ObjAttributes): Obj;
-    createFromFile(file: File, attributes?: ObjAttributes): Promise<Obj>;
+    create(params?: Partial<ObjAttributes<AttributesDefinition>>): Obj;
+    createFromFile(file: File, attributes?: Partial<ObjAttributes<AttributesDefinition>>): Promise<Obj>;
     get(objId: string): Obj | null;
     getIncludingDeleted(objId: string): Obj | null;
     getByPath(path: string): Obj | null;
@@ -771,8 +798,6 @@ declare interface SuggestOptions {
     limit?: number;
 }
 
-declare type SystemAttributeValue = string | null;
-
 declare type Target = Obj | Link | null;
 
 declare type TargetFunction = () => Target;
@@ -789,6 +814,28 @@ declare type ToolbarButton = 'blockquote' | 'bold' | 'bulletList' | 'clean' | 'c
 declare interface TransformationDefinition {
     height?: number;
     width?: number;
+}
+
+declare type TypeInfo<Type extends AttributeType> = Type extends keyof TypeOptionsMapping ? TypeInfoWithOptions<Type> : [Type];
+
+declare type TypeInfoWithOptions<Type extends keyof TypeOptionsMapping> = Type extends AttributeTypeWithMandatoryOptions ? [Type, TypeOptionsMapping[Type]] : [Type, TypeOptionsMapping[Type]] | [Type];
+
+declare interface TypeOptionsMapping {
+    enum: {
+        values: string[];
+    };
+    multienum: {
+        values: string[];
+    };
+    reference: {
+        validClasses: string[];
+    };
+    referencelist: {
+        validClasses: string[];
+    };
+    widgetlist: {
+        validClasses: string[];
+    };
 }
 
 declare interface UiContext {
@@ -833,17 +880,19 @@ declare type ValidationsConfig<T extends Obj | Widget> = Array<ContentValidation
 declare type ValidationSeverityLevel = 'error' | 'warning' | 'info';
 
 /** @public */
-export declare class Widget {
-    constructor(attributes?: AttrDict);
+export declare class Widget<AttrsDef extends AttributesDefinition = AttributesDefinition> {
+    constructor(attributes?: Partial<WidgetAttributes<AttrsDef>>);
     id(): string;
     objClass(): string;
-    get<T extends AttributeType>(attributeName: string): AttributeValue_2<T>;
-    update(attributes: Partial<AttrDict>): void;
+    get<AttributeName extends string & keyof AttrsDef>(attributeName: AttributeName): AttributeValue<AttrsDef[AttributeName][0]>;
+    update(attributes: Partial<WidgetUpdateAttributes<AttrsDef>>): void;
     obj(): Obj;
-    copy(): Widget;
+    copy(): Widget<AttrsDef>;
     destroy(): void;
     container(): Obj | Widget;
 }
+
+declare type WidgetAttributes<AttrsDef extends AttributesDefinition> = WidgetSystemAttributes & AttrDict<AttrsDef>;
 
 declare interface WidgetAttributeValidationCallbackParams {
     name: string;
@@ -851,8 +900,8 @@ declare interface WidgetAttributeValidationCallbackParams {
     content: Widget;
 }
 
-declare interface WidgetClass {
-    new (attributes?: AttrDict): Widget;
+declare interface WidgetClass<AttrsDef extends AttributesDefinition = AttributesDefinition> {
+    new (attributes?: Partial<WidgetAttributes<AttrsDef>>): Widget<AttrsDef>;
 }
 
 /** @public */
@@ -868,12 +917,18 @@ declare interface WidgetProps {
     [key: string]: unknown;
 }
 
+declare interface WidgetSystemAttributes {
+    _id: string;
+}
+
 /** @public */
 export declare const WidgetTag: React_2.ComponentType<WidgetTagProps>;
 
 declare type WidgetTagProps = React_2.HTMLAttributes<HTMLElement> & {
     tag?: string;
 };
+
+declare type WidgetUpdateAttributes<AttrsDef extends AttributesDefinition> = Omit<WidgetAttributes<AttrsDef>, '_id'>;
 
 declare type Width = React_2.ImgHTMLAttributes<HTMLImageElement>['width'];
 

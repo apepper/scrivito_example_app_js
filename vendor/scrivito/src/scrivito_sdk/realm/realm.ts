@@ -7,8 +7,11 @@ import {
 } from 'scrivito_sdk/realm/app_class_api_check';
 import { Obj, ObjClass } from 'scrivito_sdk/realm/obj';
 import {
+  AttributesDefinition,
+  ConvenienceAttributesDefinition,
   ConvenienceObjClassDefinition,
   ConvenienceWidgetClassDefinition,
+  NormalizedAttributesDefinition,
   Schema,
   isAppClass,
 } from 'scrivito_sdk/realm/schema';
@@ -19,13 +22,23 @@ import {
 } from './assert_valid_extract_text_attributes';
 import { registerClass } from './registry';
 
-export type AppClass = ObjClass | WidgetClass;
+export type AppClass<
+  AttrsDef extends AttributesDefinition = AttributesDefinition
+> = ObjClass<AttrsDef> | WidgetClass<AttrsDef>;
 
 /** @public */
-export function provideObjClass(
+export function provideObjClass<
+  Attributes extends ConvenienceAttributesDefinition
+>(
   name: string,
-  definition: ConvenienceObjClassDefinition | ObjClass
-): ObjClass;
+  definition: ConvenienceObjClassDefinition<Attributes>
+): ObjClass<NormalizedAttributesDefinition<Attributes>>;
+
+/** @public */
+export function provideObjClass<AttrsDef extends AttributesDefinition>(
+  name: string,
+  definition: ObjClass<AttrsDef>
+): ObjClass<AttrsDef>;
 
 /** @internal */
 export function provideObjClass(
@@ -43,10 +56,18 @@ export function provideObjClass(
 }
 
 /** @public */
-export function provideWidgetClass(
+export function provideWidgetClass<
+  Attributes extends ConvenienceAttributesDefinition
+>(
   name: string,
-  definition: ConvenienceWidgetClassDefinition | WidgetClass
-): WidgetClass;
+  definition: ConvenienceWidgetClassDefinition<Attributes>
+): WidgetClass<NormalizedAttributesDefinition<Attributes>>;
+
+/** @public */
+export function provideWidgetClass<AttrsDef extends AttributesDefinition>(
+  name: string,
+  definition: WidgetClass<AttrsDef>
+): WidgetClass<AttrsDef>;
 
 /** @internal */
 export function provideWidgetClass(
@@ -65,9 +86,11 @@ export function provideWidgetClass(
 }
 
 /** @public */
-export function createObjClass(
-  definition: ConvenienceObjClassDefinition
-): ObjClass;
+export function createObjClass<
+  Attributes extends ConvenienceAttributesDefinition
+>(
+  definition: ConvenienceObjClassDefinition<Attributes>
+): ObjClass<NormalizedAttributesDefinition<Attributes>>;
 
 /** @internal */
 export function createObjClass(
@@ -80,9 +103,11 @@ export function createObjClass(
 }
 
 /** @public */
-export function createWidgetClass(
-  definition: ConvenienceWidgetClassDefinition
-): WidgetClass;
+export function createWidgetClass<
+  Attributes extends ConvenienceAttributesDefinition
+>(
+  definition: ConvenienceWidgetClassDefinition<Attributes>
+): WidgetClass<NormalizedAttributesDefinition<Attributes>>;
 
 /** @internal */
 export function createWidgetClass(

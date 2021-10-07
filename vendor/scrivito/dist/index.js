@@ -5391,7 +5391,7 @@ function runAndCatchException(fn) {
 ;// CONCATENATED MODULE: ./scrivito_sdk/common/get_scrivito_version.ts
 
 function getScrivitoVersion() {
-    var version = "1.20.0-rc1-4143-g9c17cc301ec1";
+    var version = "1.20.0-rc1-4162-g37f1824ec106";
     if (!version) {
         // version info missing
         throw new InternalError();
