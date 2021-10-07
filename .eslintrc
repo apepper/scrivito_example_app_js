@@ -1,6 +1,6 @@
 {
-  "parser": "babel-eslint",
-  "plugins": ["import", "prettier", "react"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import", "prettier", "react"],
   "settings": {
     "import/resolver": "webpack",
     "react": { "version": "16" }
@@ -11,10 +11,14 @@
   },
   "extends": [
     "airbnb/base",
+    "plugin:import/typescript",
     "eslint:recommended",
     "plugin:react/recommended",
     "prettier",
-    "react-app"
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "document": true,
@@ -52,11 +56,14 @@
     "import/prefer-default-export": 0,
     "no-debugger": 1,
     "no-param-reassign": [1, { "props": false }],
-    "no-unused-vars": [
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": [
       1,
       { "args": "all", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
     ],
-    "no-use-before-define": [2, { "functions": false, "variables": false }],
+    "no-use-before-define": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
     "prettier/prettier": 1,
     "react/display-name": 0,
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
@@ -81,7 +88,17 @@
       "files": ["webpack.config.*"],
       "rules": {
         "import/no-commonjs": 0,
-        "import/no-nodejs-modules": 0
+        "import/no-nodejs-modules": 0,
+        "@typescript-eslint/no-var-requires": 0
+      }
+    },
+    {
+      "files": ["latestScrivitoMaster.js"],
+      "rules": {
+        "import/no-commonjs": 0,
+        "import/no-nodejs-modules": 0,
+        "@typescript-eslint/no-var-requires": 0,
+        "no-console": 0
       }
     },
     {
