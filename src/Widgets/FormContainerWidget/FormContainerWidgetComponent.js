@@ -4,9 +4,7 @@ import * as Scrivito from "scrivito";
 import "./FormContainerWidget.scss";
 
 Scrivito.provideComponent("FormContainerWidget", ({ widget }) => (
-  <Scrivito.ContentTag
-    className="form-container-widget"
-    content={widget}
-    attribute="headline"
-  />
+  <form className="form-container-widget" method="post">
+    <Scrivito.ContentTag content={widget} attribute="content" />
+  </form>
 ));
