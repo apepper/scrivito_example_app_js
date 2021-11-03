@@ -8,7 +8,14 @@ const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
     type: [
       "enum",
       {
-        values: ["name", "given_name", "family_name", "middle_name", "company"],
+        values: [
+          "email",
+          "name",
+          "given_name",
+          "family_name",
+          "middle_name",
+          "company",
+        ],
       },
     ],
   },

@@ -9,6 +9,7 @@ Scrivito.provideEditingConfig("TextInputWidget", {
     type: {
       title: "Input Type",
       values: [
+        { value: "email", title: "Email" },
         { value: "name", title: "Name" },
         { value: "given_name", title: "Given name" },
         { value: "family_name", title: "Family name" },
@@ -18,9 +19,9 @@ Scrivito.provideEditingConfig("TextInputWidget", {
     },
   },
   initialContent: {
-    label: "Company",
-    placeholder: "Your company name",
-    type: "company",
+    label: "Email address",
+    placeholder: "Email",
+    type: "email",
   },
   properties: ["type", "label", "placeholder", "required"],
 });
