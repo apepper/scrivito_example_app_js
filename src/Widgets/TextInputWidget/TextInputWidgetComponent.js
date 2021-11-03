@@ -1,18 +1,23 @@
+import { uniqueId } from "lodash-es";
 import * as React from "react";
 import * as Scrivito from "scrivito";
 
 import "./TextInputWidget.scss";
 
-Scrivito.provideComponent("TextInputWidget", ({ widget }) => (
-  <div className="text-input-widget form-group">
-    <label htmlFor="contactName">{widget.get("label")}</label>
+Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
+  const [id] = React.useState(() => uniqueId("text-input-widget_"));
 
-    <input
-      id="contactName"
-      name="contactName"
-      placeholder={widget.get("placeholder")}
-      type="text"
-      required
-    />
-  </div>
-));
+  return (
+    <div className="text-input-widget form-group">
+      <label htmlFor={id}>{widget.get("label")}</label>
+
+      <input
+        id={id}
+        name="contactName"
+        placeholder={widget.get("placeholder")}
+        type="text"
+        required
+      />
+    </div>
+  );
+});
