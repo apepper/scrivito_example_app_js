@@ -2,9 +2,9 @@ import * as Scrivito from "scrivito";
 
 const SubmitButtonWidget = Scrivito.provideWidgetClass("SubmitButtonWidget", {
   attributes: {
-    headline: "string",
+    buttonText: "string",
   },
-  extractTextAttributes: ["headline"],
+  extractTextAttributes: ["buttonText"],
 });
 
 export default SubmitButtonWidget;
