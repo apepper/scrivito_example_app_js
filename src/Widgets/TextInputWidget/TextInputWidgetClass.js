@@ -2,9 +2,10 @@ import * as Scrivito from "scrivito";
 
 const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
   attributes: {
-    headline: "string",
+    label: "string",
+    placeholder: "string",
   },
-  extractTextAttributes: ["headline"],
+  extractTextAttributes: [],
 });
 
 export default TextInputWidget;
