@@ -18,7 +18,7 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
         maxLength="250"
         placeholder={widget.get("placeholder")}
         type="text"
-        required
+        required={widget.get("required")}
       />
     </div>
   );

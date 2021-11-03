@@ -3,6 +3,9 @@ import * as Scrivito from "scrivito";
 Scrivito.provideEditingConfig("TextInputWidget", {
   title: "Text Input",
   attributes: {
+    required: {
+      title: "Mandatory",
+    },
     type: {
       title: "Input Type",
       values: [
@@ -19,5 +22,5 @@ Scrivito.provideEditingConfig("TextInputWidget", {
     placeholder: "Your company name",
     type: "company",
   },
-  properties: ["type", "label", "placeholder"],
+  properties: ["type", "label", "placeholder", "required"],
 });
