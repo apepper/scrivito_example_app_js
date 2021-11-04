@@ -6,6 +6,7 @@ import "./TextInputWidget.scss";
 
 Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
   const [id] = React.useState(() => uniqueId("text-input-widget_"));
+  const name = widget.get("type");
 
   return (
     <div className="text-input-widget form-group">
@@ -13,7 +14,8 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
 
       <input
         id={id}
-        name="contactName"
+        name={name}
+        maxLength="250"
         placeholder={widget.get("placeholder")}
         type="text"
         required
