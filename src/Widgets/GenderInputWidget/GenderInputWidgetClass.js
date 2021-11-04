@@ -2,9 +2,10 @@ import * as Scrivito from "scrivito";
 
 const GenderInputWidget = Scrivito.provideWidgetClass("GenderInputWidget", {
   attributes: {
-    headline: "string",
+    label: "string",
+    required: "boolean",
   },
-  extractTextAttributes: ["headline"],
+  extractTextAttributes: [],
 });
 
 export default GenderInputWidget;

@@ -2,7 +2,13 @@ import * as Scrivito from "scrivito";
 
 Scrivito.provideEditingConfig("GenderInputWidget", {
   title: "Gender Input",
-  initialContent: {
-    headline: "Lorem Ipsum",
+  attributes: {
+    required: {
+      title: "Mandatory",
+    },
   },
+  initialContent: {
+    label: "Gender",
+  },
+  properties: ["label", "required"],
 });
