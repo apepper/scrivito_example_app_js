@@ -35,10 +35,25 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
   }
 });
 
+export function booleanIndicatorPrefix() {
+  return "2️⃣";
+}
+
 function extractFormData(formElement) {
   // TODO: If IE11 support is needed, something like https://www.npmjs.com/package/formdata-polyfill should be used
   const formData = new FormData(formElement);
-  return Object.fromEntries(formData);
+  const entries = Object.fromEntries(formData);
+  const booleanKeys = Object.keys(entries).filter((key) =>
+    key.startsWith(booleanIndicatorPrefix())
+  );
+  booleanKeys.forEach((booleanKey) => {
+    const booleanValue = entries[booleanKey] === "true";
+    delete entries[booleanKey];
+    const newKey = booleanKey.substring(booleanIndicatorPrefix().length);
+    entries[newKey] = booleanValue;
+  });
+
+  return entries;
 }
 
 async function submit(formProps) {

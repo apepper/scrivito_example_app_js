@@ -2,9 +2,10 @@ import * as Scrivito from "scrivito";
 
 const CheckboxWidget = Scrivito.provideWidgetClass("CheckboxWidget", {
   attributes: {
-    headline: "string",
+    label: "html",
+    required: "boolean",
   },
-  extractTextAttributes: ["headline"],
+  extractTextAttributes: [],
 });
 
 export default CheckboxWidget;
