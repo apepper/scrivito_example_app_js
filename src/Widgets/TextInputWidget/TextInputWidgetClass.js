@@ -15,6 +15,7 @@ const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
           "family_name",
           "middle_name",
           "company",
+          "phone_number",
         ],
       },
     ],

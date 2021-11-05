@@ -15,6 +15,7 @@ Scrivito.provideEditingConfig("TextInputWidget", {
         { value: "family_name", title: "Family name" },
         { value: "middle_name", title: "Middle name" },
         { value: "company", title: "Company" },
+        { value: "phone_number", title: "Telephone number" },
       ],
     },
   },

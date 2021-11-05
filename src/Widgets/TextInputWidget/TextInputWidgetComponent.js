@@ -15,11 +15,27 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
       <input
         id={id}
         name={name}
-        maxLength="250"
+        maxLength={calculateMaxLength(name)}
         placeholder={widget.get("placeholder")}
-        type={name === "email" ? "email" : "text"}
+        type={calculateType(name)}
         required={widget.get("required")}
       />
     </div>
   );
 });
+
+function calculateMaxLength(fieldName) {
+  return fieldName === "phone_number" ? "50" : "250";
+}
+
+function calculateType(fieldName) {
+  if (fieldName === "email") {
+    return "email";
+  }
+
+  if (fieldName === "phone_number") {
+    return "tel";
+  }
+
+  return "text";
+}
