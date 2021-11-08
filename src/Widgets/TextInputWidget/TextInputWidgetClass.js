@@ -16,9 +16,11 @@ const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
           "middle_name",
           "company",
           "phone_number",
+          "custom_text_area",
         ],
       },
     ],
+    customFieldName: "string",
   },
   extractTextAttributes: [],
 });

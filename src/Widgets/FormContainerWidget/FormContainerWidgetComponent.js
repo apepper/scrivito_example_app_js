@@ -39,10 +39,16 @@ export function booleanIndicatorPrefix() {
   return "2️⃣";
 }
 
+export function customFieldIndicator() {
+  return "🏷️";
+}
+
 function extractFormData(formElement) {
   // TODO: If IE11 support is needed, something like https://www.npmjs.com/package/formdata-polyfill should be used
   const formData = new FormData(formElement);
   const entries = Object.fromEntries(formData);
+
+  // process boolean
   const booleanKeys = Object.keys(entries).filter((key) =>
     key.startsWith(booleanIndicatorPrefix())
   );
@@ -52,6 +58,19 @@ function extractFormData(formElement) {
     const newKey = booleanKey.substring(booleanIndicatorPrefix().length);
     entries[newKey] = booleanValue;
   });
+
+  // process custom fields
+  const customKeys = Object.keys(entries).filter((key) =>
+    key.startsWith(customFieldIndicator())
+  );
+  const customFields = {};
+  customKeys.forEach((customKey) => {
+    const customValue = entries[customKey];
+    delete entries[customKey];
+    const newKey = customKey.substring(booleanIndicatorPrefix().length);
+    customFields[newKey] = customValue;
+  });
+  entries.custom_fields = customFields;
 
   return entries;
 }

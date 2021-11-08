@@ -1,6 +1,7 @@
 import { uniqueId } from "lodash-es";
 import * as React from "react";
 import * as Scrivito from "scrivito";
+import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidgetComponent";
 
 import "./TextInputWidget.scss";
 
@@ -12,14 +13,24 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
     <div className="text-input-widget form-group">
       <label htmlFor={id}>{widget.get("label")}</label>
 
-      <input
-        id={id}
-        name={name}
-        maxLength={calculateMaxLength(name)}
-        placeholder={widget.get("placeholder")}
-        type={calculateType(name)}
-        required={widget.get("required")}
-      />
+      {name === "custom_text_area" ? (
+        <textarea
+          rows="3"
+          id={id}
+          name={`${customFieldIndicator()}${widget.get("customFieldName")}`}
+          placeholder={widget.get("placeholder")}
+          required={widget.get("required")}
+        />
+      ) : (
+        <input
+          id={id}
+          name={name}
+          maxLength={calculateMaxLength(name)}
+          placeholder={widget.get("placeholder")}
+          type={calculateType(name)}
+          required={widget.get("required")}
+        />
+      )}
     </div>
   );
 });
