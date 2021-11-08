@@ -24,7 +24,10 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
 
   return (
     <div className="gender-input-widget form-group">
-      <span>{widget.get("label")}</span>
+      <span>
+        {widget.get("label")}
+        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
+      </span>
 
       <span>
         <label htmlFor={femaleId}>Female</label>

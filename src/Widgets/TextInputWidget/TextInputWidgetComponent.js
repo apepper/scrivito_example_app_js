@@ -11,7 +11,10 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
 
   return (
     <div className="text-input-widget form-group">
-      <label htmlFor={id}>{widget.get("label")}</label>
+      <label htmlFor={id}>
+        {widget.get("label")}
+        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
+      </label>
 
       {name === "custom_text_area" ? (
         <textarea

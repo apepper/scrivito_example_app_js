@@ -24,7 +24,10 @@ Scrivito.provideComponent("CheckboxWidget", ({ widget }) => {
         value={checked}
       />
 
-      <label htmlFor={id}>{widget.get("label")}</label>
+      <label htmlFor={id}>
+        {widget.get("label")}{" "}
+        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
+      </label>
     </div>
   );
 });
