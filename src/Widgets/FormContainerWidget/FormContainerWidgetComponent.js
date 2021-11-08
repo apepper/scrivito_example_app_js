@@ -8,12 +8,12 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
   const [submission, setSubmission] = React.useState("not submitted");
 
   if (submission === "submitting") {
-    return <div className="form-container-widget">🛰️ Submitting...</div>;
+    return <div className="form-container-widget text-center"><i class="fa fa-spin fa-spinner fa-2x" aria-hidden="true"></i><span class="text-super"> Submitting...</span></div>;
   }
 
   if (submission === "success") {
     return (
-      <div className="form-container-widget">🗳️ Successfully submitted.</div>
+      <div className="form-container-widget text-center"><i class="fa fa-check fa-2x" aria-hidden="true"></i><span class="text-super"> Successfully submitted.</span></div>
     );
   }
 

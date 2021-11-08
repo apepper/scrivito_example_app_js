@@ -10,8 +10,9 @@ Scrivito.provideComponent("CheckboxWidget", ({ widget }) => {
   const [checked, setChecked] = React.useState(false);
 
   return (
-    <div className="checkbox-widget form-group">
+    <div className="checkbox-widget form-check form-check-inline mb-2">
       <input
+        class="form-check-input"
         id={id}
         type="checkbox"
         value={true}
@@ -24,9 +25,9 @@ Scrivito.provideComponent("CheckboxWidget", ({ widget }) => {
         value={checked}
       />
 
-      <label htmlFor={id}>
+      <label class="form-check-label ml-3" htmlFor={id}>
         {widget.get("label")}{" "}
-        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
+        {widget.get("required") ? <span class="text-mandatory" title="Mandatory">*</span> : ""}
       </label>
     </div>
   );

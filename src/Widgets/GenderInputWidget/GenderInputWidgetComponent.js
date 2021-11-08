@@ -24,14 +24,17 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
 
   return (
     <div className="gender-input-widget form-group">
-      <span>
-        {widget.get("label")}
-        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
-      </span>
 
-      <span>
-        <label htmlFor={femaleId}>Female</label>
+     
+
+      <label>
+        {widget.get("label")}
+        {widget.get("required") ? <span  class="text-mandatory" title="Mandatory">*</span> : ""}
+      </label>
+      <br/>
+      <div class="form-check form-check-inline">
         <input
+          class="form-check-input" 
           type="radio"
           id={femaleId}
           name="gender"
@@ -39,11 +42,12 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
           required={required}
           onChange={onChange}
         />
-      </span>
+        <label class="form-check-label" htmlFor={femaleId}>Female</label>
+      </div>
 
-      <span>
-        <label htmlFor={maleId}>Male</label>
+      <div class="form-check form-check-inline">
         <input
+          class="form-check-input" 
           type="radio"
           id={maleId}
           name="gender"
@@ -51,31 +55,37 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
           required={required}
           onChange={onChange}
         />
-      </span>
+        <label class="form-check-label" htmlFor={maleId}>Male</label>
+      </div>
 
-      <span>
-        <label htmlFor={diversId}>Custom</label>
+      <div class="form-check form-check-inline">
         <input
+          class="form-check-input" 
           type="radio"
           id={diversId}
           name="gender"
           required={required}
           onChange={onChange}
         />
-      </span>
-
+        <label class="form-check-label" htmlFor={diversId}>Custom</label>
+      </div>
       {showCustom && (
-        <div>
-          <label htmlFor={customId}>Custom</label>
-          <input
-            type="text"
-            id={customId}
-            name="gender"
-            maxLength="50"
-            required={required}
-          />
-        </div>
-      )}
+        <input
+          class="form-control"
+          type="text"
+          id={customId}
+          name="gender"
+          maxLength="50"
+          required={required}
+        />
+    )}
+
+
+
+
+     
+
+
     </div>
   );
 });

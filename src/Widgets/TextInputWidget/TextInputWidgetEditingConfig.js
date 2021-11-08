@@ -1,7 +1,10 @@
 import * as Scrivito from "scrivito";
+import form_widget_textinput from "../../assets/images/form_widget_textinput.svg";
+
 
 Scrivito.provideEditingConfig("TextInputWidget", {
   title: "Text Input",
+  thumbnail: form_widget_textinput,
   attributes: {
     required: {
       title: "Mandatory",

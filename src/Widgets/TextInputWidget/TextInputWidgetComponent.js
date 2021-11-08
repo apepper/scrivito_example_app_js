@@ -13,11 +13,12 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
     <div className="text-input-widget form-group">
       <label htmlFor={id}>
         {widget.get("label")}
-        {widget.get("required") ? <span title="Mandatory">*</span> : ""}
+        {widget.get("required") ? <span class="text-mandatory" title="Mandatory">*</span> : ""}
       </label>
 
       {name === "custom_text_area" ? (
         <textarea
+          class="form-control"
           rows="3"
           id={id}
           name={`${customFieldIndicator()}${widget.get("customFieldName")}`}
@@ -26,6 +27,7 @@ Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
         />
       ) : (
         <input
+          class="form-control"
           id={id}
           name={name}
           maxLength={calculateMaxLength(name)}
