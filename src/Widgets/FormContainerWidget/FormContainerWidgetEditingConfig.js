@@ -2,7 +2,7 @@ import * as Scrivito from "scrivito";
 import { random32CharHex } from "./random32CharHex";
 
 Scrivito.provideEditingConfig("FormContainerWidget", {
-  title: "Form",
+  title: "Form Container",
   attributes: {
     formId: {
       title: "Form ID",
