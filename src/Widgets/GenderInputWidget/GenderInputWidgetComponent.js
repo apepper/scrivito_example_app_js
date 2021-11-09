@@ -2,8 +2,6 @@ import { uniqueId } from "lodash-es";
 import * as React from "react";
 import * as Scrivito from "scrivito";
 
-import "./GenderInputWidget.scss";
-
 Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
   const required = widget.get("required");
   const [showCustom, setShowCustom] = React.useState(false);
