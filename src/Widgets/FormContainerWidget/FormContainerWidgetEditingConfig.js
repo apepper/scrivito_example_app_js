@@ -1,11 +1,11 @@
 import * as Scrivito from "scrivito";
-import form_widget_container from "../../assets/images/form_widget_container.svg";
+import formContainerWidgetIcon from "../../assets/images/form_container_widget.svg";
 
 import { random32CharHex } from "./random32CharHex";
 
 Scrivito.provideEditingConfig("FormContainerWidget", {
   title: "Form Container",
-  thumbnail: form_widget_container,
+  thumbnail: formContainerWidgetIcon,
   attributes: {
     formId: {
       title: "Form ID",
