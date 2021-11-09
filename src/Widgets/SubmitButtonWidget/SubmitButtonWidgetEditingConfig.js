@@ -1,9 +1,9 @@
 import * as Scrivito from "scrivito";
-import form_widget_button from "../../assets/images/form_widget_button.svg";
+import formSubmitButtonWidgetIcon from "../../assets/images/form_submit_button_widget.svg";
 
 Scrivito.provideEditingConfig("SubmitButtonWidget", {
   title: "Submit Button",
-  thumbnail: form_widget_button,
+  thumbnail: formSubmitButtonWidgetIcon,
   initialContent: {
     buttonText: "send message",
   },
