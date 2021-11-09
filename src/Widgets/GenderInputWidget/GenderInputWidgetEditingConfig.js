@@ -1,10 +1,9 @@
 import * as Scrivito from "scrivito";
-import form_widget_gender from "../../assets/images/form_widget_gender.svg";
-
+import formGenderInputWidgetIcon from "../../assets/images/form_gender_input_widget.svg";
 
 Scrivito.provideEditingConfig("GenderInputWidget", {
   title: "Gender Input",
-  thumbnail: form_widget_gender,
+  thumbnail: formGenderInputWidgetIcon,
   attributes: {
     required: {
       title: "Mandatory",
