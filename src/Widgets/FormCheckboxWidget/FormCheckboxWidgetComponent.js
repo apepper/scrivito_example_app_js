@@ -3,7 +3,7 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import { booleanIndicatorPrefix } from "../FormContainerWidget/FormContainerWidgetComponent";
 
-Scrivito.provideComponent("CheckboxWidget", ({ widget }) => {
+Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
   const [id] = React.useState(() => uniqueId("checkbox-widget_"));
   const [checked, setChecked] = React.useState(false);
 

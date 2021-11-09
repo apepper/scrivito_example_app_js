@@ -1,6 +1,6 @@
 import * as Scrivito from "scrivito";
 
-const CheckboxWidget = Scrivito.provideWidgetClass("CheckboxWidget", {
+const FormCheckboxWidget = Scrivito.provideWidgetClass("FormCheckboxWidget", {
   attributes: {
     label: "html",
     required: "boolean",
@@ -8,4 +8,4 @@ const CheckboxWidget = Scrivito.provideWidgetClass("CheckboxWidget", {
   extractTextAttributes: [],
 });
 
-export default CheckboxWidget;
+export default FormCheckboxWidget;

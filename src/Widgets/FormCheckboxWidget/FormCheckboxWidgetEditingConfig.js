@@ -1,8 +1,8 @@
 import * as Scrivito from "scrivito";
 import formCheckboxWidgetIcon from "../../assets/images/form_checkbox_widget.svg";
 
-Scrivito.provideEditingConfig("CheckboxWidget", {
-  title: "Checkbox",
+Scrivito.provideEditingConfig("FormCheckboxWidget", {
+  title: "Form: Checkbox",
   thumbnail: formCheckboxWidgetIcon,
   attributes: {
     required: {
