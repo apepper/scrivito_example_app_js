@@ -3,7 +3,7 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidgetComponent";
 
-Scrivito.provideComponent("TextInputWidget", ({ widget }) => {
+Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
   const [id] = React.useState(() => uniqueId("text-input-widget_"));
   const name = widget.get("type");
 

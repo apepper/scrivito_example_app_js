@@ -1,6 +1,6 @@
 import * as Scrivito from "scrivito";
 
-const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
+const FormTextInputWidget = Scrivito.provideWidgetClass("FormTextInputWidget", {
   attributes: {
     label: "string",
     placeholder: "string",
@@ -25,4 +25,4 @@ const TextInputWidget = Scrivito.provideWidgetClass("TextInputWidget", {
   extractTextAttributes: [],
 });
 
-export default TextInputWidget;
+export default FormTextInputWidget;
