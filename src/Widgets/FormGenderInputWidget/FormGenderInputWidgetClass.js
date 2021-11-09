@@ -1,11 +1,14 @@
 import * as Scrivito from "scrivito";
 
-const GenderInputWidget = Scrivito.provideWidgetClass("GenderInputWidget", {
-  attributes: {
-    label: "string",
-    required: "boolean",
-  },
-  extractTextAttributes: [],
-});
+const FormGenderInputWidget = Scrivito.provideWidgetClass(
+  "FormGenderInputWidget",
+  {
+    attributes: {
+      label: "string",
+      required: "boolean",
+    },
+    extractTextAttributes: [],
+  }
+);
 
-export default GenderInputWidget;
+export default FormGenderInputWidget;
