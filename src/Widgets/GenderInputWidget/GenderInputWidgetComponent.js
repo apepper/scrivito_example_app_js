@@ -24,17 +24,20 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
 
   return (
     <div className="gender-input-widget form-group">
-
-     
-
       <label>
         {widget.get("label")}
-        {widget.get("required") ? <span  class="text-mandatory" title="Mandatory">*</span> : ""}
+        {widget.get("required") ? (
+          <span className="text-mandatory" title="Mandatory">
+            *
+          </span>
+        ) : (
+          ""
+        )}
       </label>
-      <br/>
-      <div class="form-check form-check-inline">
+      <br />
+      <div className="form-check form-check-inline">
         <input
-          class="form-check-input" 
+          className="form-check-input"
           type="radio"
           id={femaleId}
           name="gender"
@@ -42,12 +45,14 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
           required={required}
           onChange={onChange}
         />
-        <label class="form-check-label" htmlFor={femaleId}>Female</label>
+        <label className="form-check-label" htmlFor={femaleId}>
+          Female
+        </label>
       </div>
 
-      <div class="form-check form-check-inline">
+      <div className="form-check form-check-inline">
         <input
-          class="form-check-input" 
+          className="form-check-input"
           type="radio"
           id={maleId}
           name="gender"
@@ -55,37 +60,34 @@ Scrivito.provideComponent("GenderInputWidget", ({ widget }) => {
           required={required}
           onChange={onChange}
         />
-        <label class="form-check-label" htmlFor={maleId}>Male</label>
+        <label className="form-check-label" htmlFor={maleId}>
+          Male
+        </label>
       </div>
 
-      <div class="form-check form-check-inline">
+      <div className="form-check form-check-inline">
         <input
-          class="form-check-input" 
+          className="form-check-input"
           type="radio"
           id={diversId}
           name="gender"
           required={required}
           onChange={onChange}
         />
-        <label class="form-check-label" htmlFor={diversId}>Custom</label>
+        <label className="form-check-label" htmlFor={diversId}>
+          Custom
+        </label>
       </div>
       {showCustom && (
         <input
-          class="form-control"
+          className="form-control"
           type="text"
           id={customId}
           name="gender"
           maxLength="50"
           required={required}
         />
-    )}
-
-
-
-
-     
-
-
+      )}
     </div>
   );
 });
