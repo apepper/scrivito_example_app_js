@@ -4,6 +4,8 @@ const FormContainerWidget = Scrivito.provideWidgetClass("FormContainerWidget", {
   attributes: {
     content: "widgetlist",
     formId: "string",
+    submittingMessage: "string",
+    submittedMessage: "string",
   },
   extractTextAttributes: ["content"],
 });

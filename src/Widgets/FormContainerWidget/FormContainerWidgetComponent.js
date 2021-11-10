@@ -10,8 +10,8 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
   if (submission === "submitting") {
     return (
       <div className="form-container-widget text-center">
-        <i className="fa fa-spin fa-spinner fa-2x" aria-hidden="true"></i>
-        <span className="text-super"> Submitting...</span>
+        <i className="fa fa-spin fa-spinner fa-2x" aria-hidden="true"></i>{" "}
+        <span className="text-super">{widget.get("submittingMessage")}</span>
       </div>
     );
   }
@@ -19,8 +19,8 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
   if (submission === "success") {
     return (
       <div className="form-container-widget text-center">
-        <i className="fa fa-check fa-2x" aria-hidden="true"></i>
-        <span className="text-super"> Successfully submitted.</span>
+        <i className="fa fa-check fa-2x" aria-hidden="true"></i>{" "}
+        <span className="text-super">{widget.get("submittedMessage")}</span>
       </div>
     );
   }
