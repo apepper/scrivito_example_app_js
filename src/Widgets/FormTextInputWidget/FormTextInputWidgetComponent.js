@@ -33,7 +33,11 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
         <input
           className="form-control"
           id={id}
-          name={name}
+          name={
+            name.startsWith("custom_")
+              ? `${customFieldIndicator()}${widget.get("customFieldName")}`
+              : name
+          }
           maxLength={calculateMaxLength(name)}
           placeholder={widget.get("placeholder")}
           type={calculateType(name)}

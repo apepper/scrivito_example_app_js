@@ -18,6 +18,7 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
         { value: "middle_name", title: "Middle name" },
         { value: "company", title: "Company" },
         { value: "phone_number", title: "Telephone number" },
+        { value: "custom_input", title: "Custom single-line" },
         { value: "custom_text_area", title: "Custom multi-line" },
       ],
     },
@@ -33,7 +34,7 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
   properties: (widget) => {
     const otherProps = ["label", "placeholder", "required"];
 
-    if (widget.get("type") === "custom_text_area") {
+    if (widget.get("type").startsWith("custom_")) {
       return ["type", "customFieldName", ...otherProps];
     }
     return ["type", ...otherProps];
