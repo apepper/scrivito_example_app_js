@@ -1,5 +1,6 @@
 import * as Scrivito from "scrivito";
 import formGenderInputWidgetIcon from "../../assets/images/form_gender_input_widget.svg";
+import { validateInsideFormContainer } from "../FormContainerWidget/FormContainerWidgetEditingConfig";
 
 Scrivito.provideEditingConfig("FormGenderInputWidget", {
   title: "Form: Gender Input",
@@ -13,4 +14,5 @@ Scrivito.provideEditingConfig("FormGenderInputWidget", {
     label: "Gender",
   },
   properties: ["label", "required"],
+  validations: [validateInsideFormContainer],
 });

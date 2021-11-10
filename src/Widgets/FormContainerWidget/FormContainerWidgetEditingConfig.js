@@ -51,3 +51,16 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
   },
   properties: ["formId", "submittingMessage", "submittedMessage"],
 });
+
+export function validateInsideFormContainer(widget) {
+  let ancestor = widget.container();
+  while (ancestor) {
+    if (ancestor.objClass() === "FormContainerWidget") {
+      return;
+    }
+
+    ancestor = ancestor.container && ancestor.container();
+  }
+
+  return "Needs to be inside a form container.";
+}

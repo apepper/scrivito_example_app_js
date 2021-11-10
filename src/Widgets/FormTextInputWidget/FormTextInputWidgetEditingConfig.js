@@ -1,5 +1,6 @@
 import * as Scrivito from "scrivito";
 import formTextInputWidgetIcon from "../../assets/images/form_text_input_widget.svg";
+import { validateInsideFormContainer } from "../FormContainerWidget/FormContainerWidgetEditingConfig";
 
 Scrivito.provideEditingConfig("FormTextInputWidget", {
   title: "Form: Text Input",
@@ -39,4 +40,5 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
     }
     return ["type", ...otherProps];
   },
+  validations: [validateInsideFormContainer],
 });
