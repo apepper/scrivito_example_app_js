@@ -50,17 +50,34 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
     ],
   },
   properties: ["formId", "submittingMessage", "submittedMessage"],
+  validations: [validateOutsideFormContainer],
 });
 
+function validateOutsideFormContainer(widget) {
+  return detectFormContainerWidgetAncestor(
+    widget,
+    "Needs to be outside of a form container.",
+    undefined
+  );
+}
+
 export function validateInsideFormContainer(widget) {
+  return detectFormContainerWidgetAncestor(
+    widget,
+    undefined,
+    "Needs to be inside a form container."
+  );
+}
+
+function detectFormContainerWidgetAncestor(widget, found, notFound) {
   let ancestor = widget.container();
   while (ancestor) {
     if (ancestor.objClass() === "FormContainerWidget") {
-      return;
+      return found;
     }
 
     ancestor = ancestor.container && ancestor.container();
   }
 
-  return "Needs to be inside a form container.";
+  return notFound;
 }
