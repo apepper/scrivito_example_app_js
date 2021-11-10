@@ -1,4 +1,5 @@
 import * as Scrivito from "scrivito";
+import { flattenDeep } from "lodash-es";
 import formContainerWidgetIcon from "../../assets/images/form_container_widget.svg";
 import FormCheckboxWidget from "../FormCheckboxWidget/FormCheckboxWidgetClass";
 import FormSubmitButtonWidget from "../FormSubmitButtonWidget/FormSubmitButtonWidgetClass";
@@ -50,8 +51,46 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
     ],
   },
   properties: ["formId", "submittingMessage", "submittedMessage"],
-  validations: [validateOutsideFormContainer],
+  validations: [
+    validateOutsideFormContainer,
+    (widget) => {
+      const descendants = descendantWidgets(widget);
+      const formSubmitButtons = descendants.filter(
+        (descendant) => descendant.objClass() === "FormSubmitButtonWidget"
+      );
+      if (formSubmitButtons.length === 0) {
+        return "A submit button is missing.";
+      }
+      if (formSubmitButtons.length > 1) {
+        return "More then one submit button.";
+      }
+    },
+  ],
 });
+
+function descendantWidgets(widget) {
+  return flattenDeep(
+    widgetlistAttributes(widget).map((attributeName) =>
+      widget
+        .get(attributeName)
+        .map((childWidget) => [childWidget, ...descendantWidgets(childWidget)])
+    )
+  );
+}
+
+function widgetlistAttributes(widget) {
+  // TODO: reimplement with nicer attributesDefinition once JS 1.27.0 is out
+  const attributes = Scrivito.getClass(widget.objClass())
+    ?._scrivitoPrivateSchema?.attributes;
+  if (!attributes) {
+    return [];
+  }
+
+  return Object.keys(attributes).filter((attributeName) => {
+    const [attributeType] = attributes[attributeName];
+    return attributeType === "widgetlist";
+  });
+}
 
 function validateOutsideFormContainer(widget) {
   return detectFormContainerWidgetAncestor(
