@@ -1,11 +1,20 @@
 import { uniqueId } from "lodash";
 import * as React from "react";
 import * as Scrivito from "scrivito";
-import { booleanIndicatorPrefix } from "../FormContainerWidget/FormContainerWidgetComponent";
+import {
+  booleanIndicatorPrefix,
+  customFieldIndicator,
+} from "../FormContainerWidget/FormContainerWidgetComponent";
 
 Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
   const [id] = React.useState(() => uniqueId("checkbox-widget_"));
   const [checked, setChecked] = React.useState(false);
+
+  const type = widget.get("type");
+  const name =
+    type === "custom"
+      ? `${customFieldIndicator()}${widget.get("customFieldName")}`
+      : type;
 
   return (
     <div className="checkbox-widget form-check form-check-inline mb-2">
@@ -19,7 +28,7 @@ Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
       />
       <input
         type="hidden"
-        name={`${booleanIndicatorPrefix()}accept_terms`}
+        name={`${booleanIndicatorPrefix()}${name}`}
         value={checked}
       />
 
