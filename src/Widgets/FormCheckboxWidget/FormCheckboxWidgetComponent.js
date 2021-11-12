@@ -7,7 +7,7 @@ import {
 } from "../FormContainerWidget/FormContainerWidgetComponent";
 
 Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
-  const [id] = React.useState(() => uniqueId("checkbox-widget_"));
+  const [id] = React.useState(() => uniqueId("FormCheckboxWidget_"));
   const [checked, setChecked] = React.useState(false);
 
   const type = widget.get("type");

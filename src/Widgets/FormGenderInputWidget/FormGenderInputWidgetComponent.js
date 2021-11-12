@@ -5,18 +5,10 @@ import * as Scrivito from "scrivito";
 Scrivito.provideComponent("FormGenderInputWidget", ({ widget }) => {
   const required = widget.get("required");
   const [showCustom, setShowCustom] = React.useState(false);
-  const [femaleId] = React.useState(() =>
-    uniqueId("gender-input-widget_gender-f_")
-  );
-  const [maleId] = React.useState(() =>
-    uniqueId("gender-input-widget_gender-m_")
-  );
-  const [diversId] = React.useState(() =>
-    uniqueId("gender-input-widget_gender-d_")
-  );
-  const [customId] = React.useState(() =>
-    uniqueId("gender-input-widget_gender-c_")
-  );
+  const [femaleId] = React.useState(() => uniqueId("FormGenderInputWidget-f_"));
+  const [maleId] = React.useState(() => uniqueId("FormGenderInputWidget-m_"));
+  const [diversId] = React.useState(() => uniqueId("FormGenderInputWidget-d_"));
+  const [customId] = React.useState(() => uniqueId("FormGenderInputWidget-c_"));
 
   const onChange = (event) => setShowCustom(event.target.id === diversId);
 
