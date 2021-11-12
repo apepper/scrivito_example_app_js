@@ -38,7 +38,7 @@ Scrivito.provideEditingConfig("FormCheckboxWidget", {
     [
       "customFieldName",
       (customFieldName, { widget }) => {
-        if (!widget.get("type").startsWith("custom")) {
+        if (!widget.get("type")?.startsWith("custom")) {
           return;
         }
 

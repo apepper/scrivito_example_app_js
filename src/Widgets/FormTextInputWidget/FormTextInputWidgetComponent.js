@@ -34,7 +34,7 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
           className="form-control"
           id={id}
           name={
-            name.startsWith("custom_")
+            name?.startsWith("custom_")
               ? `${customFieldIndicator()}${widget.get("customFieldName")}`
               : name
           }

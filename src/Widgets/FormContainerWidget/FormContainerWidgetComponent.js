@@ -58,7 +58,7 @@ function extractFormData(formElement) {
 
   // process boolean
   const booleanKeys = Object.keys(entries).filter((key) =>
-    key.startsWith(booleanIndicatorPrefix())
+    key?.startsWith(booleanIndicatorPrefix())
   );
   booleanKeys.forEach((booleanKey) => {
     const booleanValue = entries[booleanKey] === "true";
@@ -69,7 +69,7 @@ function extractFormData(formElement) {
 
   // process custom fields
   const customKeys = Object.keys(entries).filter((key) =>
-    key.startsWith(customFieldIndicator())
+    key?.startsWith(customFieldIndicator())
   );
   const customFields = {};
   customKeys.forEach((customKey) => {

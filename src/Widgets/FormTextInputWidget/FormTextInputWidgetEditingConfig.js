@@ -35,7 +35,7 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
   properties: (widget) => {
     const otherProps = ["label", "placeholder", "required"];
 
-    if (widget.get("type").startsWith("custom_")) {
+    if (widget.get("type")?.startsWith("custom_")) {
       return ["type", "customFieldName", ...otherProps];
     }
     return ["type", ...otherProps];
@@ -45,7 +45,7 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
     [
       "customFieldName",
       (customFieldName, { widget }) => {
-        if (!widget.get("type").startsWith("custom")) {
+        if (!widget.get("type")?.startsWith("custom")) {
           return;
         }
 
