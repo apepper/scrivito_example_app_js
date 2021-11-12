@@ -5,9 +5,24 @@ import { validateInsideFormContainer } from "../FormContainerWidget/FormContaine
 Scrivito.provideEditingConfig("FormSubmitButtonWidget", {
   title: "Form: Submit Button",
   thumbnail: formSubmitButtonWidgetIcon,
+  attributes: {
+    buttonText: {
+      title: "Button Text",
+    },
+    alignment: {
+      title: "Alignment",
+      description: "Default: Left",
+      values: [
+        { value: "left", title: "Left" },
+        { value: "center", title: "Center" },
+        { value: "right", title: "Right" },
+      ],
+    },
+  },
   initialContent: {
     buttonText: "send message",
+    alignment: "left",
   },
-  properties: ["buttonText"],
+  properties: ["buttonText", "alignment"],
   validations: [validateInsideFormContainer],
 });
