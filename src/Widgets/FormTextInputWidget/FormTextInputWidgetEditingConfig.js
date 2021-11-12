@@ -40,5 +40,27 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
     }
     return ["type", ...otherProps];
   },
-  validations: [validateInsideFormContainer],
+  validations: [
+    validateInsideFormContainer,
+    [
+      "customFieldName",
+      (customFieldName, { widget }) => {
+        if (!widget.get("type").startsWith("custom")) {
+          return;
+        }
+
+        if (customFieldName.length === 0) {
+          return "Custom field name needs to be set.";
+        }
+
+        if (customFieldName.length > 50) {
+          return "Custom field name is too long. Only 50 characters are allowed.";
+        }
+
+        if (customFieldName.match(/^[A-Za-z_][A-Za-z0-9_]*$/) === null) {
+          return 'Custom field name contains invalid characters: only "a-z", "A-Z", "0-9" and "_".';
+        }
+      },
+    ],
+  ],
 });
