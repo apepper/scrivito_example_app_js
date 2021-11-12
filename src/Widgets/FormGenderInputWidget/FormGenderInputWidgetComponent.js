@@ -21,7 +21,7 @@ Scrivito.provideComponent("FormGenderInputWidget", ({ widget }) => {
   const onChange = (event) => setShowCustom(event.target.id === diversId);
 
   return (
-    <div className="gender-input-widget form-group">
+    <div className="form-group">
       <label>
         {widget.get("label")}
         {widget.get("required") ? (

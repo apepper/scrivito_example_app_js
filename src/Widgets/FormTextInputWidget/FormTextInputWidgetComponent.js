@@ -8,7 +8,7 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
   const name = widget.get("type");
 
   return (
-    <div className="text-input-widget form-group">
+    <div className="form-group">
       <label htmlFor={id}>
         {widget.get("label")}
         {widget.get("required") ? (

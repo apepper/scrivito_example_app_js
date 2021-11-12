@@ -17,7 +17,7 @@ Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
       : type;
 
   return (
-    <div className="checkbox-widget form-check form-check-inline mb-2">
+    <div className="form-check form-check-inline mb-2">
       <input
         className="form-check-input"
         id={id}
