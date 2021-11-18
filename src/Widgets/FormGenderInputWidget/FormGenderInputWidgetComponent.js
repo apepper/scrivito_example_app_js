@@ -60,6 +60,7 @@ Scrivito.provideComponent("FormGenderInputWidget", ({ widget }) => {
           type="radio"
           id={diversId}
           name="gender"
+          value="custom"
           required={required}
           onChange={onChange}
         />
