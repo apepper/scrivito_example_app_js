@@ -79,7 +79,7 @@ function descendantWidgets(widget) {
 }
 
 function widgetlistAttributes(widget) {
-  // TODO: reimplement with nicer attributesDefinition once JS 1.27.0 is out
+  // TODO: reimplement with nicer attributeDefinitions once JS 1.27.0 is out
   // eslint-disable-next-line no-underscore-dangle
   const attributes = Scrivito.getClass(widget.objClass())
     ?._scrivitoPrivateSchema?.attributes;
