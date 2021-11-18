@@ -1,14 +1,13 @@
-import { uniqueId } from "lodash-es";
 import * as React from "react";
 import * as Scrivito from "scrivito";
 
 Scrivito.provideComponent("FormGenderInputWidget", ({ widget }) => {
   const required = widget.get("required");
   const [showCustom, setShowCustom] = React.useState(false);
-  const [femaleId] = React.useState(() => uniqueId("FormGenderInputWidget-f_"));
-  const [maleId] = React.useState(() => uniqueId("FormGenderInputWidget-m_"));
-  const [diversId] = React.useState(() => uniqueId("FormGenderInputWidget-d_"));
-  const [customId] = React.useState(() => uniqueId("FormGenderInputWidget-c_"));
+  const femaleId = `FormGenderInputWidget_${widget.id}_f`;
+  const maleId = `FormGenderInputWidget_${widget.id}_m`;
+  const diversId = `FormGenderInputWidget_${widget.id}_d`;
+  const customId = `FormGenderInputWidget_${widget.id}_c`;
 
   const onChange = (event) => setShowCustom(event.target.id === diversId);
 

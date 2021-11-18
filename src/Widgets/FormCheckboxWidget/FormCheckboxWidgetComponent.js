@@ -1,4 +1,3 @@
-import { uniqueId } from "lodash";
 import * as React from "react";
 import * as Scrivito from "scrivito";
 import {
@@ -7,7 +6,7 @@ import {
 } from "../FormContainerWidget/FormContainerWidgetComponent";
 
 Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
-  const [id] = React.useState(() => uniqueId("FormCheckboxWidget_"));
+  const id = `FormCheckboxWidget_${widget.id()}`;
   const [checked, setChecked] = React.useState(false);
 
   const type = widget.get("type");

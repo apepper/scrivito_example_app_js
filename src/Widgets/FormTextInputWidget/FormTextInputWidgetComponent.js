@@ -1,10 +1,9 @@
-import { uniqueId } from "lodash-es";
 import * as React from "react";
 import * as Scrivito from "scrivito";
 import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidgetComponent";
 
 Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
-  const [id] = React.useState(() => uniqueId("FormTextInputWidget_"));
+  const id = `FormTextInputWidget_${widget.id()}`;
   const name = widget.get("type");
 
   return (
