@@ -33,7 +33,7 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
     type: "email",
   },
   properties: (widget) => {
-    const otherProps = ["label", "placeholder", "required"];
+    const otherProps = ["label", "description", "placeholder", "required"];
 
     if (widget.get("type")?.startsWith("custom_")) {
       return ["type", "customFieldName", ...otherProps];
