@@ -5,19 +5,28 @@ import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidget
 Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
   const id = `FormTextInputWidget_${widget.id()}`;
   const name = widget.get("type");
+  const labelOptions = {};
+  if (!Scrivito.isInPlaceEditingActive()) {
+    labelOptions.htmlFor = id;
+  }
 
   return (
     <div className="form-group">
-      <label htmlFor={id}>
-        {widget.get("label")}
-        {widget.get("required") ? (
+      <Scrivito.ContentTag
+        content={widget}
+        attribute="label"
+        tag="label"
+        {...labelOptions}
+      />
+      {widget.get("required") ? (
+        <>
           <span className="text-mandatory" title="Mandatory">
             *
           </span>
-        ) : (
-          ""
-        )}
-      </label>
+        </>
+      ) : (
+        ""
+      )}
 
       {name === "custom_text_area" ? (
         <textarea
