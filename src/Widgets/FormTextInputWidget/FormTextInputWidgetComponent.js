@@ -34,7 +34,7 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
 
       {widget.get("description") ? (
         <>
-          <i className="fa fa-question-circle fa-1x" id={questionId}></i>
+          <i className="fa fa-question-circle fa-1x ml-2" id={questionId}></i>
           <Popover
             placement="bottom"
             isOpen={popoverOpen}
