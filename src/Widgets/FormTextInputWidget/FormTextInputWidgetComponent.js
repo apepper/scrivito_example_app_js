@@ -42,7 +42,7 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
       {widget.get("description") ? (
         <>
           <i
-            className="fa fa-question-circle-o fa-1x ml-2 help-cursor"
+            className="fa fa-question-circle-o fa-1x ml-1 help-cursor"
             id={questionId}
           ></i>
           <UncontrolledPopover
