@@ -1,12 +1,11 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
-import { Popover, PopoverBody } from "reactstrap";
+import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidgetComponent";
 
 Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
   const id = `FormTextInputWidget_${widget.id()}`;
   const questionId = `${id}_question`;
-  const [popoverOpen, setPopoverOpen] = React.useState(false);
 
   const name = widget.get("type");
   const labelOptions = {};
@@ -35,18 +34,17 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
       {widget.get("description") ? (
         <>
           <i className="fa fa-question-circle fa-1x ml-2" id={questionId}></i>
-          <Popover
+          <UncontrolledPopover
             placement="bottom"
-            isOpen={popoverOpen}
             target={questionId}
-            toggle={() => setPopoverOpen(!popoverOpen)}
+            trigger="legacy"
           >
             <PopoverBody>
               <Scrivito.InPlaceEditingOff>
                 <Scrivito.ContentTag content={widget} attribute="description" />
               </Scrivito.InPlaceEditingOff>
             </PopoverBody>
-          </Popover>
+          </UncontrolledPopover>
         </>
       ) : null}
 
