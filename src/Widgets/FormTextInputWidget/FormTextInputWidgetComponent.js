@@ -23,7 +23,7 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
       />
       {widget.get("required") ? (
         <>
-          <span className="text-mandatory" title="Mandatory">
+          <span className="text-mandatory help-cursor" title="Mandatory">
             *
           </span>
         </>
@@ -33,7 +33,10 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
 
       {widget.get("description") ? (
         <>
-          <i className="fa fa-question-circle fa-1x ml-2" id={questionId}></i>
+          <i
+            className="fa fa-question-circle fa-1x ml-2 help-cursor"
+            id={questionId}
+          ></i>
           <UncontrolledPopover
             placement="bottom"
             target={questionId}
