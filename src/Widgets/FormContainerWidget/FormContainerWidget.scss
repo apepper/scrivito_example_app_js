@@ -8,13 +8,11 @@
     font-weight: bold;
     color: red;
   }
+  .fa { 
+    color: #ccc;
+  }
   .help-cursor:hover {
     cursor: help;
   }
 }
-
-/* popover styles used in forms
-=================================================================== */
-
-.popover p { margin: 0; }
 
