@@ -6,6 +6,7 @@ import { customFieldIndicator } from "../FormContainerWidget/FormContainerWidget
 Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
   const id = `FormTextInputWidget_${widget.id()}`;
   const questionId = `${id}_question`;
+  const mandatoryId = `${id}_mandatory`;
 
   const name = widget.get("type");
   const labelOptions = {};
@@ -23,9 +24,16 @@ Scrivito.provideComponent("FormTextInputWidget", ({ widget }) => {
       />
       {widget.get("required") ? (
         <>
-          <span className="text-mandatory help-cursor" title="Mandatory">
+          <span className="text-mandatory help-cursor" id={mandatoryId}>
             *
           </span>
+          <UncontrolledPopover
+            placement="bottom"
+            target={mandatoryId}
+            trigger="legacy"
+          >
+            <PopoverBody>mandatory</PopoverBody>
+          </UncontrolledPopover>
         </>
       ) : (
         ""
