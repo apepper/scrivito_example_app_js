@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import getMetadata from "../../utils/getMetadata";
 
-Scrivito.registerComponent("SocialCardsTab", ({ obj }) => {
+export function SocialCardsTab({ obj }) {
   const uiContext = Scrivito.uiContext();
   if (uiContext === undefined) {
     return null;
@@ -41,7 +41,7 @@ Scrivito.registerComponent("SocialCardsTab", ({ obj }) => {
       </div>
     </div>
   );
-});
+}
 
 const TwitterInput = Scrivito.connect(({ obj }) => {
   const validationsForCreator = Scrivito.validationResultsFor(obj, "tcCreator");
