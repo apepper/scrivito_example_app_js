@@ -3,7 +3,7 @@ import formContainerWidgetIcon from "../../assets/images/form_container_widget.s
 import FormSubmitButtonWidget from "../FormSubmitButtonWidget/FormSubmitButtonWidgetClass";
 import FormTextInputWidget from "../FormTextInputWidget/FormTextInputWidgetClass";
 import TextWidget from "../TextWidget/TextWidgetClass";
-import { random32CharHex } from "./random32CharHex";
+import { pseudoRandom32CharHex } from "./pseudoRandom32CharHex";
 
 Scrivito.provideEditingConfig("FormContainerWidget", {
   title: "Form Container",
@@ -29,7 +29,7 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
     },
   ],
   initialContent: {
-    formId: () => random32CharHex(),
+    formId: () => pseudoRandom32CharHex(),
     submittingMessage: "Submitting...",
     submittedMessage:
       "Your message has been successfully sent. Thank you for your request. We will get back to you as soon as possible.",
