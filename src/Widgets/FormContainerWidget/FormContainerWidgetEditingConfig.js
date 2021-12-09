@@ -1,9 +1,9 @@
 import * as Scrivito from "scrivito";
-import md5 from "blueimp-md5";
 import formContainerWidgetIcon from "../../assets/images/form_container_widget.svg";
 import FormSubmitButtonWidget from "../FormSubmitButtonWidget/FormSubmitButtonWidgetClass";
 import FormTextInputWidget from "../FormTextInputWidget/FormTextInputWidgetClass";
 import TextWidget from "../TextWidget/TextWidgetClass";
+import { pseudoRandom32CharHex } from "./pseudoRandom32CharHex";
 
 Scrivito.provideEditingConfig("FormContainerWidget", {
   title: "Form Container",
@@ -31,10 +31,8 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
       properties: ["formId"],
     },
   ],
-  initialize: (widget) => {
-    widget.update({ formId: md5(`${widget.obj().id()}${widget.id()}`) });
-  },
   initialContent: {
+    formId: () => pseudoRandom32CharHex(),
     submittingMessage: "Submitting...",
     submittedMessage:
       "Your message has been successfully sent. Thank you for your request. We will get back to you as soon as possible.",
