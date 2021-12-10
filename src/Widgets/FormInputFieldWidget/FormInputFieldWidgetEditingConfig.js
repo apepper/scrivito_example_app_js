@@ -1,9 +1,9 @@
 import * as Scrivito from "scrivito";
-import formTextInputWidgetIcon from "../../assets/images/form_text_input_widget.svg";
+import formInputFieldWidgetIcon from "../../assets/images/form_input_field_widget.svg";
 
-Scrivito.provideEditingConfig("FormTextInputWidget", {
-  title: "Form: Text Input",
-  thumbnail: formTextInputWidgetIcon,
+Scrivito.provideEditingConfig("FormInputFieldWidget", {
+  title: "Form Input Field",
+  thumbnail: formInputFieldWidgetIcon,
   attributes: {
     required: { title: "Mandatory" },
     type: {
@@ -20,5 +20,5 @@ Scrivito.provideEditingConfig("FormTextInputWidget", {
     placeholder: "Your email address",
     type: "email",
   },
-  properties: ["required", "label", "placeholder", "type", "helpText"],
+  properties: ["type", "label", "placeholder", "required", "helpText"],
 });
