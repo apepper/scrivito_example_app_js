@@ -9,7 +9,6 @@ import {
 import {
   metadataEditingConfigAttributes,
   metadataInitialContent,
-  metadataPropertiesGroups,
   metadataValidations,
 } from "../_metadataEditingConfig";
 
@@ -92,7 +91,17 @@ Scrivito.provideEditingConfig("Homepage", {
       ],
       key: "site-settings-group",
     },
-    ...metadataPropertiesGroups,
+    {
+      title: "Metadata",
+      properties: ["metaDataDescription", "robotsIndex"],
+      key: "metadata-group",
+    },
+    {
+      title: "Social cards",
+      component: "SocialCardsTab",
+      properties: ["tcCreator", "tcDescription", "ogDescription"],
+      key: "social-cards-group",
+    },
   ],
   initialContent: {
     ...defaultPageInitialContent,
