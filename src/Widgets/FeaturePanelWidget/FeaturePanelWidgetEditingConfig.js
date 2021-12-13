@@ -1,5 +1,6 @@
 import * as Scrivito from "scrivito";
 import featurePanelWidgetIcon from "../../assets/images/feature_panel_widget.svg";
+import { IconEditorTab } from "../../Components/ScrivitoExtensions/IconEditorTab";
 
 Scrivito.provideEditingConfig("FeaturePanelWidget", {
   title: "Feature Panel",
@@ -7,7 +8,7 @@ Scrivito.provideEditingConfig("FeaturePanelWidget", {
   propertiesGroups: [
     {
       title: "Icon",
-      component: "IconEditorTab",
+      component: IconEditorTab,
       key: "icon-group",
     },
   ],
