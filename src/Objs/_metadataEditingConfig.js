@@ -23,12 +23,12 @@ export const metadataPropertiesGroups = [
     properties: ["metaDataDescription", "robotsIndex"],
     key: "metadata-group",
   },
-  {
-    title: "Social cards",
-    component: "SocialCardsTab",
-    properties: ["tcCreator", "tcDescription", "ogDescription"],
-    key: "social-cards-group",
-  },
+  // {
+  //   title: "Social cards",
+  //   component: "SocialCardsTab",
+  //   properties: ["tcCreator", "tcDescription", "ogDescription"],
+  //   key: "social-cards-group",
+  // },
 ];
 
 export const metadataValidations = [
