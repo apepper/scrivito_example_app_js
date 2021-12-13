@@ -1,6 +1,7 @@
 import * as Scrivito from "scrivito";
+import loadable from "@loadable/component";
+
 import homepageObjIcon from "../../assets/images/homepage_obj.svg";
-import SocialCardsTab from "../../Components/ScrivitoExtensions/SocialCardsTab";
 import {
   defaultPageEditingConfigAttributes,
   defaultPageInitialContent,
@@ -12,6 +13,10 @@ import {
   metadataInitialContent,
   metadataValidations,
 } from "../_metadataEditingConfig";
+
+const SocialCardsTab = loadable(() =>
+  import("../../Components/ScrivitoExtensions/SocialCardsTab")
+);
 
 Scrivito.provideEditingConfig("Homepage", {
   title: "Homepage",
