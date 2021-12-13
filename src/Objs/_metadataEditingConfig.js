@@ -1,3 +1,5 @@
+import { SocialCardsTab } from "../Components/ScrivitoExtensions/SocialCardsTab";
+
 export const metadataEditingConfigAttributes = {
   metaDataDescription: {
     title: "Page description",
@@ -25,7 +27,7 @@ export const metadataPropertiesGroups = [
   },
   {
     title: "Social cards",
-    component: "SocialCardsTab",
+    component: SocialCardsTab,
     properties: ["tcCreator", "tcDescription", "ogDescription"],
     key: "social-cards-group",
   },

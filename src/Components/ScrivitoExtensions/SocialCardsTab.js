@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import getMetadata from "../../utils/getMetadata";
 
-Scrivito.registerComponent("SocialCardsTab", ({ obj }) => {
+export const SocialCardsTab = Scrivito.connect(({ obj }) => {
   const uiContext = Scrivito.uiContext();
   if (uiContext === undefined) {
     return null;
