@@ -1,5 +1,6 @@
 import * as Scrivito from "scrivito";
 import homepageObjIcon from "../../assets/images/homepage_obj.svg";
+import SocialCardsTab from "../../Components/ScrivitoExtensions/SocialCardsTab";
 import {
   defaultPageEditingConfigAttributes,
   defaultPageInitialContent,
@@ -98,7 +99,7 @@ Scrivito.provideEditingConfig("Homepage", {
     },
     {
       title: "Social cards",
-      component: "SocialCardsTab",
+      component: SocialCardsTab,
       properties: ["tcCreator", "tcDescription", "ogDescription"],
       key: "social-cards-group",
     },
