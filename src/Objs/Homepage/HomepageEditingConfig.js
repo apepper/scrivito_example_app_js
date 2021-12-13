@@ -111,5 +111,13 @@ Scrivito.provideEditingConfig("Homepage", {
         }
       },
     ],
+    [
+      "metaDataDescription",
+      (metaDataDescription) => {
+        if (!metaDataDescription) {
+          return "Provde a page description";
+        }
+      },
+    ],
   ],
 });
