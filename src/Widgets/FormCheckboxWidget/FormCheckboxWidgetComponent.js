@@ -3,20 +3,28 @@ import * as Scrivito from "scrivito";
 import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import { getFieldName } from "../FormContainerWidget/utils/getFieldName";
 
-Scrivito.provideComponent("FormInputFieldWidget", ({ widget }) => {
-  const id = `form_text_input_widget_${widget.id()}`;
+Scrivito.provideComponent("FormCheckboxWidget", ({ widget }) => {
+  const id = `form_checkbox_widget_${widget.id()}`;
   const questionMarkId = `${id}_question_mark`;
   const mandatoryId = `${id}_mandatory`;
 
-  const fieldName = getFieldName(widget);
   const labelOptions = {};
   if (!Scrivito.isInPlaceEditingActive()) {
     labelOptions.htmlFor = id;
   }
 
   return (
-    <div className="form-group">
+    <div className="form-check form-check-inline mb-2">
+      <input
+        className="form-check-input"
+        id={id}
+        type="checkbox"
+        name={getFieldName(widget)}
+        required={widget.get("required")}
+      />
+
       <Scrivito.ContentTag
+        className="form-check-label"
         content={widget}
         attribute="label"
         tag="label"
@@ -56,43 +64,6 @@ Scrivito.provideComponent("FormInputFieldWidget", ({ widget }) => {
           </UncontrolledPopover>
         </>
       ) : null}
-
-      {widget.get("type") === "custom_textarea" ? (
-        <textarea
-          className="form-control"
-          id={id}
-          rows="3"
-          name={fieldName}
-          placeholder={widget.get("placeholder")}
-          required={widget.get("required")}
-        />
-      ) : (
-        <input
-          className="form-control"
-          id={id}
-          name={fieldName}
-          maxLength={calculateMaxLength(fieldName)}
-          placeholder={widget.get("placeholder")}
-          type={calculateType(fieldName)}
-          required={widget.get("required")}
-        />
-      )}
     </div>
   );
 });
-
-function calculateMaxLength(fieldName) {
-  return fieldName === "phone_number" ? "50" : "250";
-}
-
-function calculateType(type) {
-  if (type === "email") {
-    return "email";
-  }
-
-  if (type === "phone_number") {
-    return "tel";
-  }
-
-  return "text";
-}
