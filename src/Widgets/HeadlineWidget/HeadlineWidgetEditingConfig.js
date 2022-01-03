@@ -69,7 +69,13 @@ Scrivito.provideEditingConfig("HeadlineWidget", {
     [
       "headline",
 
-      (headline) => {
+      (headline, { widget }) => {
+        let candidate = widget.container();
+        do {
+          candidate = candidate.container();
+        } while (candidate && candidate.container);
+        console.log("candidate", candidate);
+
         if (!headline) {
           return { message: "The headline must be set.", severity: "error" };
         }
