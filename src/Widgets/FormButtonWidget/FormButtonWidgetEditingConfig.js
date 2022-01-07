@@ -1,5 +1,7 @@
 import * as Scrivito from "scrivito";
 import formButtonWidgetIcon from "../../assets/images/form_button_widget.svg";
+import { neoletterInstance } from "../FormContainerWidget/utils/neoletterInstance";
+import { insideFormContainerValidation } from "../FormContainerWidget/utils/validations/insideFormContainerValidation";
 
 Scrivito.provideEditingConfig("FormButtonWidget", {
   title: "Form Button",
@@ -24,6 +26,12 @@ Scrivito.provideEditingConfig("FormButtonWidget", {
     alignment: "block",
   },
   validations: [
+    () => {
+      if (!neoletterInstance()) {
+        return "For form buttons to work, a Neoletter instance must be specified in the site settings.";
+      }
+    },
+    insideFormContainerValidation,
     [
       "alignment",
       (alignment) => {

@@ -3,8 +3,9 @@ import formContainerWidgetIcon from "../../assets/images/form_container_widget.s
 import FormButtonWidget from "../FormButtonWidget/FormButtonWidgetClass";
 import FormInputFieldWidget from "../FormInputFieldWidget/FormInputFieldWidgetClass";
 import TextWidget from "../TextWidget/TextWidgetClass";
-import { neoletterInstance } from "./utils/neoletterInstance";
 import { pseudoRandom32CharHex } from "./utils/pseudoRandom32CharHex";
+import { getFormContainer } from "./utils/getFormContainer";
+import { widgets } from "./utils/widgets";
 
 Scrivito.provideEditingConfig("FormContainerWidget", {
   title: "Form",
@@ -67,9 +68,13 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
     ],
   },
   validations: [
-    () => {
-      if (!neoletterInstance()) {
-        return "For form containers to work, a Neoletter instance must be specified in the site settings.";
+    (widget) => {
+      if (getFormContainer(widget)) {
+        return "Needs to be outside of a form.";
+      }
+
+      if (widgets(widget).every((w) => w.objClass() !== "FormButtonWidget")) {
+        return "A submit button is missing.";
       }
     },
 

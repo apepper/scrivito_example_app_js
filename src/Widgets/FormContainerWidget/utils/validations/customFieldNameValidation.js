@@ -1,8 +1,11 @@
+import { isCustomType } from "../isCustomType";
+import { isFieldNameUnique } from "../isFieldNameUnique";
+
 export const customFieldNameValidation = [
   "customFieldName",
 
   (customFieldName, { widget }) => {
-    if (!widget.get("type")?.startsWith("custom")) {
+    if (!isCustomType(widget.get("type"))) {
       return;
     }
 
@@ -20,6 +23,10 @@ export const customFieldNameValidation = [
 
     if (customFieldName.length > 50) {
       return `Custom field names may be up to 50 characters long. This name is ${customFieldName.length} characters long.`;
+    }
+
+    if (!isFieldNameUnique(widget)) {
+      return "There is at least one other element with the same custom field name.";
     }
   },
 ];
