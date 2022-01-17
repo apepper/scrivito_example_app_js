@@ -26,9 +26,17 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
     failedMessage: {
       title: "Message shown if form submission failed",
     },
+    hiddenFields: {
+      title: "Hidden fields",
+    },
   },
   properties: ["submittingMessage", "submittedMessage", "failedMessage"],
   propertiesGroups: [
+    {
+      title: "Hidden fields",
+      key: "FormContainerWidgetHiddenFields",
+      properties: ["hiddenFields"],
+    },
     {
       title: "System",
       key: "FormContainerWidgetSystem",
@@ -69,7 +77,12 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
           }),
         ],
       }),
-      new FormInputFieldWidget({ required: true }),
+      new FormInputFieldWidget({
+        label: "Email",
+        placeholder: "Your email address",
+        type: "email",
+        required: true,
+      }),
       new FormInputFieldWidget({
         type: "company",
         label: "Company",
@@ -77,7 +90,8 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
       }),
 
       new FormInputFieldWidget({
-        type: "custom_textarea",
+        type: "custom",
+        customType: "multi_line",
         customFieldName: "custom_message",
         label: "Message",
         placeholder: "Your message",

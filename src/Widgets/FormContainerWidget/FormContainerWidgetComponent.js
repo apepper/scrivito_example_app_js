@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
+import { getFieldName } from "./utils/getFieldName";
 import { neoletterInstance } from "./utils/neoletterInstance";
 import { scrollIntoView } from "./utils/scrollIntoView";
 
@@ -45,6 +46,9 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
     <div className="form-container-widget">
       <form method="post" action={formEndpoint} onSubmit={onSubmit}>
         <input type="hidden" name="form_id" value={widget.get("formId")} />
+        {widget.get("hiddenFields").map((hiddenField) => (
+          <HiddenField key={hiddenField.id()} widget={hiddenField} />
+        ))}
         <Scrivito.ContentTag content={widget} attribute="content" />
       </form>
     </div>
@@ -91,3 +95,14 @@ async function submit(formElement, formEndpoint) {
   // console.log("submitting", Object.fromEntries(body.entries()));
   await fetch(formEndpoint, { method: "post", body });
 }
+
+const HiddenField = Scrivito.connect(({ widget }) => {
+  const name = getFieldName(widget);
+  if (!name) {
+    return null;
+  }
+
+  return (
+    <input type="hidden" name={name} value={widget.get("customHiddenValue")} />
+  );
+});

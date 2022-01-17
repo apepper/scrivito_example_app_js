@@ -1,3 +1,3 @@
-export function isCustomType(type) {
-  return ["custom", "custom_text", "custom_textarea"].includes(type);
+export function isCustomType(widget) {
+  return !widget.attributeDefinitions().type || widget.get("type") === "custom";
 }
