@@ -86,7 +86,15 @@ Scrivito.provideEditingConfig("Job", {
     "locationCountry",
     "employmentType",
   ],
-  propertiesGroups: [...metadataPropertiesGroups],
+  propertiesGroups: [
+    ...metadataPropertiesGroups,
+    {
+      title: "Inhalt",
+      key: "main",
+      properties: ["title"],
+      enabled: true,
+    },
+  ],
   initialContent: {
     ...metadataInitialContent,
     title: "Lorem Ipsum",

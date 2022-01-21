@@ -58,6 +58,14 @@ Scrivito.provideEditingConfig("HeadlineWidget", {
     },
   },
   properties: ["style", "level", "alignment", "showDividingLine", "showMargin"],
+  propertiesGroups: [
+    {
+      title: "Inhalt",
+      key: "main3",
+      properties: ["style"],
+      enabled: true,
+    },
+  ],
   initialContent: {
     alignment: "left",
     headline: "Lorem Ipsum",
