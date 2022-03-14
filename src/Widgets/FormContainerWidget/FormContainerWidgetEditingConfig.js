@@ -104,6 +104,9 @@ Scrivito.provideEditingConfig("FormContainerWidget", {
       new FormButtonWidget(),
     ],
   },
+  initializeCopy: (widget) => {
+    widget.update({ formId: pseudoRandom32CharHex() });
+  },
   validations: [
     (widget) => {
       if (getFormContainer(widget)) {
