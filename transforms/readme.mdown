@@ -1,0 +1,5 @@
+# Usage
+
+```
+npx jscodeshift --extensions=jsx,js --transform transforms/defaultToNamedExport.ts src/Objs/SearchResults/SearchInput.js src/Components/AnimateOnReveal.js src/Components/BlogPost/BlogPostNavigation.js -d --print
+```
