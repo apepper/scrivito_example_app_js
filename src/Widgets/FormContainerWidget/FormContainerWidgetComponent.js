@@ -1,15 +1,12 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
 import { getFieldName } from "./utils/getFieldName";
-import { neoletterInstance } from "./utils/neoletterInstance";
 import { scrollIntoView } from "./utils/scrollIntoView";
 
 import "./FormContainerWidget.scss";
 
 Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
-  const formEndpoint = neoletterInstance()
-    ? `https://api.justrelate.com/neoletter/instances/${neoletterInstance()}/form_submissions`
-    : "";
+  const formEndpoint = `https://api.justrelate.com/neoletter/instances/${process.env.SCRIVITO_TENANT}/form_submissions`;
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [successfullySent, setSuccessfullySent] = React.useState(false);
@@ -56,9 +53,6 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
 
   async function onSubmit(element) {
     element.preventDefault();
-    if (!formEndpoint) {
-      return;
-    }
 
     scrollIntoView(element.target);
 
@@ -67,6 +61,10 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
       await submit(element.target, formEndpoint);
       indicateSuccess();
     } catch (e) {
+      setTimeout(() => {
+        throw e;
+      }, 0);
+
       indicateFailure();
     }
   }
@@ -93,7 +91,12 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
 async function submit(formElement, formEndpoint) {
   const body = new URLSearchParams(new FormData(formElement));
   // console.log("submitting", Object.fromEntries(body.entries()));
-  await fetch(formEndpoint, { method: "post", body });
+  const response = await fetch(formEndpoint, { method: "post", body });
+  if (!response.ok) {
+    throw new Error(
+      `Response was not successful. Status code: ${response.status}.`
+    );
+  }
 }
 
 const HiddenField = Scrivito.connect(({ widget }) => {
