@@ -1,8 +1,10 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
-import ReactstrapCarousel from "reactstrap/lib/Carousel";
-import ReactstrapCarouselControl from "reactstrap/lib/CarouselControl";
-import ReactstrapCarouselItem from "reactstrap/lib/CarouselItem";
+import {
+  Carousel as ReactstrapCarousel,
+  CarouselControl as ReactstrapCarouselControl,
+  CarouselItem as ReactstrapCarouselItem,
+} from "reactstrap";
 
 import InPlaceEditingPlaceholder from "../../Components/InPlaceEditingPlaceholder";
 import "./CarouselWidget.scss";

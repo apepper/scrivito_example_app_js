@@ -67,7 +67,7 @@
     "react-highlight-words": "^0.17.0",
     "react-reveal-iframe": "^1.2.7",
     "react-slick": "^0.28.1",
-    "reactstrap": "^8.10.0",
+    "reactstrap": "^9.0.1",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "scrivito": "^1.29.0",
