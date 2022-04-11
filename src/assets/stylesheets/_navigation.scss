@@ -3,6 +3,9 @@
 @import "src/assets/stylesheets/bootstrap5/variables";
 @import "src/assets/stylesheets/bootstrap5/mixins/transition";
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
 .nav-link:hover,
 .nav-link:active,
 .nav-link:focus {
@@ -47,7 +50,7 @@
     }
 
     .navbar-toggler .icon-bar {
-      background: $secondary;
+      background: $primary;
     }
   }
 }
@@ -231,7 +234,7 @@
     .fa {
       font-size: 22px;
       padding: 0;
-      color: $secondary;
+      color: $primary;
     }
   }
 
@@ -252,7 +255,7 @@
       background: #fff !important;
 
       .icon-bar {
-        background: $secondary !important;
+        background: $primary !important;
       }
     }
 
@@ -260,7 +263,7 @@
       display: block;
       height: 2px;
       border-radius: 1px;
-      background: $secondary;
+      background: $primary;
       width: 30px;
 
       + .icon-bar {
@@ -361,15 +364,15 @@
       .fa {
         font-size: 20px;
         padding: 0 0 3px 0;
-        color: $secondary;
+        color: $primary;
         text-align: center;
       }
     }
 
     &-search {
       border-radius: 0 50px 50px 0 !important;
-      background: $secondary;
-      border-color: $secondary;
+      background: $primary;
+      border-color: $primary;
       padding: 3px 10px;
       min-height: 36px;
       margin: 0;

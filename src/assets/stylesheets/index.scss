@@ -309,7 +309,7 @@ small,
 }
 
 .fa {
-  color: $secondary;
+  color: $primary;
 }
 
 .text-greymiddle {
@@ -321,12 +321,12 @@ small,
   font-weight: 700;
   font-size: 180px;
   text-transform: uppercase;
-  color: $secondary !important;
+  color: $primary !important;
   line-height: 1;
   margin: 0 0 20px 0;
 }
 .bg-dark-image .hero-bold {
-  color: $secondary !important;
+  color: $primary !important;
 }
 .hero-small {
   font-family: "Source Sans Pro", sans-serif;
@@ -380,7 +380,7 @@ small,
 .btn-info,
 .btn-warning,
 .btn-danger {
-  color: #fff;
+  color: #fff !important;
   .fa {
     color: #fff;
   }
@@ -405,7 +405,7 @@ small,
 
 .btn-white-transparent {
   background: rgba(255, 255, 255, 0.1);
-  color: $secondary;
+  color: $primary;
 }
 .btn-white-transparent:hover {
   background: rgba(255, 255, 255, 0.2);
@@ -430,6 +430,10 @@ small,
   bottom: 30px;
   left: 50%;
   margin: 0 0 0 -25px;
+}
+
+.btn-block {
+  width: 100%;
 }
 
 /* animated hamburger
@@ -482,7 +486,7 @@ $easing: cubic-bezier(0.7, 0, 0, 0.7);
 =================================================================== */
 
 .title-bgc {
-  background-color: $secondary;
+  background-color: $primary;
   padding: 3rem;
   h1 {
     color: #fff;
@@ -762,7 +766,7 @@ section.navbar-fixed {
   font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-align: center;
-  background: $secondary;
+  background: $primary;
   border-radius: 50%;
 }
 .bg-nav-content .nav-centered .nav-blog .fa {
@@ -887,7 +891,7 @@ section.navbar-fixed {
   display: block;
   width: 60px;
   height: 60px;
-  background: $secondary;
+  background: $primary;
   color: #fff;
   border-radius: 50%;
   line-height: 60px;
@@ -920,14 +924,14 @@ section.navbar-fixed {
   display: block;
   bottom: 28px;
   right: 30px;
-  color: $secondary !important;
+  color: $primary !important;
 }
 .box-card .box-topic .h3 {
   margin: 0;
   color: $theme-greydark !important;
 }
 .box-card .box-topic span i {
-  color: $secondary !important;
+  color: $primary !important;
   padding: 0 10px 0 0;
 }
 .box-card .box-topic span {
