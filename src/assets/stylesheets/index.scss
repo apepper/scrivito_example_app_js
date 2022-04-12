@@ -632,6 +632,18 @@ $easing: cubic-bezier(0.7, 0, 0, 0.7);
   .edit-mode-link {
     color: #fff !important;
   }
+
+  a {
+    color: $secondary;
+    text-decoration: none;
+  }
+  a:hover,
+  a:active,
+  a:focus {
+    color: darken($secondary, 5%);
+    text-decoration: underline;
+    outline: none !important;
+  }
 }
 
 .bg-dark-image,
