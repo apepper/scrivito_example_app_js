@@ -1,5 +1,5 @@
 @import "src/assets/stylesheets/variables";
-@import "src/assets/stylesheets/bootstrap/mixins/clearfix";
+@import "src/assets/stylesheets/bootstrap5/mixins/clearfix";
 
 .blog-timeline {
   list-style: none;
@@ -71,8 +71,6 @@
       }
     }
 
-
-
     > .blog-timeline {
       &--badge {
         color: #fff;
@@ -87,7 +85,7 @@
         position: absolute;
         top: 20px;
         right: -40px;
-        background: $secondary;
+        background: $primary;
         z-index: 100;
         border-radius: 50%;
       }
@@ -126,7 +124,6 @@
     }
   }
 }
-
 
 .blog-timeline--divider {
   background: #fff;

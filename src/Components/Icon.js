@@ -13,14 +13,12 @@ function Icon({ icon, size, title }) {
 }
 
 function IconComponent({ icon, size, link }) {
-  if (!link) {
-    return <Icon icon={icon} size={size} />;
-  }
+  if (!link) return <Icon icon={icon} size={size} />;
 
   const title = link.title() || "";
 
   return (
-    <Scrivito.LinkTag to={link}>
+    <Scrivito.LinkTag to={link} aria-label={title}>
       <Icon icon={icon} size={size} title={title} />
     </Scrivito.LinkTag>
   );

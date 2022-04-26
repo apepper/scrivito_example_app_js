@@ -33,9 +33,7 @@ function ActualNavigation({
 }
 
 function BackgroundVideo({ videoUrl }) {
-  if (!videoUrl) {
-    return null;
-  }
+  if (!videoUrl) return null;
 
   return (
     <video
@@ -94,9 +92,7 @@ class Navigation extends React.Component {
     } = currentPageNavigationOptions();
 
     const topSectionClassNames = ["navbar-fixed"];
-    if (this.state.scrolled) {
-      topSectionClassNames.push("scrolled");
-    }
+    if (this.state.scrolled) topSectionClassNames.push("scrolled");
 
     if (navigationStyle === "transparentDark") {
       topSectionClassNames.push("bg-dark-image");
@@ -105,17 +101,13 @@ class Navigation extends React.Component {
     }
 
     const bootstrapNavbarClassNames = [];
-    if (this.state.showSearch) {
-      bootstrapNavbarClassNames.push("show-search");
-    }
+    if (this.state.showSearch) bootstrapNavbarClassNames.push("show-search");
     if (navigationStyle === "transparentDark") {
       bootstrapNavbarClassNames.push("navbar-transparent");
     }
 
     let videoUrl = "";
-    if (isVideoObj(backgroundImage)) {
-      videoUrl = urlFromBinary(backgroundImage);
-    }
+    if (isVideoObj(backgroundImage)) videoUrl = urlFromBinary(backgroundImage);
 
     const topSectionStyle = {};
     if (navigationStyle === "transparentDark") {
@@ -124,12 +116,12 @@ class Navigation extends React.Component {
           topSectionStyle.background = [
             {
               image:
-                "radial-gradient(ellipse at center, rgba(61,65,66,.5) 0%," +
-                " rgba(61,65,66,1) 90%)",
+                "radial-gradient(ellipse at center, rgba(58, 65, 81,.5) 0%," +
+                " rgba(58, 65, 81,1) 90%)",
             },
             {
               image:
-                "linear-gradient(to bottom, rgba(61,65,66,0) 0%, rgba(61,65,66,1) 90%)",
+                "linear-gradient(to bottom, rgba(58, 65, 81,0) 0%, rgba(58, 65, 81,1) 90%)",
             },
           ];
           if (!isVideoObj(backgroundImage)) {
@@ -142,7 +134,7 @@ class Navigation extends React.Component {
           topSectionStyle.background = [
             {
               image:
-                "linear-gradient(rgba(46, 53, 60, 0.7), rgba(46, 53, 60, 0.7))",
+                "linear-gradient(rgba(58, 65, 81, 0.7), rgba(58, 65, 81, 0.7))",
             },
           ];
           if (!isVideoObj(backgroundImage)) {
@@ -152,9 +144,7 @@ class Navigation extends React.Component {
       }
     }
 
-    if (heightClassName) {
-      topSectionClassNames.push(heightClassName);
-    }
+    if (heightClassName) topSectionClassNames.push(heightClassName);
 
     return (
       <React.Fragment>

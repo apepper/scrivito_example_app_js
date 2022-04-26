@@ -66,10 +66,13 @@ function sliderSettings(testimonials) {
     infinite: true,
     speed: 500,
     dotsClass: "testimonial-slider-widget--quote-portrait-wrapper",
-    customPaging: (i) => {
-      const image = testimonialAuthorImages[i];
-      return <a>{image}</a>;
-    },
+    customPaging: (i) => (
+      <button
+        aria-label={`Show testimonial of ${testimonials[i].get("author")}`}
+      >
+        {testimonialAuthorImages[i]}
+      </button>
+    ),
   };
 }
 
@@ -79,9 +82,7 @@ const fallbackImageUrl =
   "testimonial_slider_widget_fallback_author.jpeg";
 
 const AddTestimonial = ({ widget }) => {
-  if (!Scrivito.isInPlaceEditingActive()) {
-    return null;
-  }
+  if (!Scrivito.isInPlaceEditingActive()) return null;
 
   return (
     <div className="text-center">
