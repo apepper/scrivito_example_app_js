@@ -20,6 +20,7 @@
     "https://*.d2gu55vvqejsqp.amplifyapp.com",
     "https://*.netlify.app",
     "https://*.netlify.com",
-    "https://dt5t498v8txnt.cloudfront.net"
+    "https://dt5t498v8txnt.cloudfront.net",
+    "https://*.pages.dev"
   ]
 }
