@@ -14,6 +14,7 @@ export function configureScrivito(options) {
         "https://*.netlify.app",
         "https://*.netlify.com",
         "https://dt5t498v8txnt.cloudfront.net",
+        "https://*.pages.dev",
       ],
     },
   };
