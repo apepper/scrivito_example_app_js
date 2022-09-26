@@ -8,6 +8,15 @@ import "./FormContainerWidget.scss";
 Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
   const formEndpoint = `https://api.justrelate.com/neoletter/instances/${process.env.SCRIVITO_TENANT}/form_submissions`;
 
+  const [browserLocation, setBrowserLocation] = React.useState(null);
+  React.useEffect(
+    () =>
+      setBrowserLocation(
+        `${window.location.origin}${window.location.pathname}${window.location.search}`
+      ),
+    []
+  );
+
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [successfullySent, setSuccessfullySent] = React.useState(false);
   const [submissionFailed, setSubmissionFailed] = React.useState(false);
@@ -43,6 +52,11 @@ Scrivito.provideComponent("FormContainerWidget", ({ widget }) => {
     <div className="form-container-widget">
       <form method="post" action={formEndpoint} onSubmit={onSubmit}>
         <input type="hidden" name="form_id" value={widget.get("formId")} />
+        <input
+          type="hidden"
+          name="url"
+          value={browserLocation || Scrivito.urlFor(widget.obj())}
+        />
         {widget.get("hiddenFields").map((hiddenField) => (
           <HiddenField key={hiddenField.id()} widget={hiddenField} />
         ))}
