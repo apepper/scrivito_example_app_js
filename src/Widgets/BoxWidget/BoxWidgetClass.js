@@ -5,6 +5,7 @@ export const BoxWidget = Scrivito.provideWidgetClass("BoxWidget", {
     body: "widgetlist",
     boxStyle: ["enum", { values: ["transparent", "white"] }],
     useOffset: "boolean",
+    link: "link",
   },
   extractTextAttributes: ["body"],
 });

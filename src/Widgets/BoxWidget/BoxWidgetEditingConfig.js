@@ -18,7 +18,7 @@ Scrivito.provideEditingConfig("BoxWidget", {
       description: 'If so, the box will move "up". Default: No',
     },
   },
-  properties: ["boxStyle", "useOffset"],
+  properties: ["boxStyle", "useOffset", "link"],
   initialContent: {
     boxStyle: "transparent",
   },
