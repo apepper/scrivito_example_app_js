@@ -6,6 +6,7 @@ export const Page = Scrivito.provideObjClass("Page", {
   attributes: {
     ...defaultPageAttributes,
     ...metadataAttributes,
+    dataClass: "string",
   },
   extractTextAttributes: ["navigationSection", "body"],
 });
