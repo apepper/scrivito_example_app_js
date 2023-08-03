@@ -1,7 +1,18 @@
 {
   "base-uri": "'none'",
-  "default-src": ["'self'", "data:", "https:", "wss:"],
-  "style-src": ["'self'", "data:", "https:", "wss:", "'unsafe-inline'"],
+  "default-src": [
+    "'self'",
+    "data:",
+    "https:",
+    "wss:"
+  ],
+  "style-src": [
+    "'self'",
+    "data:",
+    "https:",
+    "wss:",
+    "'unsafe-inline'"
+  ],
   "script-src": [
     "'self'",
     "https://api.scrivito.com",
@@ -17,6 +28,7 @@
     "https://*.scrivito.com",
     "http://localhost:8090",
     "http://127.0.0.1:8090",
-    "https://*.netlify.app"
+    "https://*.netlify.app",
+    "https://*.scrivito-ui.pages.dev"
   ]
 }
