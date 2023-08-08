@@ -6,7 +6,7 @@ import { CurrentPageMetadata } from "./Components/CurrentPageMetadata";
 import { ErrorBoundary } from "./Components/ErrorBoundary";
 import { Footer } from "./Components/Footer";
 import { Intercom } from "./Components/Intercom";
-import { Navigation } from "./Components/Navigation";
+
 import { NotFoundErrorPage } from "./Components/NotFoundErrorPage";
 import { CookieConsentBanner } from "./Components/CookieConsentBanner";
 import { Tracking } from "./Components/Tracking";
@@ -22,10 +22,7 @@ export function App({ appWrapperRef }) {
           <React.Suspense>
             <div ref={appWrapperRef}>
               <div className="content-wrapper">
-                <Navigation />
-                <div id="mainContent">
-                  <Scrivito.CurrentPage />
-                </div>
+                <Scrivito.CurrentPage />
                 <Scrivito.NotFoundErrorPage>
                   <NotFoundErrorPage />
                 </Scrivito.NotFoundErrorPage>
